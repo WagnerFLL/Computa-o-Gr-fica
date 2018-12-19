@@ -2,9 +2,9 @@
 #include <GL/glut.h>
 #include <vector>
 #include <iostream>
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-#include <GL/freeglut.h>  // GLUT, includes glu.h and gl.h
+#include <stdlib.h>     
+#include <time.h>       
+#include <GL/freeglut.h>  
 
 using namespace std;
 
@@ -17,14 +17,9 @@ struct square {
    bool canMove = false;
 };
 
-int R, G, B;
-
 vector<square> blocks;
 
 void drawSquare(float x, float y, float edgeSize) {
-
-
-
   glBegin(GL_QUADS);
       glColor3f(133, 133, 133);
       glVertex2f(x, y + edgeSize);
@@ -64,35 +59,28 @@ void scheduleUpdate(int useless) {
 }
 
 void keyboardHandler(unsigned char key, int x, int y) {
-  if(key == ' '){
-    for (int i = 0; i < blocks.size(); i++) {
+  if(key == ' ')
+    for (int i = 0; i < blocks.size(); i++) 
         blocks[i].canMove = true;
-    }
-  }
 }
 
 void display() {
    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    glClear(GL_COLOR_BUFFER_BIT);
 
-   for (int j = 0 ; j< 5 ; j++){
-   for (int i = 0; i < (int) blocks.size(); i++) {
-      drawSquare(blocks[i].x, blocks[i].y + (j*45), blocks[i].edgeSize);
-   }
- }
+   for (int j = 0 ; j< 5 ; j++)
+      for (int i = 0; i < (int) blocks.size(); i++) 
+         drawSquare(blocks[i].x, blocks[i].y + (j*45), blocks[i].edgeSize);
 
    glFlush();
 }
 
-void init() {
-  gluOrtho2D(0, width, 0, height);
-}
+void init() { gluOrtho2D(0, width, 0, height); }
 
 int main(int argc, char** argv) {
 
-    for (int i = 0; i < 18; i++) {
-        blocks.push_back(createSquare());
-    }
+   for (int i = 0; i < 18; i++) 
+       blocks.push_back(createSquare());
 
    glutInit(&argc, argv);
       glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
