@@ -25,6 +25,10 @@ void reshape (int w, int h);
     3º deslocamento em z  =  profundidade
 */
 
+int coss[400], sinn[400], lk = 0;
+
+
+
 static GLfloat vertices[100]={
   0.0,  20.0, 25.0, /* 0 */
   30.0, 20.0, 25.0, /* 1 no-trash*/
@@ -42,7 +46,12 @@ static GLfloat vertices[100]={
   40.0,   20.0,  30.0, /* 13 */
   15.0,   30.0,  -20.0, /* 14 */
   40.0,   20.0,  -20.0, /* 15 */
-}; 
+  200.0,   0.0,  -200.0, /* 16 */
+  -200.0,   0.0,  200.0, /* 17 */
+  200.0,   0.0, -200.0, /* 18 */
+  200.0,   0.0,  200.0, /* 19 */
+
+};
 
 static GLubyte frenteIndices[]    = {0,4,3,1};
 static GLubyte trasIndices[]      = {5,6,7,8};
@@ -55,20 +64,27 @@ static GLubyte telhaDireita[]     = {12,13, 15,  14};
 static GLubyte telhaFrente[]     = {10, 13, 12};
 static GLubyte telhaTras[]     = {11, 14, 15};
 static GLubyte lage[] = {10, 11, 15, 13};
-static GLubyte chao[] = {4, 8, 7, 3};
-    
+static GLubyte chao[] = {16, 17, 19, 18};
+
 static int eixoy, eixox;
 int largura, altura;
+int kx = 15, ky = 40, z = 80;
+
+int ax = 15, az = 0;
 
 int main(int argc, char** argv){
+  for (int i = 0; i< 360; i++){
+    coss[i] = cos(i) + 25;
+    sinn[i] = sin(i) + 25;
+  }
   int i;
   glutInit(&argc, argv);
   glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
-  glutInitWindowSize (700, 700); 
-  glutInitWindowPosition (100, 100); 
+  glutInitWindowSize (700, 700);
+  glutInitWindowPosition (100, 100);
   glutCreateWindow (argv[0]);
   init();
-  glutDisplayFunc(display); 
+  glutDisplayFunc(display);
   glutKeyboardFunc(keyboard);
   glutReshapeFunc(reshape);
   glutMainLoop();
@@ -79,23 +95,32 @@ void init(void){
   glClearColor(0.0, 0.0, 0.0, 0.0);
   glOrtho (-50, 50, -50, 50, -50 , 50);
   glEnable(GL_DEPTH_TEST);
-  glEnable(GL_CULL_FACE); 
+  glEnable(GL_CULL_FACE);
 }
 
 void reshape (int w, int h){
   glViewport (0, 0, (GLsizei) w, (GLsizei) h);
-  largura=w; 
+  largura=w;
   altura=h;
 }
 
 void display(void){
   glPushMatrix();
+  glLoadIdentity();
+  gluPerspective(65.0, (GLfloat) largura/(GLfloat) altura, 20.0, 3000.0);
+  gluLookAt(kx, ky, z, // de onde
+            0, 0, 0, //pra onde
+            0, 1, 0); // como
   glRotatef ((GLfloat) eixoy, 0.0, 1.0, 0.0);
   glRotatef ((GLfloat) eixox, 1.0, 0.0, 0.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-  
+
   glEnableClientState(GL_VERTEX_ARRAY);
   glVertexPointer(3, GL_FLOAT, 0, vertices);
+
+
+  // glColor3f (CHAO); /* chao */
+  // glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_BYTE, chao);
 
   glColor3f (AZUL); /* frente */
   glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_BYTE, frenteIndices);
@@ -123,16 +148,13 @@ void display(void){
 
   glColor3f (TELHA2); /* telhaFrente */
   glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_BYTE, telhaFrente);
-  
+
   glColor3f (TELHA2); /* telhaTras */
   glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_BYTE, telhaTras);
-  
+
   glColor3f (TELHA2); /* lage */
   glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_BYTE, lage);
-  
-  glColor3f (CHAO); /* chao */
-  glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_BYTE, chao);
-  
+
   glDisableClientState (GL_VERTEX_ARRAY);
 
   glPopMatrix();
@@ -144,9 +166,6 @@ void keyboard(unsigned char key, int x, int y){
   switch (key) {
   case 27:
     exit(0);
-    break;
-  case 'a':
-    printf("%d, %d\n",x,y);
     break;
   case 'y':
     eixoy = (eixoy + 5) % 360;
@@ -168,6 +187,39 @@ void keyboard(unsigned char key, int x, int y){
     glLoadIdentity();
     gluPerspective(65.0, (GLfloat) largura/(GLfloat) altura, 20.0, 120.0);
     gluLookAt(0, 0, -90, 0, 0, 0, 0, 1, 0);
+    glutPostRedisplay();
+    break;
+  case 'z':
+    z += 5;
+    glutPostRedisplay();
+    break;
+  case 'Z':
+    z -= 5;
+    glutPostRedisplay();
+    break;
+  case '.':
+    kx += 5;
+    glutPostRedisplay();
+    break;
+  case ',':
+    kx -= 5;
+    glutPostRedisplay();
+    break;
+  case 'c':
+    ky += 5;
+    glutPostRedisplay();
+    break;
+  case 'b':
+    ky -= 5;
+    if (ky < 25) {
+      ky = 25;
+    }
+    glutPostRedisplay();
+    break;
+  case 'r':
+    lk+=5;
+    kx = coss[lk%360];
+    ky = sinn[lk%360];
     glutPostRedisplay();
     break;
   case 'o':
