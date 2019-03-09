@@ -342,6 +342,12 @@ float fraction = 0.5f;
             x -= lx * fraction;
             z -= lz * fraction;
         break;
+        case GLUT_KEY_PAGE_UP :
+            cam += 0.5;
+        break;
+        case GLUT_KEY_PAGE_DOWN :
+            cam -= 0.5;
+        break;
         case 'w' :
             cam += 0.3f;
         break;
