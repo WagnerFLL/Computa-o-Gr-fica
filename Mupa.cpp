@@ -52,6 +52,152 @@ void draw(){
         glutSolidCube(1.0);
     glPopMatrix();
 
+    // salao despacho com gabinete e jardim
+    glPushMatrix();
+    glTranslatef(7.5, 0, 9.75);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(19.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // salão de despacho com direitoria
+    glPushMatrix();
+    glTranslatef(3, 0, 13.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // diretoria com corredor
+    glPushMatrix();
+    glTranslatef(6, 0, 16.5);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // diretoria com atelier
+    glPushMatrix();
+    glTranslatef(3, 0, 19.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // atelier com corredor
+    glPushMatrix();
+    glTranslatef(6, 0, 22.5);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // atelier com sala protocolo
+    glPushMatrix();
+    glTranslatef(3, 0, 25.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // jardim com costas da escada
+    glPushMatrix();
+    glTranslatef(10.65, 0, 19.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6.3, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // por tras da recpção
+    glPushMatrix();
+    glTranslatef(13.8, 0, 22.5);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // sec. cult com elevador
+    glPushMatrix();
+    glTranslatef(16.9, 0, 25.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6.2, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // elevador com reserva técnica
+    glPushMatrix();
+    glTranslatef(16.75, 0, 28);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // reserva téc. com salão
+    glPushMatrix();
+    glTranslatef(13.8, 0, 31.5);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(7, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // sala protocolo com exposicao 1
+    glPushMatrix();
+    glTranslatef(3.25, 0, 28);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // exposicao1 com salao
+    glPushMatrix();
+    glTranslatef(6, 0, 31.5);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(7, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // mini auditorio com salao
+    glPushMatrix();
+    glTranslatef(13.8, 0, 39);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(8, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // exposicao 2 com salao
+    glPushMatrix();
+    glTranslatef(6, 0, 39);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(8, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // lage
+    glPushMatrix();
+    glTranslatef(10, 1.8, 21.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(20, 0.1, 43);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // // Columns
+    // glPushMatrix();
+    //  glTranslatef(0, 0, 0);
+    //  glRotatef (-90, 1,0,0);
+    //     glColor3f(0.0f, 0.5f, 0.0f);
+    //
+    //     gluCylinder(quadratic,
+    //                 0.35, 0.35, 1.5, 30, 30);
+    // glPopMatrix();
+
 }
 
 void drawDoor() {
