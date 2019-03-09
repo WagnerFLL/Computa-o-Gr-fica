@@ -30,6 +30,15 @@ void init(void) {
     glClearColor(0.0, 0.7, 1.0, 1.0);
 }
 
+void drawColumn(float x) {
+  glPushMatrix();
+   glTranslatef(x, 0, 43);
+   glRotatef(-90, 1,0,0);
+      glColor3f(0.78f, 0.823f, 0.824f);
+      gluCylinder(quadratic, 0.28, 0.28, 7, 30, 30);
+  glPopMatrix();
+}
+
 void draw(){
 
     // Back side floor
@@ -186,22 +195,40 @@ void draw(){
 
     // lage
     glPushMatrix();
-    glTranslatef(10, 3.5, 21.5);
+    glTranslatef(10, 3.6, 21.5);
         glColor3f(0.5f, 0.5f, 0.5f);
-        glScalef(20, 0.1, 43);
+        glScalef(20, 0.2, 43.4);
         glutSolidCube(1.0);
     glPopMatrix();
 
-    // // Columns
-    // glPushMatrix();
-    //  glTranslatef(0, 0, 0);
-    //  glRotatef (-90, 1,0,0);
-    //     glColor3f(0.0f, 0.5f, 0.0f);
-    //
-    //     gluCylinder(quadratic,
-    //                 0.35, 0.35, 1.5, 30, 30);
-    // glPopMatrix();
+// FACHADA
+    drawColumn(6);
+    drawColumn(8.6);
+    drawColumn(11.2);
+    drawColumn(14);
 
+    // sides
+    glPushMatrix();
+    glTranslatef(3, 3.5, 43);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 7, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(17, 3.5, 43);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 7, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // Top
+    glPushMatrix();
+    glTranslatef(10, 8, 43);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(20, 2, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
 }
 
 void drawDoor() {
