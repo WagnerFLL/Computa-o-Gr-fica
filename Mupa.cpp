@@ -18,6 +18,10 @@ float door_angle = 0.0f;
 // angle for rotating
 float angle = 0.0f;
 
+float fovy = 80.0f;
+
+float cam = 3.0f;
+
 GLUquadricObj *quadratic;
 
 void init(void) {
@@ -30,7 +34,7 @@ void draw(){
 
     // Back side floor
     glPushMatrix();
-    glTranslatef(10, 0, 0);
+    glTranslatef(10, 1.75, 0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(20, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -38,7 +42,7 @@ void draw(){
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(0, 0, 21.5);
+    glTranslatef(0, 1.75, 21.5);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(0.1, 3.5, 43);
         glutSolidCube(1.0);
@@ -46,7 +50,7 @@ void draw(){
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(20, 0, 21.5);
+    glTranslatef(20, 1.75, 21.5);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(0.1, 3.5, 43);
         glutSolidCube(1.0);
@@ -54,7 +58,7 @@ void draw(){
 
     // salao despacho com gabinete e jardim
     glPushMatrix();
-    glTranslatef(7.5, 0, 9.75);
+    glTranslatef(7.5, 1.75, 9.75);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(19.5, 3.5, 0.1);
@@ -63,7 +67,7 @@ void draw(){
 
     // salão de despacho com direitoria
     glPushMatrix();
-    glTranslatef(3, 0, 13.5);
+    glTranslatef(3, 1.75, 13.5);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -71,7 +75,7 @@ void draw(){
 
     // diretoria com corredor
     glPushMatrix();
-    glTranslatef(6, 0, 16.5);
+    glTranslatef(6, 1.75, 16.5);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6, 3.5, 0.1);
@@ -80,7 +84,7 @@ void draw(){
 
     // diretoria com atelier
     glPushMatrix();
-    glTranslatef(3, 0, 19.5);
+    glTranslatef(3, 1.75, 19.5);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -88,7 +92,7 @@ void draw(){
 
     // atelier com corredor
     glPushMatrix();
-    glTranslatef(6, 0, 22.5);
+    glTranslatef(6, 1.75, 22.5);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6, 3.5, 0.1);
@@ -97,7 +101,7 @@ void draw(){
 
     // atelier com sala protocolo
     glPushMatrix();
-    glTranslatef(3, 0, 25.5);
+    glTranslatef(3, 1.75, 25.5);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -105,7 +109,7 @@ void draw(){
 
     // jardim com costas da escada
     glPushMatrix();
-    glTranslatef(10.65, 0, 19.5);
+    glTranslatef(10.65, 1.75, 19.5);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6.3, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -113,7 +117,7 @@ void draw(){
 
     // por tras da recpção
     glPushMatrix();
-    glTranslatef(13.8, 0, 22.5);
+    glTranslatef(13.8, 1.75, 22.5);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6, 3.5, 0.1);
@@ -122,7 +126,7 @@ void draw(){
 
     // sec. cult com elevador
     glPushMatrix();
-    glTranslatef(16.9, 0, 25.5);
+    glTranslatef(16.9, 1.75, 25.5);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6.2, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -130,7 +134,7 @@ void draw(){
 
     // elevador com reserva técnica
     glPushMatrix();
-    glTranslatef(16.75, 0, 28);
+    glTranslatef(16.75, 1.75, 28);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6.5, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -138,7 +142,7 @@ void draw(){
 
     // reserva téc. com salão
     glPushMatrix();
-    glTranslatef(13.8, 0, 31.5);
+    glTranslatef(13.8, 1.75, 31.5);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(7, 3.5, 0.1);
@@ -147,7 +151,7 @@ void draw(){
 
     // sala protocolo com exposicao 1
     glPushMatrix();
-    glTranslatef(3.25, 0, 28);
+    glTranslatef(3.25, 1.75, 28);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(6.5, 3.5, 0.1);
         glutSolidCube(1.0);
@@ -155,7 +159,7 @@ void draw(){
 
     // exposicao1 com salao
     glPushMatrix();
-    glTranslatef(6, 0, 31.5);
+    glTranslatef(6, 1.75, 31.5);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(7, 3.5, 0.1);
@@ -164,7 +168,7 @@ void draw(){
 
     // mini auditorio com salao
     glPushMatrix();
-    glTranslatef(13.8, 0, 39);
+    glTranslatef(13.8, 1.75, 39);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(8, 3.5, 0.1);
@@ -173,7 +177,7 @@ void draw(){
 
     // exposicao 2 com salao
     glPushMatrix();
-    glTranslatef(6, 0, 39);
+    glTranslatef(6, 1.75, 39);
         glRotatef (90, 0,1,0);
         glColor3f(1.0f, 0.5f, 0.0f);
         glScalef(8, 3.5, 0.1);
@@ -182,8 +186,8 @@ void draw(){
 
     // lage
     glPushMatrix();
-    glTranslatef(10, 1.8, 21.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
+    glTranslatef(10, 3.5, 21.5);
+        glColor3f(0.5f, 0.5f, 0.5f);
         glScalef(20, 0.1, 43);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -229,7 +233,7 @@ void changeSize(int w, int h){
     glViewport(0, 0, w, h);
 
     // Set the correct perspective.
-    gluPerspective(45.0f, ratio, 0.1f, 1000.0f);
+    gluPerspective(fovy, ratio, 0.1f, 1000.0f);
 
     // Get Back to the Modelview
     glMatrixMode(GL_MODELVIEW);
@@ -247,7 +251,9 @@ void renderScene(void){
     glLoadIdentity();
 
     // Set the camera
-    gluLookAt(x, 1.3f, z, x+lx, 1.0f, z+lz, 0.0f, 1.0f, 0.0f);
+    gluLookAt(x, cam , z,  // de onde
+              x+lx, cam, z+lz, // pra onde
+              0.0f, 1.0f, 0.0f); // como
 
     // Draw ground
     glColor3f(0.0, 0.65, 0.0);
@@ -308,6 +314,12 @@ float fraction = 0.5f;
         case GLUT_KEY_DOWN :
             x -= lx * fraction;
             z -= lz * fraction;
+        break;
+        case 'w' :
+            cam += 0.3f;
+        break;
+        case 's' :
+            cam -= 0.3f;
         break;
     }
 }
