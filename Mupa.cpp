@@ -198,9 +198,61 @@ void draw(){
     glPushMatrix();
     glTranslatef(10, 3.6, 21.5);
         glColor3f(0.5f, 0.5f, 0.5f);
-        glScalef(20, 0.2, 43.4);
+        glScalef(20, 0.2, 44);
         glutSolidCube(1.0);
     glPopMatrix();
+
+    // floor
+    glPushMatrix();
+    glTranslatef(10, 0.1, 21.5);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glScalef(20, 0.2, 44);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+// ESCADA
+    float zBase = 25.5, yBase = 0.25;
+
+    for (int i = 0; i < 20; i++, zBase -= 0.2, yBase += 0.1){
+      glPushMatrix();
+      glTranslatef(9.9, yBase, zBase);
+          glColor3f(0.78f, 0.823f, 0.824f);
+          glScalef(2.5, 0.175, 0.2);
+          glutSolidCube(1.0);
+      glPopMatrix();
+    }
+
+    // floor escada
+    glPushMatrix();
+    glTranslatef(9.9, 2.3, 20.5);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glScalef(4.5, 0.2, 2);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    zBase = 21.5;
+    yBase = 2.25;
+
+    for (int i = 0; i < 12; i++, zBase += 0.2, yBase += 0.1){
+      glPushMatrix();
+      glTranslatef(11.6, yBase, zBase);
+          glColor3f(0.78f, 0.823f, 0.824f);
+          glScalef(1, 0.175, 0.2);
+          glutSolidCube(1.0);
+      glPopMatrix();
+    }
+
+    zBase = 21.5;
+    yBase = 2.25;
+
+    for (int i = 0; i < 12; i++, zBase += 0.2, yBase += 0.1){
+      glPushMatrix();
+      glTranslatef(8.1, yBase, zBase);
+          glColor3f(0.78f, 0.823f, 0.824f);
+          glScalef(1, 0.175, 0.2);
+          glutSolidCube(1.0);
+      glPopMatrix();
+    }
 
 // FACHADA
     drawColumn(6);
