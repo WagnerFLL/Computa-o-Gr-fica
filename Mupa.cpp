@@ -3,11 +3,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-/*
- * Adaptado de:
- *   https://github.com/mdrkb/3D-House-using-OpenGL-and-C-/blob/master/main.cpp
-*/
-
 // actual vector representing the camera's direction
 float lx=0.0f,lz=-1.0f;
 
@@ -236,13 +231,12 @@ void drawDoorOrtho(float x, float z, float floor) {
     glPopMatrix();
 }
 
-
 void drawDoorParallel(float x, float z, float floor) {
     float doorWidth = 1.25;
     float doorHeight = 2.2;
     float relativeZ = z + (doorWidth/2);
     float relativeY = doorHeight/2 + (floor*3.5);
-    glPushMatrix();  
+    glPushMatrix();
         glTranslatef(x, relativeY, relativeZ + ((doorWidth/2) * -1));
         glRotatef(door_angle, 0,1,0);
         glTranslatef(0, 0, (doorWidth/2));
@@ -262,7 +256,7 @@ void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorL
     float width2 = newWidth * (2 - doorLocation);
     float x1 = x;
     float z1 = z;
-    float x2 = x + width1 + doorWidth; 
+    float x2 = x + width1 + doorWidth;
     float z2 = z;
 
     drawOrthoWall(x1, z1, width1, floor); // parede a esquerda da porta
@@ -289,7 +283,7 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
     float width2 = newWidth * (2 - doorLocation);
     float x1 = x;
     float z1 = z;
-    float x2 = x; 
+    float x2 = x;
     float z2 = z + width1 + doorWidth;
 
     drawParallelWall(x1, z1, width1, floor); // parede a esquerda da porta
@@ -307,7 +301,7 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
 
     drawDoorParallel(x, z + width1, floor);
 
-    
+
 }
 
 void draw(){
@@ -529,6 +523,23 @@ void draw(){
     drawDetail(13.75);
     drawDetail(19.5);
 
+    // grade
+    float px = 6.4;
+    for (int i = 0; i < 74; i++, px += 0.1 ){
+      glPushMatrix();
+      glTranslatef(px, 4, 43);
+          glColor3f(0.78f, 0.823f, 0.824f);
+          glScalef(0.02, 0.8, 0.02);
+          glutSolidCube(1.0);
+      glPopMatrix();
+    }
+    glPushMatrix();
+    glTranslatef(12.1, 4.4, 43);
+        glColor3f(0.78f, 0.823f, 0.824f);
+        glScalef(12, 0.02, 0.02);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
 // CADEIRA
     drawChair(3.5, 0, 2, 1, 0);
     drawChair(1.5, 0, 3.5, 0, 1);
@@ -548,8 +559,14 @@ void draw(){
     drawStar(3);
     drawStar(6.75);
     drawStar(4.75);
-    
+
 //Segundo andar
+
+    //varanda com exposicao
+    drawOrthoWallWithDoor(6, 39, 2.6666, 1, 1);
+    drawOrthoWallWithDoor(8.6666, 39, 2.6666, 1, 1);
+    drawOrthoWallWithDoor(11.3333, 39, 2.6666, 1, 1);
+
     // exposição cima com salão
     drawParallelWallWithDoor(13.8, 28, 15, 1, 1);
 
@@ -558,6 +575,9 @@ void draw(){
 
     //elevador com vazio
     drawOrthoWall(13.8, 25.5, 6.2, 1);
+
+    // atras da escada
+    drawOrthoWall(6, 19.5, 2, 1);
 
     //vazio com circulacao
     drawParallelWall(13.8, 19.5, 6, 1);
@@ -695,12 +715,6 @@ float fraction = 0.5f;
         break;
         case GLUT_KEY_PAGE_DOWN :
             cam -= 0.5;
-        break;
-        case 'w' :
-            cam += 0.3f;
-        break;
-        case 's' :
-            cam -= 0.3f;
         break;
     }
 }
