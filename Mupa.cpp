@@ -1,4 +1,5 @@
 #include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -40,28 +41,28 @@ void drawColumn(float x) {
 }
 
 void draw(){
-
+//Primeiro andar
     // Back side floor
     glPushMatrix();
-    glTranslatef(10, 1.75, 0);
+    glTranslatef(10, 3.5, 0);
         glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(20, 3.5, 0.1);
+        glScalef(20, 7, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(0, 1.75, 21.5);
+    glTranslatef(0, 3.5, 21.5);
         glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(0.1, 3.5, 43);
+        glScalef(0.1, 7, 43);
         glutSolidCube(1.0);
     glPopMatrix();
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(20, 1.75, 21.5);
+    glTranslatef(20, 3.5, 21.5);
         glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(0.1, 3.5, 43);
+        glScalef(0.1, 7, 43);
         glutSolidCube(1.0);
     glPopMatrix();
 
@@ -229,6 +230,118 @@ void draw(){
         glScalef(20, 2, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
+
+//Segundo andar
+    // exposição cima com salão
+    glPushMatrix();
+    glTranslatef(13.8, 5.25, 35.25);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(14.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //exposição cima com elevador
+    glPushMatrix();
+    glTranslatef(16.75, 5.25, 28);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //elevador com vazio
+    glPushMatrix();
+    glTranslatef(16.9, 5.25, 25.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6.2, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //vazio com circulacao
+    glPushMatrix();
+    glTranslatef(13.8, 5.25, 22.5);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // exposição baixo com salão
+    glPushMatrix();
+    glTranslatef(6, 5.25, 35.25);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(14.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //exposição baixo com corredor baixo
+    glPushMatrix();
+    glTranslatef(3.25, 5.25, 28);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // corredor baixo com gabinete
+    glPushMatrix();
+    glTranslatef(3, 5.25, 25.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // gabinete com sala de jantar
+    glPushMatrix();
+    glTranslatef(3, 5.25, 19.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // gabinete com circulacao
+    glPushMatrix();
+    glTranslatef(6, 5.25, 22.5);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(6, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // sala de jantar com jardim
+    glPushMatrix();
+    glTranslatef(8, 5.25, 14);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(11, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // jardim com circulacao
+    glPushMatrix();
+    glTranslatef(10.9, 5.25, 19.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(5.8, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // sala de jantar com sala de visita
+    glPushMatrix();
+    glTranslatef(6.9, 5.25, 8.5);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(13.8, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // sala de visita com emcima
+    glPushMatrix();
+    glTranslatef(13.8, 5.25, 4.25);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(8.5, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
 }
 
 void drawDoor() {
@@ -279,7 +392,7 @@ void renderScene(void){
 
     // Set the camera
     gluLookAt(x, cam , z,  // de onde
-              x+lx, cam, z+lz, // pra onde
+              x+lx, cam - 10 , z+lz, // pra onde
               0.0f, 1.0f, 0.0f); // como
 
     // Draw ground
