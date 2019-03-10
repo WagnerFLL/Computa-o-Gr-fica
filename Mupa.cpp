@@ -21,7 +21,7 @@ float angle = 0.0f;
 
 float fovy = 80.0f;
 
-float cam = 8.0f;
+float cam = 2.0f;
 
 GLUquadricObj *quadratic;
 
@@ -72,6 +72,57 @@ void drawDetail(float x) {
       glScalef(0.5, 0.6, 0.1);
       glutSolidCube(1.0);
   glPopMatrix();
+}
+
+void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorLocation) {
+    float doorHeight = 2.2;
+    float doorWidth = 1.25;
+
+    float newWidth = (width/2) - (doorWidth/2);
+    float width1 = newWidth * doorLocation;
+    float width2 = newWidth * (2 - doorLocation);
+    float x1 = x;
+    float z1 = z;
+    float x2 = x + width1 + doorWidth; 
+    float z2 = z;
+
+    drawOrthoWall(x1, z1, width1, floor); // parede a esquerda da porta
+    drawOrthoWall(x2, z2, width2, floor); // parede a direita da porta
+
+    float relativeX = x + width1 + doorWidth/2; // parede emcima da porta
+    float relativeY = 3.5 - ((3.5 - doorHeight)/2);
+    glPushMatrix();
+    glTranslatef(relativeX, relativeY, z);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(doorWidth, 3.5 - doorHeight, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+}
+
+void drawParallelWallWithDoor(float x, float z, float width, int floor, float doorLocation) {
+    float doorHeight = 2.2;
+    float doorWidth = 1.25;
+
+    float newWidth = (width/2) - (doorWidth/2);
+    float width1 = newWidth * doorLocation;
+    float width2 = newWidth * (2 - doorLocation);
+    float x1 = x;
+    float z1 = z;
+    float x2 = x; 
+    float z2 = z + width1 + doorWidth;
+
+    drawParallelWall(x1, z1, width1, floor); // parede a esquerda da porta
+    drawParallelWall(x2, z2, width2, floor); // parede a direita da porta
+
+    float relativeZ = z + width1 + doorWidth/2; // parede emcima da porta
+    float relativeY = 3.5 - ((3.5 - doorHeight)/2);
+    glPushMatrix();
+    glTranslatef(x, relativeY, relativeZ);
+        glRotatef (90, 0,1,0);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(doorWidth, 3.5 - doorHeight, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
 }
 
 void draw(){
@@ -392,6 +443,16 @@ void draw(){
         glutSolidCube(1.0);
     glPopMatrix();
 
+    // teste
+    drawParallelWallWithDoor(0, 46, 6, 0, 1);
+    drawParallelWall(2, 46, 6, 0);
+
+    drawParallelWallWithDoor(0, 55, 6, 0, 0);
+    drawParallelWall(2, 55, 6, 0);
+
+    drawParallelWallWithDoor(0, 65, 6, 0, 1.7);
+    drawParallelWall(2, 65, 6, 0);
+
 }
 
 void drawDoor() {
@@ -442,7 +503,7 @@ void renderScene(void){
 
     // Set the camera
     gluLookAt(x, cam , z,  // de onde
-              x+lx, cam , z+lz, // pra onde
+              x+lx, cam - 5, z+lz, // pra onde
               0.0f, 1.0f, 0.0f); // como
 
     // Draw ground
