@@ -14,10 +14,10 @@ float lx=0.0f,lz=-1.0f;
 // XZ position of the camera
 float x=0.0f,z=50.0f;
 
-float door_angle = 0.0f;
-
 // angle for rotating
 float angle = 0.0f;
+
+float door_angle = 0.0f;
 
 float fovy = 80.0f;
 
@@ -221,6 +221,38 @@ void drawDetail(float x) {
   glPopMatrix();
 }
 
+void drawDoorOrtho(float x, float z, float floor) {
+    float doorWidth = 1.25;
+    float doorHeight = 2.2;
+    float relativeX = x + (doorWidth/2);
+    float relativeY = doorHeight/2 + (floor*3.5);
+    glPushMatrix();
+        glTranslatef(relativeX + ((doorWidth/2) * -1), relativeY, z);
+        glRotatef(door_angle, 0,1,0);
+        glTranslatef((doorWidth/2), 0, 0);
+        glColor3f(0.5f, 0.25f, 0.0);
+        glScalef(doorWidth, doorHeight, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+}
+
+
+void drawDoorParallel(float x, float z, float floor) {
+    float doorWidth = 1.25;
+    float doorHeight = 2.2;
+    float relativeZ = z + (doorWidth/2);
+    float relativeY = doorHeight/2 + (floor*3.5);
+    glPushMatrix();  
+        glTranslatef(x, relativeY, relativeZ + ((doorWidth/2) * -1));
+        glRotatef(door_angle, 0,1,0);
+        glTranslatef(0, 0, (doorWidth/2));
+        glRotatef(90, 0,1,0);
+        glColor3f(0.5f, 0.25f, 0.0);
+        glScalef(doorWidth, doorHeight, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+}
+
 void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorLocation) {
     float doorHeight = 2.2;
     float doorWidth = 1.25;
@@ -244,6 +276,8 @@ void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorL
         glScalef(doorWidth, 3.5 - doorHeight, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
+
+    drawDoorOrtho(x + width1, z, floor);
 }
 
 void drawParallelWallWithDoor(float x, float z, float width, int floor, float doorLocation) {
@@ -270,6 +304,10 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
         glScalef(doorWidth, 3.5 - doorHeight, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
+
+    drawDoorParallel(x, z + width1, floor);
+
+    
 }
 
 void draw(){
@@ -298,50 +336,55 @@ void draw(){
         glutSolidCube(1.0);
     glPopMatrix();
 
-    // // salao despacho com gabinete e jardim
-    // drawParallelWall(7.5, 0, 19.5, 0);
+    //varanda com exposicao
+    drawOrthoWallWithDoor(6, 39, 2.6666, 0, 1);
+    drawOrthoWallWithDoor(8.6666, 39, 2.6666, 0, 1);
+    drawOrthoWallWithDoor(11.3333, 39, 2.6666, 0, 1);
 
-    // // salão de despacho com direitoria
-    // drawOrthoWallWithDoor(0,13.5, 6, 0, 1);
+    // salao despacho com gabinete e jardim
+    drawParallelWall(7.5, 0, 19.5, 0);
 
-    // // diretoria com corredor
-    // drawParallelWallWithDoor(6, 13.5, 6, 0, 1);
+    // salão de despacho com direitoria
+    drawOrthoWallWithDoor(0,13.5, 6, 0, 1);
 
-    // // diretoria com atelier
-    // drawOrthoWallWithDoor(0, 19.5, 6, 0, 1);
+    // diretoria com corredor
+    drawParallelWallWithDoor(6, 13.5, 6, 0, 1);
 
-    // // atelier com corredor
-    // drawParallelWallWithDoor(6, 19.5, 6, 0, 1);
+    // diretoria com atelier
+    drawOrthoWallWithDoor(0, 19.5, 6, 0, 1);
 
-    // // atelier com sala protocolo
-    // drawOrthoWallWithDoor(0, 25.5, 6, 0, 0.8);
+    // atelier com corredor
+    drawParallelWallWithDoor(6, 19.5, 6, 0, 1);
 
-    // // jardim com costas da escada
-    // drawOrthoWall(7.5, 19.5, 6.3, 0);
+    // atelier com sala protocolo
+    drawOrthoWallWithDoor(0, 25.5, 6, 0, 0.8);
 
-    // // por tras da recpção
-    // drawParallelWall(13.8, 19.5, 6, 0);
+    // jardim com costas da escada
+    drawOrthoWall(7.5, 19.5, 6.3, 0);
 
-    // // sec. cult com elevador
-    // drawOrthoWallWithDoor(13.8, 25.5, 6.2, 0, 1.1);
+    // por tras da recpção
+    drawParallelWall(13.8, 19.5, 6, 0);
 
-    // // elevador com reserva técnica
-    // drawOrthoWallWithDoor(13.5, 28, 6.5, 0, 1.1);
+    // sec. cult com elevador
+    drawOrthoWallWithDoor(13.8, 25.5, 6.2, 0, 1.1);
 
-    // // reserva téc. com salão
-    // drawParallelWallWithDoor(13.8, 28, 7, 0, 0.1);
+    // elevador com reserva técnica
+    drawOrthoWallWithDoor(13.5, 28, 6.5, 0, 1.1);
 
-    // // sala protocolo com exposicao 1
-    // drawOrthoWallWithDoor(0, 28, 6.5, 0, 0.8);
+    // reserva téc. com salão
+    drawParallelWallWithDoor(13.8, 28, 7, 0, 0.1);
 
-    // // exposicao1 com salao
-    // drawParallelWallWithDoor(6, 28, 7, 0, 0.1);
+    // sala protocolo com exposicao 1
+    drawOrthoWallWithDoor(0, 28, 6.5, 0, 0.8);
 
-    // // mini auditorio com salao
-    // drawParallelWallWithDoor(13.8, 35, 8, 0, 0.1);
+    // exposicao1 com salao
+    drawParallelWallWithDoor(6, 28, 7, 0, 0.1);
 
-    // // exposicao 2 com salao
-    // drawParallelWallWithDoor(6, 35, 8, 0, 0.1);
+    // mini auditorio com salao
+    drawParallelWallWithDoor(13.8, 35, 8, 0, 0.1);
+
+    // exposicao 2 com salao
+    drawParallelWallWithDoor(6, 35, 8, 0, 0.1);
 
 // floor 1
     // Back
@@ -541,18 +584,6 @@ void draw(){
 
 }
 
-void drawDoor() {
-
-    glPushMatrix();
-		glTranslatef(0, 0, 1.3);
-        glRotatef (door_angle, 0,1,0);
-        glColor3f(0.7f, 0.7f, 0.7f);
-        glScalef(0.6, 2, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
-
-}
-
 void changeSize(int w, int h){
 
     // Prevent a divide by zero, when window is too short
@@ -602,7 +633,7 @@ void renderScene(void){
     glEnd();
 
     draw();
-    drawDoor();
+    // drawDoor();
 
     glFlush();
     glutSwapBuffers();
