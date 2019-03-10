@@ -21,7 +21,7 @@ float angle = 0.0f;
 
 float fovy = 80.0f;
 
-float cam = 3.0f;
+float cam = 8.0f;
 
 GLUquadricObj *quadratic;
 
@@ -40,169 +40,145 @@ void drawColumn(float x) {
   glPopMatrix();
 }
 
+void drawOrthoWall(float x, float z, float width, int floor) {
+  float relativeX = x + width/2;
+  float relativeY = 1.75 + (floor * 3.5);
+
+  glPushMatrix();
+  glTranslatef(relativeX, relativeY, z);
+      glColor3f(1.0f, 0.5f, 0.0f);
+      glScalef(width, 3.5, 0.1);
+      glutSolidCube(1.0);
+  glPopMatrix();
+}
+
+void drawParallelWall(float x, float z, float width, int floor) {
+  float relativeZ = z + width/2;
+  float relativeY = 1.75 + (floor * 3.5);
+
+  glPushMatrix();
+  glTranslatef(x, relativeY, relativeZ);
+      glRotatef (90, 0,1,0);
+      glColor3f(1.0f, 0.5f, 0.0f);
+      glScalef(width, 3.5, 0.1);
+      glutSolidCube(1.0);
+  glPopMatrix();
+}
+
+void drawDetail(float x) {
+  glPushMatrix();
+  glTranslatef(x + 0.25, 9.3, 43);
+      glColor3f(1.0f, 0.5f, 0.0f);
+      glScalef(0.5, 0.6, 0.1);
+      glutSolidCube(1.0);
+  glPopMatrix();
+}
+
 void draw(){
 //Primeiro andar
     // Back side floor
     glPushMatrix();
-    glTranslatef(10, 3.5, 0);
+    glTranslatef(10, 4.5, 0);
         glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(20, 7, 0.1);
+        glScalef(20, 9, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(0, 3.5, 21.5);
+    glTranslatef(0,4.5, 21.5);
         glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(0.1, 7, 43);
+        glScalef(0.1, 9, 43);
         glutSolidCube(1.0);
     glPopMatrix();
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(20, 3.5, 21.5);
+    glTranslatef(20, 4.5, 21.5);
         glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(0.1, 7, 43);
+        glScalef(0.1, 9, 43);
         glutSolidCube(1.0);
     glPopMatrix();
 
     // salao despacho com gabinete e jardim
-    glPushMatrix();
-    glTranslatef(7.5, 1.75, 9.75);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(19.5, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(7.5, 0, 19.5, 0);
 
     // salão de despacho com direitoria
-    glPushMatrix();
-    glTranslatef(3, 1.75, 13.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawOrthoWall(0,13.5, 6, 0);
 
     // diretoria com corredor
-    glPushMatrix();
-    glTranslatef(6, 1.75, 16.5);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(6, 13.5, 6, 0);
 
     // diretoria com atelier
-    glPushMatrix();
-    glTranslatef(3, 1.75, 19.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawOrthoWall(0, 19.5, 6, 0);
 
     // atelier com corredor
-    glPushMatrix();
-    glTranslatef(6, 1.75, 22.5);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(6, 19.5, 6, 0);
 
     // atelier com sala protocolo
-    glPushMatrix();
-    glTranslatef(3, 1.75, 25.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawOrthoWall(0, 25.5, 6, 0);
 
     // jardim com costas da escada
-    glPushMatrix();
-    glTranslatef(10.65, 1.75, 19.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6.3, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawOrthoWall(7.5, 19.5, 6.3, 0);
 
     // por tras da recpção
-    glPushMatrix();
-    glTranslatef(13.8, 1.75, 22.5);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(13.8, 19.5, 6, 0);
 
     // sec. cult com elevador
-    glPushMatrix();
-    glTranslatef(16.9, 1.75, 25.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6.2, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawOrthoWall(13.8, 25.5, 6.2, 0);
 
     // elevador com reserva técnica
-    glPushMatrix();
-    glTranslatef(16.75, 1.75, 28);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6.5, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawOrthoWall(13.5, 28, 6.5, 0);
 
     // reserva téc. com salão
-    glPushMatrix();
-    glTranslatef(13.8, 1.75, 31.5);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(7, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(13.8, 28, 7, 0);
 
     // sala protocolo com exposicao 1
-    glPushMatrix();
-    glTranslatef(3.25, 1.75, 28);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(6.5, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawOrthoWall(0, 28, 6.5, 0);
 
     // exposicao1 com salao
-    glPushMatrix();
-    glTranslatef(6, 1.75, 31.5);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(7, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(6, 28, 7, 0);
 
     // mini auditorio com salao
-    glPushMatrix();
-    glTranslatef(13.8, 1.75, 39);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(8, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(13.8, 35, 8, 0);
 
     // exposicao 2 com salao
-    glPushMatrix();
-    glTranslatef(6, 1.75, 39);
-        glRotatef (90, 0,1,0);
-        glColor3f(1.0f, 0.5f, 0.0f);
-        glScalef(8, 3.5, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+    drawParallelWall(6, 35, 8, 0);
 
-    // lage
+// floor 1
+    // Back
     glPushMatrix();
-    glTranslatef(10, 3.6, 21.5);
+    glTranslatef(10, 3.6, 10.75);
         glColor3f(0.5f, 0.5f, 0.5f);
-        glScalef(20, 0.2, 44);
+        glScalef(20, 0.2, 21.5);
         glutSolidCube(1.0);
     glPopMatrix();
 
-    // floor
+    // Front
+    glPushMatrix();
+    glTranslatef(10, 3.6, 34);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glScalef(20, 0.2, 18.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // Right
+    glPushMatrix();
+    glTranslatef(3.8, 3.6, 22.5);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glScalef(7.6, 0.2, 6);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // Left
+    glPushMatrix();
+    glTranslatef(15.8, 3.6, 22.5);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glScalef(7.6, 0.2, 6);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // floor 0
     glPushMatrix();
     glTranslatef(10, 0.1, 21.5);
         glColor3f(0.5f, 0.5f, 0.5f);
@@ -210,10 +186,18 @@ void draw(){
         glutSolidCube(1.0);
     glPopMatrix();
 
+    // lage
+    glPushMatrix();
+    glTranslatef(10, 7.1, 21.5);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glScalef(20, 0.2, 43.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
 // ESCADA
     float zBase = 25.5, yBase = 0.25;
 
-    for (int i = 0; i < 20; i++, zBase -= 0.2, yBase += 0.1){
+    for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1){
       glPushMatrix();
       glTranslatef(9.9, yBase, zBase);
           glColor3f(0.78f, 0.823f, 0.824f);
@@ -224,20 +208,20 @@ void draw(){
 
     // floor escada
     glPushMatrix();
-    glTranslatef(9.9, 2.3, 20.5);
+    glTranslatef(9.9, 2.2, 20.5);
         glColor3f(0.5f, 0.5f, 0.5f);
-        glScalef(4.5, 0.2, 2);
+        glScalef(4.7, 0.2, 2);
         glutSolidCube(1.0);
     glPopMatrix();
 
     zBase = 21.5;
     yBase = 2.25;
 
-    for (int i = 0; i < 12; i++, zBase += 0.2, yBase += 0.1){
+    for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
       glPushMatrix();
       glTranslatef(11.6, yBase, zBase);
           glColor3f(0.78f, 0.823f, 0.824f);
-          glScalef(1, 0.175, 0.2);
+          glScalef(1, 0.15, 0.35);
           glutSolidCube(1.0);
       glPopMatrix();
     }
@@ -245,11 +229,11 @@ void draw(){
     zBase = 21.5;
     yBase = 2.25;
 
-    for (int i = 0; i < 12; i++, zBase += 0.2, yBase += 0.1){
+    for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
       glPushMatrix();
       glTranslatef(8.1, yBase, zBase);
           glColor3f(0.78f, 0.823f, 0.824f);
-          glScalef(1, 0.175, 0.2);
+          glScalef(1, 0.15, 0.35);
           glutSolidCube(1.0);
       glPopMatrix();
     }
@@ -282,6 +266,20 @@ void draw(){
         glScalef(20, 2, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
+
+    // middle
+    glPushMatrix();
+    glTranslatef(9.85, 9.62, 43);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        glScalef(1.25, 1.25, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // details
+    drawDetail(0);
+    drawDetail(5.75);
+    drawDetail(13.75);
+    drawDetail(19.5);
 
 //Segundo andar
     // exposição cima com salão
@@ -444,7 +442,7 @@ void renderScene(void){
 
     // Set the camera
     gluLookAt(x, cam , z,  // de onde
-              x+lx, cam - 10 , z+lz, // pra onde
+              x+lx, cam , z+lz, // pra onde
               0.0f, 1.0f, 0.0f); // como
 
     // Draw ground
