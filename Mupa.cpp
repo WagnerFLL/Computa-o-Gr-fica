@@ -21,7 +21,7 @@ float angle = 0.0f;
 
 float fovy = 80.0f;
 
-float cam = 8.0f;
+float cam = 2.0f;
 
 GLUquadricObj *quadratic;
 
@@ -62,6 +62,153 @@ void drawParallelWall(float x, float z, float width, int floor) {
       glColor3f(1.0f, 0.5f, 0.0f);
       glScalef(width, 3.5, 0.1);
       glutSolidCube(1.0);
+  glPopMatrix();
+}
+
+void drawChair(float x, float  y, float z, int cabeceira, int rotate) {
+  glPushMatrix();
+  glTranslated(x, y + 0.7, z);
+    if(cabeceira)
+      glScalef(1,1.15,1);
+    glRotatef (rotate*90, 0,1,0);
+    if(rotate == 3)
+      glTranslated(-0.5, 0, -0.5);
+    // costas
+    glPushMatrix();
+    glTranslatef(0, 0, 0);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.1, 1.2, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.2, 0.3, 0);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.06, 0.6, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.4, 0.3, 0);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.06, 0.6, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.6, 0, 0);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.1, 1.2, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.3, 0.6, 0);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.8, 0.06, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // acento
+    glPushMatrix();
+    glTranslatef(0.3, 0, 0.38);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.7, 0.06, 0.7);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // pé da frente
+    glPushMatrix();
+    glTranslatef(0, -0.3, 0.6);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.1, 0.6, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.6, -0.3, 0.6);
+        glColor3f(0.2f, 0.10f, 0.0f);
+        glScalef(0.1, 0.6, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+  glPopMatrix();
+}
+
+void drawTable(float x, float z){
+
+  glPushMatrix();
+    // tampa
+    glPushMatrix();
+    glTranslatef(x, 1, z+3);
+        glPushMatrix();
+          glColor3f(0.3f, 0.2f, 0.1f);
+          glScalef(3, 0.05, 6);
+          glutSolidCube(1.0);
+        glPopMatrix();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(x, 1.05, z+3);
+        glPushMatrix();
+          glColor3f(0.35f, 0.3f, 0.2f);
+          glScalef(2.8, 0.05, 5.8);
+          glutSolidCube(1.0);
+        glPopMatrix();
+    glPopMatrix();
+
+    // pés
+    glPushMatrix();
+    glTranslatef(x-1.45, 0.5, z+0.05);
+        glPushMatrix();
+          glColor3f(0.3f, 0.2f, 0.1f);
+          glScalef(0.1, 1, 0.1);
+          glutSolidCube(1.0);
+        glPopMatrix();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(x-1.45, 0.5, z+6-0.05);
+        glPushMatrix();
+          glColor3f(0.3f, 0.2f, 0.1f);
+          glScalef(0.1, 1, 0.1);
+          glutSolidCube(1.0);
+        glPopMatrix();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(x+1.45, 0.5, z+0.05);
+        glPushMatrix();
+          glColor3f(0.3f, 0.2f, 0.1f);
+          glScalef(0.1, 1, 0.1);
+          glutSolidCube(1.0);
+        glPopMatrix();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(x+1.45, 0.5, z+6-0.05);
+        glPushMatrix();
+          glColor3f(0.3f, 0.2f, 0.1f);
+          glScalef(0.1, 1, 0.1);
+          glutSolidCube(1.0);
+        glPopMatrix();
+    glPopMatrix();
+  glPopMatrix();
+
+}
+
+void drawStar(float z) {
+  glPushMatrix();
+    glTranslated(4.5, 1.1, z);
+    glRotated(90, 1, 0, 0);
+    glColor3f(1.0f, 0.75f, 0.0f);
+    glBegin(GL_POLYGON);
+      glVertex3f(-0.60, 0.77, 0);
+      glVertex3f(-0.68, 0.77, 0);
+      glVertex3f(-0.7, 0.68, 0);
+      glVertex3f(-0.64, 0.63, 0);
+      glVertex3f(-0.58, 0.68, 0);
+    glEnd();
   glPopMatrix();
 }
 
@@ -281,6 +428,26 @@ void draw(){
     drawDetail(13.75);
     drawDetail(19.5);
 
+// CADEIRA
+    drawChair(3.5, 0, 2, 1, 0);
+    drawChair(1.5, 0, 3.5, 0, 1);
+    drawChair(1.5, 0, 4.5, 0, 1);
+    drawChair(1.5, 0, 5.5, 0, 1);
+    drawChair(1.5, 0, 6.5, 0, 1);
+    drawChair(1.5, 0, 7.5, 0, 1);
+    drawChair(1.5, 0, 8.5, 0, 1);
+    drawChair(5, 0, 3.5, 0, 3);
+    drawChair(5, 0, 4.5, 0, 3);
+    drawChair(5, 0, 5.5, 0, 3);
+    drawChair(5, 0, 6.5, 0, 3);
+    drawChair(5, 0, 7.5, 0, 3);
+
+// mesa
+    drawTable(3.8, 2.5);
+    drawStar(3);
+    drawStar(6.75);
+    drawStar(4.75);
+    
 //Segundo andar
     // exposição cima com salão
     glPushMatrix();
@@ -315,6 +482,7 @@ void draw(){
         glScalef(6, 3.5, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
+    glColor3f(1, 0, 0);
 
     // exposição baixo com salão
     glPushMatrix();
