@@ -12,7 +12,7 @@
 float lx=0.0f,lz=-1.0f;
 
 // XZ position of the camera
-float x=0.0f,z=50.0f;
+float x=10.0f,z=50.0f;
 
 // angle for rotating
 float angle = 0.0f;
@@ -371,20 +371,27 @@ void draw(){
     // elevador com reserva técnica
     drawOrthoWallWithDoor(13.5, 28, 6.5, 0, 1.1);
 
-    // reserva téc. com salão
-    drawParallelWallWithDoor(13.8, 28, 7, 0, 0.1);
-
     // sala protocolo com exposicao 1
     drawOrthoWallWithDoor(0, 28, 6.5, 0, 0.8);
 
     // exposicao1 com salao
     drawParallelWallWithDoor(6, 28, 7, 0, 0.1);
 
-    // mini auditorio com salao
-    drawParallelWallWithDoor(13.8, 35, 8, 0, 0.1);
+    // exposicao1 com exposicao2
+    drawOrthoWallWithDoor(0, 35, 6, 0, 1);
 
     // exposicao 2 com salao
     drawParallelWallWithDoor(6, 35, 8, 0, 0.1);
+
+    // mini auditorio com salao
+    drawParallelWallWithDoor(13.8, 35, 8, 0, 0.1);
+
+    // mini auditorio com reserva tecnica
+    drawOrthoWallWithDoor(13.8, 35, 6, 0, 1);
+
+    // reserva téc. com salão
+    drawParallelWallWithDoor(13.8, 28, 7, 0, 0.1);
+
 
 // floor 1
     // Back
@@ -544,7 +551,7 @@ void draw(){
     
 //Segundo andar
     // exposição cima com salão
-    drawParallelWallWithDoor(13.8, 28, 14.5, 1, 1);
+    drawParallelWallWithDoor(13.8, 28, 15, 1, 1);
 
     //exposição cima com elevador
     drawOrthoWallWithDoor(13.5, 28, 6.5, 1, 1);
@@ -556,7 +563,7 @@ void draw(){
     drawParallelWall(13.8, 19.5, 6, 1);
 
     // exposição baixo com salão
-    drawParallelWallWithDoor(6, 28, 14.5, 1, 0.1);
+    drawParallelWallWithDoor(6, 28, 15, 1, 0.1);
 
     //exposição baixo com corredor baixo
     drawOrthoWallWithDoor(0, 28, 6.5, 1, 0.9);
