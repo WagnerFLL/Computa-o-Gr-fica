@@ -14,7 +14,7 @@ float angle = 0.0f;
 
 float door_angle = 0.0f;
 
-float fovy = 80.0f;
+float fovy = 70.0f;
 
 float cam = 2.0f;
 
@@ -64,7 +64,7 @@ void drawChair(float x, float  y, float z, int cabeceira, int rotate) {
   glPushMatrix();
   glTranslated(x, y + 0.7, z);
     if(cabeceira)
-      glScalef(1,1.15,1);
+      glScalef(1,1.5,1);
     glRotatef (rotate*90, 0,1,0);
     if(rotate == 3)
       glTranslated(-0.5, 0, -0.5);
@@ -391,7 +391,7 @@ void draw(){
     // Back
     glPushMatrix();
     glTranslatef(10, 3.6, 10.75);
-        glColor3f(1.0f, 0.87f, 0.67f);
+        glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 21.5);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -399,7 +399,7 @@ void draw(){
     // Front
     glPushMatrix();
     glTranslatef(10, 3.6, 34);
-        glColor3f(1.0f, 0.87f, 0.67f);
+        glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 18.5);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -407,7 +407,7 @@ void draw(){
     // Right
     glPushMatrix();
     glTranslatef(3.8, 3.6, 22.5);
-        glColor3f(1.0f, 0.87f, 0.67f);
+        glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(7.6, 0.2, 6);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -415,7 +415,7 @@ void draw(){
     // Left
     glPushMatrix();
     glTranslatef(15.8, 3.6, 22.5);
-        glColor3f(1.0f, 0.87f, 0.67f);
+        glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(7.6, 0.2, 6);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -423,7 +423,7 @@ void draw(){
     // floor 0
     glPushMatrix();
     glTranslatef(10, 0.1, 21.5);
-        glColor3f(1.0f, 0.87f, 0.67f);
+        glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 44);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -431,7 +431,7 @@ void draw(){
     // lage
     glPushMatrix();
     glTranslatef(10, 7.1, 21.5);
-        glColor3f(1.0f, 0.87f, 0.67f);
+        glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 43.5);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -442,7 +442,7 @@ void draw(){
     for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1){
       glPushMatrix();
       glTranslatef(9.9, yBase, zBase);
-          glColor3f(0.78f, 0.823f, 0.824f);
+          glColor3f(1.0f, 0.85f, 0.8f);
           glScalef(2.5, 0.175, 0.2);
           glutSolidCube(1.0);
       glPopMatrix();
@@ -462,7 +462,7 @@ void draw(){
     for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
       glPushMatrix();
       glTranslatef(11.6, yBase, zBase);
-          glColor3f(0.78f, 0.823f, 0.824f);
+          glColor3f(1.0f, 0.85f, 0.8f);
           glScalef(1, 0.15, 0.35);
           glutSolidCube(1.0);
       glPopMatrix();
@@ -474,7 +474,7 @@ void draw(){
     for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
       glPushMatrix();
       glTranslatef(8.1, yBase, zBase);
-          glColor3f(0.78f, 0.823f, 0.824f);
+          glColor3f(1.0f, 0.85f, 0.8f);
           glScalef(1, 0.15, 0.35);
           glutSolidCube(1.0);
       glPopMatrix();
@@ -536,14 +536,14 @@ void draw(){
     for (int i = 0; i < 74; i++, px += 0.1 ){
       glPushMatrix();
       glTranslatef(px, 4, 43);
-          glColor3f(0.78f, 0.823f, 0.824f);
+          glColor3f(0.5f, 0.6f, 0.6f);
           glScalef(0.02, 0.8, 0.02);
           glutSolidCube(1.0);
       glPopMatrix();
     }
     glPushMatrix();
     glTranslatef(12.1, 4.4, 43);
-        glColor3f(0.78f, 0.823f, 0.824f);
+        glColor3f(0.5f, 0.6f, 0.6f);
         glScalef(12, 0.02, 0.02);
         glutSolidCube(1.0);
     glPopMatrix();
