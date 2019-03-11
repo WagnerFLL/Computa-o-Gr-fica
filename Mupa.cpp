@@ -210,7 +210,7 @@ void drawStar(float z) {
 void drawDetail(float x) {
   glPushMatrix();
   glTranslatef(x + 0.25, 9.3, 43);
-      glColor3f(1.0f, 0.5f, 0.0f);
+      glColor3f(0.43f, 0.50f, 0.56f);
       glScalef(0.5, 0.6, 0.1);
       glutSolidCube(1.0);
   glPopMatrix();
@@ -309,7 +309,7 @@ void draw(){
     // Back side floor
     glPushMatrix();
     glTranslatef(10, 4.5, 0);
-        glColor3f(1.0f, 0.5f, 0.0f);
+        glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(20, 9, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -317,7 +317,7 @@ void draw(){
     // Right side floor
     glPushMatrix();
     glTranslatef(0,4.5, 21.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
+        glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(0.1, 9, 43);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -325,7 +325,7 @@ void draw(){
     // Right side floor
     glPushMatrix();
     glTranslatef(20, 4.5, 21.5);
-        glColor3f(1.0f, 0.5f, 0.0f);
+        glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(0.1, 9, 43);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -391,7 +391,7 @@ void draw(){
     // Back
     glPushMatrix();
     glTranslatef(10, 3.6, 10.75);
-        glColor3f(0.5f, 0.5f, 0.5f);
+        glColor3f(1.0f, 0.87f, 0.67f);
         glScalef(20, 0.2, 21.5);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -399,7 +399,7 @@ void draw(){
     // Front
     glPushMatrix();
     glTranslatef(10, 3.6, 34);
-        glColor3f(0.5f, 0.5f, 0.5f);
+        glColor3f(1.0f, 0.87f, 0.67f);
         glScalef(20, 0.2, 18.5);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -407,7 +407,7 @@ void draw(){
     // Right
     glPushMatrix();
     glTranslatef(3.8, 3.6, 22.5);
-        glColor3f(0.5f, 0.5f, 0.5f);
+        glColor3f(1.0f, 0.87f, 0.67f);
         glScalef(7.6, 0.2, 6);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -415,7 +415,7 @@ void draw(){
     // Left
     glPushMatrix();
     glTranslatef(15.8, 3.6, 22.5);
-        glColor3f(0.5f, 0.5f, 0.5f);
+        glColor3f(1.0f, 0.87f, 0.67f);
         glScalef(7.6, 0.2, 6);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -423,7 +423,7 @@ void draw(){
     // floor 0
     glPushMatrix();
     glTranslatef(10, 0.1, 21.5);
-        glColor3f(0.5f, 0.5f, 0.5f);
+        glColor3f(1.0f, 0.87f, 0.67f);
         glScalef(20, 0.2, 44);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -431,7 +431,7 @@ void draw(){
     // lage
     glPushMatrix();
     glTranslatef(10, 7.1, 21.5);
-        glColor3f(0.5f, 0.5f, 0.5f);
+        glColor3f(1.0f, 0.87f, 0.67f);
         glScalef(20, 0.2, 43.5);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -489,14 +489,14 @@ void draw(){
     // sides
     glPushMatrix();
     glTranslatef(3, 3.5, 43);
-        glColor3f(1.0f, 0.5f, 0.0f);
+        glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(6, 7, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
     glTranslatef(17, 3.5, 43);
-        glColor3f(1.0f, 0.5f, 0.0f);
+        glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(6, 7, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -504,7 +504,7 @@ void draw(){
     // Top
     glPushMatrix();
     glTranslatef(10, 8, 43);
-        glColor3f(1.0f, 0.5f, 0.0f);
+        glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(20, 2, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
@@ -512,9 +512,17 @@ void draw(){
     // middle
     glPushMatrix();
     glTranslatef(9.85, 9.62, 43);
-        glColor3f(1.0f, 0.5f, 0.0f);
+        glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(1.25, 1.25, 0.1);
         glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(9.85, 10.1, 43);
+    glRotated(45,0,0,1);
+    glColor3f(0.43f, 0.50f, 0.56f);
+    glScalef(1.25, 1.25, 0.1);
+    glutSolidCube(1.0);
     glPopMatrix();
 
     // details
