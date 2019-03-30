@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
+
 #define LEFT 0
 #define UP 1
 #define RIGHT 2
@@ -157,8 +158,11 @@ void loadTextureFromFile(char const *filename,int index) {
 }
 
 void loadTextures(){
-	loadTextureFromFile("texture/sample.jpg", 0);
-	loadTextureFromFile("texture/sample2.jpg", 1);
-	loadTextureFromFile("texture/estatua.png", 2);
-	
+	loadTextureFromFile("resources/sample.jpg", 0);
+	loadTextureFromFile("resources/sample2.jpg", 1);
+	loadTextureFromFile("resources/claro_mesa.jpg", 2);
+        loadTextureFromFile("resources/escuro_mesa.jpg", 3);
+        loadTextureFromFile("resources/estrela.jpg", 4);
+        loadTextureFromFile("resources/piso_carrara1.jpg", 5);
+	loadTextureFromFile("resources/teto.jpg", 6);
 }
