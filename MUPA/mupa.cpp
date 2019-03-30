@@ -21,14 +21,13 @@ float cam = 2.0f;
 
 GLUquadricObj *quadratic;
 
+void ilumination (void) {}
+
 void init(void) {
-    // sky color
     quadratic = gluNewQuadric();
     glClearColor(0.0, 0.7, 1.0, 1.0);
-    glEnable(GL_DEPTH_TEST);
-  	// glShadeModel(GL_SMOOTH);
-    glEnable(GL_TEXTURE_2D);
-	  loadTextures();
+    loadTextures();
+    glEnable (GL_DEPTH_TEST);
 }
 
 void drawColumn(float x) {
@@ -38,6 +37,28 @@ void drawColumn(float x) {
       glColor3f(0.78f, 0.823f, 0.824f);
       gluCylinder(quadratic, 0.28, 0.28, 7, 30, 30);
   glPopMatrix();
+}
+
+void textureWall(float x, float z, float width, int floor, int parallel) {
+  glEnable(GL_TEXTURE_2D);
+  glPushMatrix();
+    glTranslatef(x, 3.5 + (3.5 * floor), z);
+    glRotated(90, 1, 0, 0);
+    glRotated(270, 0, 0, parallel);
+    glColor3ub(255,255,255);
+    glBindTexture(GL_TEXTURE_2D, texture_id[6]);
+    glBegin(GL_QUADS);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(0, 0.0001, 3.5);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(width, 0.0001, 3.5);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(width, 0.0001, 0);
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(0,0.0001, 0);
+    glEnd();
+  glPopMatrix();
+  glDisable(GL_TEXTURE_2D);
 }
 
 void drawOrthoWall(float x, float z, float width, int floor) {
@@ -50,6 +71,9 @@ void drawOrthoWall(float x, float z, float width, int floor) {
       glScalef(width, 3.5, 0.1);
       glutSolidCube(1.0);
   glPopMatrix();
+
+  textureWall(x, z+0.05, width, floor, 0);
+  textureWall(x, z-0.06, width, floor, 0);
 }
 
 void drawParallelWall(float x, float z, float width, int floor) {
@@ -63,6 +87,9 @@ void drawParallelWall(float x, float z, float width, int floor) {
       glScalef(width, 3.5, 0.1);
       glutSolidCube(1.0);
   glPopMatrix();
+
+  textureWall(x+0.06, width+z, width, floor, 1);
+  textureWall(x-0.06, width+z, width, floor, 1);
 }
 
 void drawChair(float x, float  y, float z, int cabeceira, int rotate) {
@@ -198,18 +225,44 @@ void drawTable(float x, float z){
 }
 
 void drawStar(float z) {
+  glEnable(GL_TEXTURE_2D);
   glPushMatrix();
-    glTranslated(4.5, 1.1, z);
-    glRotated(90, 1, 0, 0);
-    glColor3f(1.0f, 0.75f, 0.0f);
-    glBegin(GL_POLYGON);
-      glVertex3f(-0.60, 0.77, 0);
-      glVertex3f(-0.68, 0.77, 0);
-      glVertex3f(-0.7, 0.68, 0);
-      glVertex3f(-0.64, 0.63, 0);
-      glVertex3f(-0.58, 0.68, 0);
+    glTranslatef(3.8, 1.11, z);
+    glRotated(90, 0, 1, 0);
+    glColor3ub(255,255,255);
+    glBindTexture(GL_TEXTURE_2D, texture_id[4]);
+    glBegin(GL_QUADS);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(-0.07, 0.0001, 0.07);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(0.07, 0.0001, 0.07);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(0.07, 0.0001, -0.07);
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(-0.07,0.0001, -0.07);
     glEnd();
   glPopMatrix();
+  glDisable(GL_TEXTURE_2D);
+}
+
+void textureFloor() {
+  glEnable(GL_TEXTURE_2D);
+  glPushMatrix();
+    glTranslatef(0, 0.2, -0.5);
+    glColor3ub(255,255,255);
+    glBindTexture(GL_TEXTURE_2D, texture_id[5]);
+    glBegin(GL_QUADS);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(-0, 0.0001, 44);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(20, 0.0001, 44);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(20, 0.0001, -0);
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(-0,0.0001, -0);
+    glEnd();
+  glPopMatrix();
+  glDisable(GL_TEXTURE_2D);
 }
 
 void drawDetail(float x) {
@@ -310,23 +363,46 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
 }
 
 void draw(){
+
+    // quadro fundo
+    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-      glTranslatef(3.2, 2.25, 0.11);
+      glTranslatef(4, 2, 0.6);
       glRotated(90, 1, 0, 0);
       glColor3ub(255,255,255);
       glBindTexture(GL_TEXTURE_2D, texture_id[1]);
-  		glBegin(GL_QUADS);  // floor
-  			glTexCoord2f(0.0f, 1.0f);
-  			glVertex3f(-2, 0.0001, 1);
-  			glTexCoord2f(1.0f, 1.0f);
-  			glVertex3f(2, 0.0001, 1);
-  			glTexCoord2f(1.0f, 0.0f);
-  			glVertex3f(2, 0.0001, -1);
-  			glTexCoord2f(0.0f, 0.0f);
-  			glVertex3f(-2,0.0001, -1);
+      glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-2, 0.0001, 1);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(2, 0.0001, 1);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(2, 0.0001, -1);
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-2,0.0001, -1);
       glEnd();
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 
+    //  Mesa parte escura
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+      glTranslatef(3.8, 1.08, 5.5);
+      glRotated(90, 0, 1, 0);
+      glColor3ub(255,255,255);
+      glBindTexture(GL_TEXTURE_2D, texture_id[3]);
+      glBegin(GL_QUADS);  // floor
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-2.9, 0.0001, 1.4);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(2.9, 0.0001, 1.4);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(2.9, 0.0001, -1.4);
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-2.9,0.0001, -1.4);
+      glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 
 //Primeiro andar
     // Back side floor
@@ -443,13 +519,14 @@ void draw(){
         glutSolidCube(1.0);
     glPopMatrix();
 
-    // floor 0
+    // piso
     glPushMatrix();
     glTranslatef(10, 0.1, 21.5);
         glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 44);
         glutSolidCube(1.0);
     glPopMatrix();
+    textureFloor();
 
     // lage
     glPushMatrix();
@@ -587,9 +664,9 @@ void draw(){
 
 // mesa
     drawTable(3.8, 2.5);
-    drawStar(3);
-    drawStar(6.75);
-    drawStar(4.75);
+    drawStar(3.75);
+    drawStar(7.5);
+    drawStar(5.5);
 
 //Segundo andar
 
@@ -668,14 +745,14 @@ void changeSize(int w, int h){
 void renderScene(void){
 
     // Para ver os objetos em modo polígono (somente os traços)
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // Clear Color and Depth Buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Reset transformations
     glLoadIdentity();
-
+    ilumination();
     // Set the camera
     gluLookAt(x, cam , z,  // de onde
               x+lx, cam, z+lz, // pra onde
