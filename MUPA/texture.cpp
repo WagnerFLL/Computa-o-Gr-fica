@@ -1,4 +1,3 @@
-#include "texture.h"
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #define LEFT 0
