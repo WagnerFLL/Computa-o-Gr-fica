@@ -11,7 +11,8 @@ float lastFrame = 0.0f; // Time of last frame
 
 void mouseMovement(int x, int y)
 {
-//	printf("x = %d")
+	printf("x = %d\n", x);
+	printf("y = %d\n", y);
 }
 
 void mouseButton(int button, int state, int x, int y) {

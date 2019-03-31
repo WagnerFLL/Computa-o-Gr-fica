@@ -39,6 +39,12 @@ float floor2_height = 0.2f;
 GLUquadricObj *quadratic;
 GLuint texture_id[25];
 
+layout (location = 0) in vec3 aPos;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
 #include "Camera.h"
 #include "Texture.h"
 #include "DrawObjects.h"
