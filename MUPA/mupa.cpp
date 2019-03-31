@@ -30,7 +30,7 @@ float floor1_height = 1.0f;
 float wall_height = 0.2f;
 float floor2_height = 0.2f;
 
-bool enable_textures = true;
+bool enable_textures = false;
 
 GLUquadricObj *quadratic;
 
@@ -639,48 +639,48 @@ void draw(){
     glPopMatrix();
 
 // ESCADA
-    float zBase = 25.5, yBase = 0.45;
+	float zBase = 25.5, yBase = 0.45;
 
-    for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1){
-      glPushMatrix();
-      glTranslatef(9.9, yBase + floor1_height, zBase);
-          glColor3f(1.0f, 0.85f, 0.8f);
-          glScalef(2.5, 0.175, 0.2);
-          glutSolidCube(1.0);
-      glPopMatrix();
-    }
+	for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1){
+			glPushMatrix();
+			glTranslatef(9.85, yBase + floor1_height, zBase);
+			glColor3f(1.0f, 0.85f, 0.8f);
+			glScalef(2, 0.175, 0.2);
+			glutSolidCube(1.0);
+			glPopMatrix();
+	}
 
     // floor escada
-    glPushMatrix();
-    glTranslatef(9.9, 2.2 + floor1_height, 20.5);
-        glColor3f(0.5f, 0.5f, 0.5f);
-        glScalef(4.5, 0.2, 2);
-        glutSolidCube(1.0);
-    glPopMatrix();
+	glPushMatrix();
+	glTranslatef(9.9, 2.2 + floor1_height, 20.5);
+			glColor3f(0.5f, 0.5f, 0.5f);
+			glScalef(4.5, 0.2, 2);
+			glutSolidCube(1.0);
+	glPopMatrix();
 
-    zBase = 21.5;
-    yBase = 2.45;
+	zBase = 21.5;
+	yBase = 2.45;
 
-    for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
-      glPushMatrix();
-      glTranslatef(11.6, yBase + floor1_height, zBase);
-          glColor3f(1.0f, 0.85f, 0.8f);
-          glScalef(1, 0.15, 0.35);
-          glutSolidCube(1.0);
-      glPopMatrix();
-    }
+	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
+		glPushMatrix();
+		glTranslatef(11.6, yBase + floor1_height, zBase);
+		glColor3f(1.0f, 0.85f, 0.8f);
+		glScalef(1, 0.15, 0.35);
+		glutSolidCube(1.0);
+		glPopMatrix();
+	}
 
-    zBase = 21.5;
-    yBase = 2.45;
+	zBase = 21.5;
+	yBase = 2.45;
 
-    for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
-      glPushMatrix();
-      glTranslatef(8.1, yBase + floor1_height, zBase);
-          glColor3f(1.0f, 0.85f, 0.8f);
-          glScalef(1, 0.15, 0.35);
-          glutSolidCube(1.0);
-      glPopMatrix();
-    }
+	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
+		glPushMatrix();
+		glTranslatef(8.1, yBase + floor1_height, zBase);
+		glColor3f(1.0f, 0.85f, 0.8f);
+		glScalef(1, 0.15, 0.35);
+		glutSolidCube(1.0);
+		glPopMatrix();
+	}
 
 // FACHADA
     drawColumn(6);
