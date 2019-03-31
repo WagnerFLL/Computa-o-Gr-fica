@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <fstream>
+#include <time.h>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
@@ -15,6 +16,8 @@ float deltaAngle = 0.0f;
 int xOrigin = -1;
 // XZ position of the camera
 float x = 10.0f, z = 50.0f;
+
+
 
 GLuint texture;
 
@@ -52,9 +55,6 @@ void init(void) {
     glClearColor(0.0, 0.7, 1.0, 1.0);
     loadTextures();
     glEnable(GL_DEPTH_TEST);
-
-	currentFrame = glutGet(GLUT_ELAPSED_TIME) ;
-	printf("%d\n", &currentFrame);
 }
 
 void changeSize(int w, int h){
@@ -75,13 +75,12 @@ void changeSize(int w, int h){
 }
 
 void renderScene(void) {
-//	printf("%d\n", &currentFrame);
-//	deltaTime = currentFrame - lastFrame;
-//	lastFrame = currentFrame;
+	currentFrame = glutGet(GLUT_ELAPSED_TIME);
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
 	// Para ver os objetos em modo polígono (somente os traços)
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	currentFrame = glutGet(GLUT_ELAPSED_TIME) ;
-	printf("%d\n", &currentFrame);
+
     // Clear Color and Depth Buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -90,6 +89,7 @@ void renderScene(void) {
     ilumination();
     // Set the camera
 	processCamera();
+
 
     // Draw ground
     glColor3f(0.0, 0.65, 0.0);
@@ -101,8 +101,6 @@ void renderScene(void) {
     glEnd();
 
     draw();
-    // drawDoor();
-
     glFlush();
     glutSwapBuffers();
 }
@@ -110,13 +108,8 @@ void renderScene(void) {
 
 
 void processSpecialKeys(int key, int xx, int yy) {
-
-
-
     float fraction = 0.5f;
-
     switch (key) {
-
         case GLUT_KEY_LEFT :
             angle -= 0.05f;
             lx = sin(angle);
@@ -144,34 +137,6 @@ void processSpecialKeys(int key, int xx, int yy) {
     }
 }
 
-void mouseButton(int button, int state, int x, int y) {
-
-    // only start motion if the left button is pressed
-    if (button == GLUT_LEFT_BUTTON) {
-
-        // when the button is released
-        if (state == GLUT_UP) {
-            angle += deltaAngle;
-            xOrigin = -1;
-        } else {// state = GLUT_DOWN
-            xOrigin = x;
-        }
-    }
-}
-
-void mouseMove(int x, int y) {
-
-    // this will only be true when the left button is down
-    if (xOrigin >= 0) {
-
-        // update deltaAngle
-        deltaAngle = (x - xOrigin) * 0.01f;
-
-        // update camera's direction
-        lx = sin(angle + deltaAngle);
-        lz = -cos(angle + deltaAngle);
-    }
-}
 
 int main(int argc, char **argv) {
 
@@ -189,6 +154,7 @@ int main(int argc, char **argv) {
     glutIdleFunc(renderScene);
     glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(processSpecialKeys);
+	glutPassiveMotionFunc(mouseMovement);
     glutMouseFunc(mouseButton);
     glutMotionFunc(mouseMove);
 
