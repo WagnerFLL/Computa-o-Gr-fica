@@ -236,18 +236,7 @@ void drawTable(float x, float z){
 void drawStar(float z) {
   glEnable(GL_TEXTURE_2D);
   glPushMatrix();
-<<<<<<< HEAD:Mupa.cpp
-    glTranslated(4.5, 1.1  + floor1_height + floor2_thickness, z);
-    glRotated(90, 1, 0, 0);
-    glColor3f(1.0f, 0.75f, 0.0f);
-    glBegin(GL_POLYGON);
-      glVertex3f(-0.60, 0.77, 0);
-      glVertex3f(-0.68, 0.77, 0);
-      glVertex3f(-0.7, 0.68, 0);
-      glVertex3f(-0.64, 0.63, 0);
-      glVertex3f(-0.58, 0.68, 0);
-=======
-    glTranslatef(3.8, 1.11, z);
+    glTranslatef(3.8, 1.11 + floor1_height + floor2_thickness, z);
     glRotated(90, 0, 1, 0);
     glColor3ub(255,255,255);
     glBindTexture(GL_TEXTURE_2D, texture_id[4]);
@@ -260,7 +249,6 @@ void drawStar(float z) {
       glVertex3f(0.07, 0.0001, -0.07);
       glTexCoord2f(0.0f, 0.0f);
       glVertex3f(-0.07,0.0001, -0.07);
->>>>>>> 780e5b83cac161fa8f34064ede7bcc6ba5b877a1:MUPA/mupa.cpp
     glEnd();
   glPopMatrix();
   glDisable(GL_TEXTURE_2D);
