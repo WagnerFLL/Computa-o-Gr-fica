@@ -206,6 +206,7 @@ void draw() {
 		glScalef(2, 0.175, 0.2);
 		glutSolidCube(1.0);
 		glPopMatrix();
+        textureStair(yBase + floor1_height, zBase);
 	}
 
 	// floor escada

@@ -2,7 +2,7 @@
 #define COMPUTER_GRAPHICS_CAMERA_H
 
 glm::mat4 view;
-glm::vec3 cameraPos   = glm::vec3(10.0f, 5.0f,  50.0f);
+glm::vec3 cameraPos   = glm::vec3(10.0f, 3.0f,  50.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
 glm::vec3 temp = cameraPos + cameraFront;
@@ -33,7 +33,7 @@ void mouseButton(int button, int state, int x, int y) {
 
 void mouseMove(int x, int y) {
 	if (xOrigin >= 0) {
-		deltaAngle = (x - xOrigin) * 0.001f;
+		deltaAngle = (x - xOrigin) * 0.01f;
 		cameraFront[0] = sin(angle + deltaAngle);
 		cameraFront[2] = -cos(angle + deltaAngle);
 	}
@@ -53,7 +53,7 @@ void processCamera()
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
-	float cameraSpeed = 0.05f * deltaTime;
+	float cameraSpeed = 0.2f * deltaTime;
 	switch(key){
 		case 'w':
 			cameraPos += cameraSpeed * cameraFront;
