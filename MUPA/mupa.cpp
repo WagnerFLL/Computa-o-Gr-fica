@@ -37,14 +37,14 @@ GLUquadricObj *quadratic;
 GLuint texture_id[25];
 
 #include "Camera.h"
-#include "Draw.h"
-#include "DrawWall.h"
-#include "DrawObjects.h"
 #include "Texture.h"
+#include "DrawObjects.h"
+#include "DrawWall.h"
+#include "Draw.h"
 
+float currentFrame;
 
 void ilumination(void) {}
-
 
 
 void init(void) {
@@ -52,6 +52,9 @@ void init(void) {
     glClearColor(0.0, 0.7, 1.0, 1.0);
     loadTextures();
     glEnable(GL_DEPTH_TEST);
+
+	currentFrame = glutGet(GLUT_ELAPSED_TIME) ;
+	printf("%d\n", &currentFrame);
 }
 
 void changeSize(int w, int h){
@@ -72,14 +75,13 @@ void changeSize(int w, int h){
 }
 
 void renderScene(void) {
-
-	float currentFrame = glutGet(GLUT_ELAPSED_TIME) ;
-	printf("%d\n", &currentFrame);
-	deltaTime = currentFrame - lastFrame;
-	lastFrame = currentFrame;
+//	printf("%d\n", &currentFrame);
+//	deltaTime = currentFrame - lastFrame;
+//	lastFrame = currentFrame;
 	// Para ver os objetos em modo polígono (somente os traços)
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
+	currentFrame = glutGet(GLUT_ELAPSED_TIME) ;
+	printf("%d\n", &currentFrame);
     // Clear Color and Depth Buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -108,6 +110,8 @@ void renderScene(void) {
 
 
 void processSpecialKeys(int key, int xx, int yy) {
+
+
 
     float fraction = 0.5f;
 
@@ -177,7 +181,6 @@ int main(int argc, char **argv) {
     glutInitWindowPosition(50, 50);
     glutInitWindowSize(800, 600);
     glutCreateWindow("MUPA");
-
     init();
 
     // register callbacks
