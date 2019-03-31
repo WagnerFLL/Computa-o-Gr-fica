@@ -2,6 +2,7 @@
 #include <GL/freeglut.h>
 #include <stdlib.h>
 #include <math.h>
+#include <fstream>
 // #include "texture.cpp"
 
 // actual vector representing the camera's direction
@@ -28,6 +29,8 @@ float floor2_thickness = 0.2f;
 float floor1_height = 1.0f;
 float wall_height = 0.2f;
 float floor2_height = 0.2f;
+
+bool enable_textures = true;
 
 GLUquadricObj *quadratic;
 
@@ -102,7 +105,9 @@ void textureWall(float x, float z, float width, int floor, int parallel) {
 
   float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
 
-  texture = loadTexture( "resources/teto.bmp" );
+  if(enable_textures) {
+		texture = loadTexture("resources/teto.bmp");
+	}
   glEnable(GL_TEXTURE_2D);
   glPushMatrix();
     glTranslatef(x, y, z);
@@ -134,9 +139,10 @@ void drawOrthoWall(float x, float z, float width, int floor) {
       glScalef(width, 3.5, 0.1);
       glutSolidCube(1.0);
   glPopMatrix();
-
-  textureWall(x, z+0.05, width, floor, 0);
-  textureWall(x, z-0.06, width, floor, 0);
+    if (enable_textures) {
+        textureWall(x, z + 0.05, width, floor, 0);
+        textureWall(x, z - 0.06, width, floor, 0);
+    }
 }
 
 void drawParallelWall(float x, float z, float width, int floor) {
@@ -151,9 +157,10 @@ void drawParallelWall(float x, float z, float width, int floor) {
       glScalef(width, 3.5, 0.1);
       glutSolidCube(1.0);
   glPopMatrix();
-
-  textureWall(x+0.06, width+z, width, floor, 1);
-  textureWall(x-0.06, width+z, width, floor, 1);
+  if (enable_textures) {
+		textureWall(x + 0.06, width + z, width, floor, 1);
+		textureWall(x - 0.06, width + z, width, floor, 1);
+	}
 }
 
 void drawChair(float x, float  y, float z, int cabeceira, int rotate) {
@@ -289,7 +296,9 @@ void drawTable(float x, float z){
 }
 
 void drawStar(float z) {
-  texture = loadTexture( "resources/estrela.bmp" );
+	if(enable_textures) {
+		texture = loadTexture("resources/estrela.bmp");
+	}
   glEnable(GL_TEXTURE_2D);
   glPushMatrix();
     glTranslatef(3.8, 1.11 + floor1_height + floor2_thickness, z);
@@ -617,7 +626,9 @@ void draw(){
         glScalef(20, 0.2 + floor1_height, 44);
         glutSolidCube(1.0);
     glPopMatrix();
+    if(enable_textures){
     textureFloor();
+    }
 
     // lage
     glPushMatrix();
