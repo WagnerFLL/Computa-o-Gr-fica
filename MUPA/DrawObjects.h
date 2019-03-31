@@ -4,14 +4,14 @@
 
 #ifndef COMPUTER_GRAPHICS_DRAWOBJECTS_H
 #define COMPUTER_GRAPHICS_DRAWOBJECTS_H
-
-void drawChair(float x, float  y, float z, int cabeceira, int rotate) {
+void drawChair(float x, float y, float z, int cabeceira, int rotate) {
 	glPushMatrix();
+
 	glTranslated(x, y + 0.7 + floor1_height, z);
-	if(cabeceira)
-		glScalef(1,1.5,1);
-	glRotatef (rotate*90, 0,1,0);
-	if(rotate == 3)
+	if (cabeceira)
+		glScalef(1, 1.5, 1);
+	glRotatef(rotate * 90, 0, 1, 0);
+	if (rotate == 3)
 		glTranslated(-0.5, 0, -0.5);
 	// costas
 	glPushMatrix();
@@ -75,12 +75,12 @@ void drawChair(float x, float  y, float z, int cabeceira, int rotate) {
 	glPopMatrix();
 }
 
-void drawTable(float x, float z){
+void drawTable(float x, float z) {
 
 	glPushMatrix();
 	// tampa
 	glPushMatrix();
-	glTranslatef(x, 1 + floor1_height, z+3);
+	glTranslatef(x, 1 + floor1_height, z + 3);
 	glPushMatrix();
 	glColor3f(0.3f, 0.2f, 0.1f);
 	glScalef(3, 0.05, 6);
@@ -89,7 +89,7 @@ void drawTable(float x, float z){
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(x, 1.05 + floor1_height, z+3);
+	glTranslatef(x, 1.05 + floor1_height, z + 3);
 	glPushMatrix();
 	glColor3f(0.35f, 0.3f, 0.2f);
 	glScalef(2.8, 0.05, 5.8);
@@ -99,7 +99,7 @@ void drawTable(float x, float z){
 
 	// pés
 	glPushMatrix();
-	glTranslatef(x-1.45, 0.5 + floor1_height, z+0.05);
+	glTranslatef(x - 1.45, 0.5 + floor1_height, z + 0.05);
 	glPushMatrix();
 	glColor3f(0.3f, 0.2f, 0.1f);
 	glScalef(0.1, 1, 0.1);
@@ -108,7 +108,7 @@ void drawTable(float x, float z){
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(x-1.45, 0.5 + floor1_height, z+6-0.05);
+	glTranslatef(x - 1.45, 0.5 + floor1_height, z + 6 - 0.05);
 	glPushMatrix();
 	glColor3f(0.3f, 0.2f, 0.1f);
 	glScalef(0.1, 1, 0.1);
@@ -117,7 +117,7 @@ void drawTable(float x, float z){
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(x+1.45, 0.5 + floor1_height, z+0.05);
+	glTranslatef(x + 1.45, 0.5 + floor1_height, z + 0.05);
 	glPushMatrix();
 	glColor3f(0.3f, 0.2f, 0.1f);
 	glScalef(0.1, 1, 0.1);
@@ -126,7 +126,7 @@ void drawTable(float x, float z){
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(x+1.45, 0.5 + floor1_height, z+6-0.05);
+	glTranslatef(x + 1.45, 0.5 + floor1_height, z + 6 - 0.05);
 	glPushMatrix();
 	glColor3f(0.3f, 0.2f, 0.1f);
 	glScalef(0.1, 1, 0.1);
@@ -138,14 +138,14 @@ void drawTable(float x, float z){
 }
 
 void drawStar(float z) {
-	if(enable_textures) {
-		texture = loadTexture("resources/estrela.bmp");
-	}
+
+	texture = texture_id[1];
+
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
 	glTranslatef(3.8, 1.11 + floor1_height + floor2_thickness, z);
 	glRotated(90, 0, 1, 0);
-	glColor3ub(255,255,255);
+	glColor3ub(255, 255, 255);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 1.0f);
@@ -155,17 +155,16 @@ void drawStar(float z) {
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.07, 0.0001, -0.07);
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(-0.07,0.0001, -0.07);
+	glVertex3f(-0.07, 0.0001, -0.07);
 	glEnd();
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
-	FreeTexture(texture);
 }
 
 void drawColumn(float x) {
 	glPushMatrix();
 	glTranslatef(x, 0 + floor1_height, 43);
-	glRotatef(-90, 1,0,0);
+	glRotatef(-90, 1, 0, 0);
 	glColor3f(0.78f, 0.823f, 0.824f);
 	gluCylinder(quadratic, 0.28, 0.28, 7 + floor2_thickness + floor2_height, 30, 30);
 	glPopMatrix();
