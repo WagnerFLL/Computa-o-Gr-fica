@@ -6,12 +6,12 @@
 // #include "texture.cpp"
 
 // actual vector representing the camera's direction
-float lx=0.0f,lz=-1.0f;
+float lx = 0.0f, lz = -1.0f;
 float deltaAngle = 0.0f;
 int xOrigin = -1;
 
 // XZ position of the camera
-float x=10.0f,z=50.0f;
+float x = 10.0f, z = 50.0f;
 
 GLuint texture;
 
@@ -30,359 +30,360 @@ float floor1_height = 1.0f;
 float wall_height = 0.2f;
 float floor2_height = 0.2f;
 
-bool enable_textures = false;
-
 GLUquadricObj *quadratic;
+GLuint texture_id[25];
 
-GLuint loadTexture( const char * filename )
-{
+GLuint loadTexture(const char *filename, int width, int height, int mode) {
 
-  GLuint texture;
+    GLuint texture;
 
-  int width, height;
+    unsigned char *data;
 
-  unsigned char * data;
+    FILE *file;
 
-  FILE * file;
+    file = fopen(filename, "rb");
 
-  file = fopen( filename, "rb" );
+    if (file == NULL) return 0;
 
-  if ( file == NULL ) return 0;
-  width = 1024;
-  height = 512;
-  data = (unsigned char *)malloc( width * height * 3 );
-  //int size = fseek(file,);
-  fread( data, width * height * 3, 1, file );
-  fclose( file );
+    data = (unsigned char *) malloc(width * height * 3);
+    //int size = fseek(file,);
+    fread(data, width * height * 3, 1, file);
+    fclose(file);
 
- for(int i = 0; i < width * height ; ++i)
-{
-   int index = i*3;
-   unsigned char B,R;
-   B = data[index];
-   R = data[index+2];
+    for (int i = 0; i < width * height; ++i) {
+        int index = i * 3;
+        unsigned char B, R;
+        B = data[index];
+        R = data[index + 2];
 
-   data[index] = R;
-   data[index+2] = B;
+        data[index] = R;
+        data[index + 2] = B;
 
+    }
+
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
+    free(data);
+
+    return texture;
 }
 
+void ilumination(void) {}
 
-glGenTextures( 1, &texture );
-glBindTexture( GL_TEXTURE_2D, texture );
-glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE );
-glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST );
-
-
-glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR );
-glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,GL_REPEAT );
-glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_REPEAT );
-gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height,GL_RGB, GL_UNSIGNED_BYTE, data );
-free( data );
-
-return texture;
+void loadTextures() {
+    texture_id[0] = loadTexture("resources/teto.bmp", 532, 532, 0);
+    texture_id[1] = loadTexture("resources/estrela.bmp", 331, 277, 0);
+    texture_id[2] = loadTexture("resources/piso_carrara1.bmp", 574, 522, 1);
+    texture_id[3] = loadTexture("resources/sample.bmp", 400, 225, 0);
+    texture_id[4] = loadTexture("resources/escuro_mesa.bmp", 800, 500, 0);
 }
-
-void ilumination (void) {}
 
 void init(void) {
     quadratic = gluNewQuadric();
     glClearColor(0.0, 0.7, 1.0, 1.0);
-    // loadTextures();
-    glEnable (GL_DEPTH_TEST);
+    loadTextures();
+    glEnable(GL_DEPTH_TEST);
 }
 
 void drawColumn(float x) {
-  glPushMatrix();
-   glTranslatef(x, 0 + floor1_height, 43);
-   glRotatef(-90, 1,0,0);
-      glColor3f(0.78f, 0.823f, 0.824f);
-      gluCylinder(quadratic, 0.28, 0.28, 7 + floor2_thickness + floor2_height, 30, 30);
-  glPopMatrix();
+    glPushMatrix();
+        glTranslatef(x, 0 + floor1_height, 43);
+        glRotatef(-90, 1, 0, 0);
+        glColor3f(0.78f, 0.823f, 0.824f);
+        gluCylinder(quadratic, 0.28, 0.28, 7 + floor2_thickness + floor2_height, 30, 30);
+    glPopMatrix();
 }
 
 void textureWall(float x, float z, float width, int floor, int parallel) {
 
-  float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
+    float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
 
-  if(enable_textures) {
-		texture = loadTexture("resources/teto.bmp");
-	}
-  glEnable(GL_TEXTURE_2D);
-  glPushMatrix();
-    glTranslatef(x, y, z);
-    glRotated(90, 1, 0, 0);
-    glRotated(270, 0, 0, parallel);
-    glColor3ub(255,255,255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-      glTexCoord2f(0.0f, 1.0f);
-      glVertex3f(0, 0.0001, 3.5);
-      glTexCoord2f(1.0f, 1.0f);
-      glVertex3f(width, 0.0001, 3.5);
-      glTexCoord2f(1.0f, 0.0f);
-      glVertex3f(width, 0.0001, 0);
-      glTexCoord2f(0.0f, 0.0f);
-      glVertex3f(0,0.0001, 0);
-    glEnd();
-  glPopMatrix();
-  glDisable(GL_TEXTURE_2D);
+
+    texture = texture_id[0];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+        glTranslatef(x, y, z);
+        glRotated(90, 1, 0, 0);
+        glRotated(270, 0, 0, parallel);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(0, 0.0001, 3.5);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(width, 0.0001, 3.5);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(width, 0.0001, 0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(0, 0.0001, 0);
+        glEnd();
+
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 void drawOrthoWall(float x, float z, float width, int floor) {
-  float relativeX = x + width/2;
-  float relativeY = 1.75 + (floor * (3.5 + floor2_thickness)) + wall_height + floor1_height;
+    float relativeX = x + width / 2;
+    float relativeY = 1.75 + (floor * (3.5 + floor2_thickness)) + wall_height + floor1_height;
 
-  glPushMatrix();
-  glTranslatef(relativeX, relativeY, z);
-      glColor3f(0.7f, 0.7f, 0.7f);
-      glScalef(width, 3.5, 0.1);
-      glutSolidCube(1.0);
-  glPopMatrix();
-    if (enable_textures) {
-        textureWall(x, z + 0.05, width, floor, 0);
-        textureWall(x, z - 0.06, width, floor, 0);
-    }
+    glPushMatrix();
+        glTranslatef(relativeX, relativeY, z);
+        glColor3f(0.7f, 0.7f, 0.7f);
+        glScalef(width, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    textureWall(x, z + 0.05, width, floor, 0);
+    textureWall(x, z - 0.06, width, floor, 0);
 }
 
 void drawParallelWall(float x, float z, float width, int floor) {
-  float relativeZ = z + width/2;
-  float relativeY = 1.75 + (floor * (3.5 + floor2_thickness))
-                    + wall_height + floor1_height;
+    float relativeZ = z + width / 2;
+    float relativeY = 1.75 + (floor * (3.5 + floor2_thickness))
+                      + wall_height + floor1_height;
 
-  glPushMatrix();
-  glTranslatef(x, relativeY, relativeZ);
-      glRotatef (90, 0,1,0);
-      glColor3f(0.7f, 0.7f, 0.7f);
-      glScalef(width, 3.5, 0.1);
-      glutSolidCube(1.0);
-  glPopMatrix();
-  if (enable_textures) {
-		textureWall(x + 0.06, width + z, width, floor, 1);
-		textureWall(x - 0.06, width + z, width, floor, 1);
-	}
+    glPushMatrix();
+        glTranslatef(x, relativeY, relativeZ);
+        glRotatef(90, 0, 1, 0);
+        glColor3f(0.7f, 0.7f, 0.7f);
+        glScalef(width, 3.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    textureWall(x + 0.06, width + z, width, floor, 1);
+    textureWall(x - 0.06, width + z, width, floor, 1);
+
 }
 
-void drawChair(float x, float  y, float z, int cabeceira, int rotate) {
-  glPushMatrix();
-  glTranslated(x, y + 0.7 + floor1_height, z);
-    if(cabeceira)
-      glScalef(1,1.5,1);
-    glRotatef (rotate*90, 0,1,0);
-    if(rotate == 3)
-      glTranslated(-0.5, 0, -0.5);
-    // costas
+void drawChair(float x, float y, float z, int cabeceira, int rotate) {
     glPushMatrix();
-    glTranslatef(0, 0, 0);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.1, 1.2, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
 
-    glPushMatrix();
-    glTranslatef(0.2, 0.3, 0);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.06, 0.6, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+        glTranslated(x, y + 0.7 + floor1_height, z);
+        if (cabeceira)
+            glScalef(1, 1.5, 1);
+        glRotatef(rotate * 90, 0, 1, 0);
+        if (rotate == 3)
+            glTranslated(-0.5, 0, -0.5);
+        // costas
+        glPushMatrix();
+            glTranslatef(0, 0, 0);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.1, 1.2, 0.1);
+            glutSolidCube(1.0);
+        glPopMatrix();
 
-    glPushMatrix();
-    glTranslatef(0.4, 0.3, 0);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.06, 0.6, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+        glPushMatrix();
+            glTranslatef(0.2, 0.3, 0);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.06, 0.6, 0.1);
+            glutSolidCube(1.0);
+        glPopMatrix();
 
-    glPushMatrix();
-    glTranslatef(0.6, 0, 0);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.1, 1.2, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+        glPushMatrix();
+            glTranslatef(0.4, 0.3, 0);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.06, 0.6, 0.1);
+            glutSolidCube(1.0);
+        glPopMatrix();
 
-    glPushMatrix();
-    glTranslatef(0.3, 0.6, 0);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.8, 0.06, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+        glPushMatrix();
+            glTranslatef(0.6, 0, 0);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.1, 1.2, 0.1);
+            glutSolidCube(1.0);
+        glPopMatrix();
 
-    // acento
-    glPushMatrix();
-    glTranslatef(0.3, 0, 0.38);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.7, 0.06, 0.7);
-        glutSolidCube(1.0);
-    glPopMatrix();
+        glPushMatrix();
+            glTranslatef(0.3, 0.6, 0);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.8, 0.06, 0.1);
+            glutSolidCube(1.0);
+        glPopMatrix();
 
-    // pé da frente
-    glPushMatrix();
-    glTranslatef(0, -0.3, 0.6);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.1, 0.6, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+        // acento
+        glPushMatrix();
+            glTranslatef(0.3, 0, 0.38);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.7, 0.06, 0.7);
+            glutSolidCube(1.0);
+        glPopMatrix();
 
-    glPushMatrix();
-    glTranslatef(0.6, -0.3, 0.6);
-        glColor3f(0.2f, 0.10f, 0.0f);
-        glScalef(0.1, 0.6, 0.1);
-        glutSolidCube(1.0);
-    glPopMatrix();
+        // pé da frente
+        glPushMatrix();
+            glTranslatef(0, -0.3, 0.6);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.1, 0.6, 0.1);
+            glutSolidCube(1.0);
+        glPopMatrix();
 
-  glPopMatrix();
+        glPushMatrix();
+            glTranslatef(0.6, -0.3, 0.6);
+            glColor3f(0.2f, 0.10f, 0.0f);
+            glScalef(0.1, 0.6, 0.1);
+            glutSolidCube(1.0);
+        glPopMatrix();
+
+    glPopMatrix();
 }
 
-void drawTable(float x, float z){
+void drawTable(float x, float z) {
 
-  glPushMatrix();
+    glPushMatrix();
     // tampa
     glPushMatrix();
-    glTranslatef(x, 1 + floor1_height, z+3);
-        glPushMatrix();
-          glColor3f(0.3f, 0.2f, 0.1f);
-          glScalef(3, 0.05, 6);
-          glutSolidCube(1.0);
-        glPopMatrix();
+    glTranslatef(x, 1 + floor1_height, z + 3);
+    glPushMatrix();
+    glColor3f(0.3f, 0.2f, 0.1f);
+    glScalef(3, 0.05, 6);
+    glutSolidCube(1.0);
+    glPopMatrix();
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(x, 1.05 + floor1_height, z+3);
-        glPushMatrix();
-          glColor3f(0.35f, 0.3f, 0.2f);
-          glScalef(2.8, 0.05, 5.8);
-          glutSolidCube(1.0);
-        glPopMatrix();
+    glTranslatef(x, 1.05 + floor1_height, z + 3);
+    glPushMatrix();
+    glColor3f(0.35f, 0.3f, 0.2f);
+    glScalef(2.8, 0.05, 5.8);
+    glutSolidCube(1.0);
+    glPopMatrix();
     glPopMatrix();
 
     // pés
     glPushMatrix();
-    glTranslatef(x-1.45, 0.5 + floor1_height, z+0.05);
-        glPushMatrix();
-          glColor3f(0.3f, 0.2f, 0.1f);
-          glScalef(0.1, 1, 0.1);
-          glutSolidCube(1.0);
-        glPopMatrix();
+    glTranslatef(x - 1.45, 0.5 + floor1_height, z + 0.05);
+    glPushMatrix();
+    glColor3f(0.3f, 0.2f, 0.1f);
+    glScalef(0.1, 1, 0.1);
+    glutSolidCube(1.0);
+    glPopMatrix();
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(x-1.45, 0.5 + floor1_height, z+6-0.05);
-        glPushMatrix();
-          glColor3f(0.3f, 0.2f, 0.1f);
-          glScalef(0.1, 1, 0.1);
-          glutSolidCube(1.0);
-        glPopMatrix();
+    glTranslatef(x - 1.45, 0.5 + floor1_height, z + 6 - 0.05);
+    glPushMatrix();
+    glColor3f(0.3f, 0.2f, 0.1f);
+    glScalef(0.1, 1, 0.1);
+    glutSolidCube(1.0);
+    glPopMatrix();
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(x+1.45, 0.5 + floor1_height, z+0.05);
-        glPushMatrix();
-          glColor3f(0.3f, 0.2f, 0.1f);
-          glScalef(0.1, 1, 0.1);
-          glutSolidCube(1.0);
-        glPopMatrix();
+    glTranslatef(x + 1.45, 0.5 + floor1_height, z + 0.05);
+    glPushMatrix();
+    glColor3f(0.3f, 0.2f, 0.1f);
+    glScalef(0.1, 1, 0.1);
+    glutSolidCube(1.0);
+    glPopMatrix();
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(x+1.45, 0.5 + floor1_height, z+6-0.05);
-        glPushMatrix();
-          glColor3f(0.3f, 0.2f, 0.1f);
-          glScalef(0.1, 1, 0.1);
-          glutSolidCube(1.0);
-        glPopMatrix();
+    glTranslatef(x + 1.45, 0.5 + floor1_height, z + 6 - 0.05);
+    glPushMatrix();
+    glColor3f(0.3f, 0.2f, 0.1f);
+    glScalef(0.1, 1, 0.1);
+    glutSolidCube(1.0);
     glPopMatrix();
-  glPopMatrix();
+    glPopMatrix();
+    glPopMatrix();
 
 }
 
 void drawStar(float z) {
-	if(enable_textures) {
-		texture = loadTexture("resources/estrela.bmp");
-	}
-  glEnable(GL_TEXTURE_2D);
-  glPushMatrix();
+
+    texture = texture_id[1];
+
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
     glTranslatef(3.8, 1.11 + floor1_height + floor2_thickness, z);
     glRotated(90, 0, 1, 0);
-    glColor3ub(255,255,255);
+    glColor3ub(255, 255, 255);
     glBindTexture(GL_TEXTURE_2D, texture);
     glBegin(GL_QUADS);
-      glTexCoord2f(0.0f, 1.0f);
-      glVertex3f(-0.07, 0.0001, 0.07);
-      glTexCoord2f(1.0f, 1.0f);
-      glVertex3f(0.07, 0.0001, 0.07);
-      glTexCoord2f(1.0f, 0.0f);
-      glVertex3f(0.07, 0.0001, -0.07);
-      glTexCoord2f(0.0f, 0.0f);
-      glVertex3f(-0.07,0.0001, -0.07);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0.07, 0.0001, 0.07);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(0.07, 0.0001, 0.07);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(0.07, 0.0001, -0.07);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0.07, 0.0001, -0.07);
     glEnd();
-  glPopMatrix();
-  glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 void textureFloor() {
-  texture = loadTexture( "resources/piso_carrara1.bmp" );
-  glEnable(GL_TEXTURE_2D);
-  glPushMatrix();
+    texture = texture_id[2];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
     glTranslatef(0, 1.2, -0.5);
-    glColor3ub(255,255,255);
+    glColor3ub(255, 255, 255);
     glBindTexture(GL_TEXTURE_2D, texture);
     glBegin(GL_QUADS);
-      glTexCoord2f(0.0f, 1.0f);
-      glVertex3f(-0, 0.0001, 44);
-      glTexCoord2f(1.0f, 1.0f);
-      glVertex3f(20, 0.0001, 44);
-      glTexCoord2f(1.0f, 0.0f);
-      glVertex3f(20, 0.0001, -0);
-      glTexCoord2f(0.0f, 0.0f);
-      glVertex3f(-0,0.0001, -0);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 44);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(20, 0.0001, 44);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(20, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
     glEnd();
-  glPopMatrix();
-  glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 void drawDetail(float x) {
-  glPushMatrix();
-  glTranslatef(x + 0.25, 9.3 + floor1_height + floor2_thickness, 43);
-      glColor3f(0.43f, 0.50f, 0.56f);
-      glScalef(0.5, 0.6, 0.1);
-      glutSolidCube(1.0);
-  glPopMatrix();
+    glPushMatrix();
+    glTranslatef(x + 0.25, 9.3 + floor1_height + floor2_thickness, 43);
+    glColor3f(0.43f, 0.50f, 0.56f);
+    glScalef(0.5, 0.6, 0.1);
+    glutSolidCube(1.0);
+    glPopMatrix();
 }
 
 void drawDoorOrtho(float x, float z, float floor) {
     float doorWidth = 1.25;
     float doorHeight = 2.2;
-    float relativeX = x + (doorWidth/2);
-    float relativeY = doorHeight/2
-                      + (floor* (3.5 + floor2_thickness))
+    float relativeX = x + (doorWidth / 2);
+    float relativeY = doorHeight / 2
+                      + (floor * (3.5 + floor2_thickness))
                       + wall_height + floor1_height;
 
     glPushMatrix();
-        glTranslatef(relativeX + ((doorWidth/2) * -1), relativeY, z);
-        glRotatef(door_angle, 0,1,0);
-        glTranslatef((doorWidth/2), 0, 0);
-        glColor3f(0.5f, 0.25f, 0.0);
-        glScalef(doorWidth, doorHeight, 0.1);
-        glutSolidCube(1.0);
+    glTranslatef(relativeX + ((doorWidth / 2) * -1), relativeY, z);
+    glRotatef(door_angle, 0, 1, 0);
+    glTranslatef((doorWidth / 2), 0, 0);
+    glColor3f(0.5f, 0.25f, 0.0);
+    glScalef(doorWidth, doorHeight, 0.1);
+    glutSolidCube(1.0);
     glPopMatrix();
 }
 
 void drawDoorParallel(float x, float z, float floor) {
     float doorWidth = 1.25;
     float doorHeight = 2.2;
-    float relativeZ = z + (doorWidth/2);
-    float relativeY = doorHeight/2
-                      + (floor* (3.5 + floor2_thickness))
+    float relativeZ = z + (doorWidth / 2);
+    float relativeY = doorHeight / 2
+                      + (floor * (3.5 + floor2_thickness))
                       + wall_height + floor1_height;
 
     glPushMatrix();
-        glTranslatef(x, relativeY, relativeZ + ((doorWidth/2) * -1));
-        glRotatef(door_angle, 0,1,0);
-        glTranslatef(0, 0, (doorWidth/2));
-        glRotatef(90, 0,1,0);
-        glColor3f(0.5f, 0.25f, 0.0);
-        glScalef(doorWidth, doorHeight, 0.1);
-        glutSolidCube(1.0);
+    glTranslatef(x, relativeY, relativeZ + ((doorWidth / 2) * -1));
+    glRotatef(door_angle, 0, 1, 0);
+    glTranslatef(0, 0, (doorWidth / 2));
+    glRotatef(90, 0, 1, 0);
+    glColor3f(0.5f, 0.25f, 0.0);
+    glScalef(doorWidth, doorHeight, 0.1);
+    glutSolidCube(1.0);
     glPopMatrix();
 }
 
@@ -390,7 +391,7 @@ void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorL
     float doorHeight = 2.2;
     float doorWidth = 1.25;
 
-    float newWidth = (width/2) - (doorWidth/2);
+    float newWidth = (width / 2) - (doorWidth / 2);
     float width1 = newWidth * doorLocation;
     float width2 = newWidth * (2 - doorLocation);
     float x1 = x;
@@ -401,16 +402,16 @@ void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorL
     drawOrthoWall(x1, z1, width1, floor); // parede a esquerda da porta
     drawOrthoWall(x2, z2, width2, floor); // parede a direita da porta
 
-    float relativeX = x + width1 + doorWidth/2; // parede emcima da porta
-    float relativeY = 3.5 - ((3.5 - doorHeight)/2)
+    float relativeX = x + width1 + doorWidth / 2; // parede emcima da porta
+    float relativeY = 3.5 - ((3.5 - doorHeight) / 2)
                       + (floor * (3.5 + floor2_thickness))
                       + wall_height + floor1_height;
 
     glPushMatrix();
     glTranslatef(relativeX, relativeY, z);
-        glColor3f(0.7f, 0.7f, 0.7f);
-        glScalef(doorWidth, 3.5 - doorHeight, 0.1);
-        glutSolidCube(1.0);
+    glColor3f(0.7f, 0.7f, 0.7f);
+    glScalef(doorWidth, 3.5 - doorHeight, 0.1);
+    glutSolidCube(1.0);
     glPopMatrix();
 
     drawDoorOrtho(x + width1, z, floor);
@@ -420,7 +421,7 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
     float doorHeight = 2.2;
     float doorWidth = 1.25;
 
-    float newWidth = (width/2) - (doorWidth/2);
+    float newWidth = (width / 2) - (doorWidth / 2);
     float width1 = newWidth * doorLocation;
     float width2 = newWidth * (2 - doorLocation);
     float x1 = x;
@@ -431,70 +432,70 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
     drawParallelWall(x1, z1, width1, floor); // parede a esquerda da porta
     drawParallelWall(x2, z2, width2, floor); // parede a direita da porta
 
-    float relativeZ = z + width1 + doorWidth/2; // parede emcima da porta
-    float relativeY = 3.5 - ((3.5 - doorHeight)/2)
+    float relativeZ = z + width1 + doorWidth / 2; // parede emcima da porta
+    float relativeY = 3.5 - ((3.5 - doorHeight) / 2)
                       + (floor * (3.5 + floor2_thickness))
                       + wall_height + floor1_height;
 
     glPushMatrix();
     glTranslatef(x, relativeY, relativeZ);
-        glRotatef (90, 0,1,0);
-        glColor3f(0.7f, 0.7f, 0.7f);
-        glScalef(doorWidth, 3.5 - doorHeight, 0.1);
-        glutSolidCube(1.0);
+    glRotatef(90, 0, 1, 0);
+    glColor3f(0.7f, 0.7f, 0.7f);
+    glScalef(doorWidth, 3.5 - doorHeight, 0.1);
+    glutSolidCube(1.0);
     glPopMatrix();
 
     drawDoorParallel(x, z + width1, floor);
 }
 
-void draw(){
+void draw() {
 
     // quadro fundo
-    texture = loadTexture( "resources/sample.bmp" );
+    texture = texture_id[3];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-      glTranslatef(4, 2 + floor1_height, 0.6);
-      glRotated(90, 1, 0, 0);
-      glColor3ub(255,255,255);
-      glBindTexture(GL_TEXTURE_2D, texture);
-      glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-2, 0.0001, 1);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(2, 0.0001, 1);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(2, 0.0001, -1);
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(-2,0.0001, -1);
-      glEnd();
+        glTranslatef(4, 2 + floor1_height, 0.6);
+        glRotated(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-2, 0.0001, -1);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(2, 0.0001, -1);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(2, 0.0001, 1);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-2, 0.0001, 1);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 
     //  Mesa parte escura
-    texture = loadTexture( "resources/escuro_mesa.bmp" );
+    texture = texture_id[4];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-      glTranslatef(3.8, 1.08 + floor1_height, 5.5);
-      glRotated(90, 0, 1, 0);
-      glColor3ub(255,255,255);
-      glBindTexture(GL_TEXTURE_2D, texture);
-      glBegin(GL_QUADS);  // floor
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-2.9, 0.0001, 1.4);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(2.9, 0.0001, 1.4);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(2.9, 0.0001, -1.4);
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(-2.9,0.0001, -1.4);
-      glEnd();
+        glTranslatef(3.8, 1.08 + floor1_height, 5.5);
+        glRotated(90, 0, 1, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);  // floor
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-2.9, 0.0001, 1.4);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(2.9, 0.0001, 1.4);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(2.9, 0.0001, -1.4);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-2.9, 0.0001, -1.4);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 
 //Primeiro andar
     // Back side floor
     glPushMatrix();
-    glTranslatef(10, 4.5 + floor1_height, 0);
+        glTranslatef(10, 4.5 + floor1_height, 0);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(20, 9, 0.1);
         glutSolidCube(1.0);
@@ -502,7 +503,7 @@ void draw(){
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(0,4.5 + floor1_height, 21.5);
+        glTranslatef(0, 4.5 + floor1_height, 21.5);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(0.1, 9, 43);
         glutSolidCube(1.0);
@@ -510,7 +511,7 @@ void draw(){
 
     // Right side floor
     glPushMatrix();
-    glTranslatef(20, 4.5 + floor1_height, 21.5);
+        glTranslatef(20, 4.5 + floor1_height, 21.5);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(0.1, 9, 43);
         glutSolidCube(1.0);
@@ -525,7 +526,7 @@ void draw(){
     drawParallelWall(7.5, 0, 19.5, 0);
 
     // salão de despacho com direitoria
-    drawOrthoWallWithDoor(0,13.5, 6, 0, 1);
+    drawOrthoWallWithDoor(0, 13.5, 6, 0, 1);
 
     // diretoria com corredor
     drawParallelWallWithDoor(6, 13.5, 6, 0, 1);
@@ -579,7 +580,7 @@ void draw(){
     drawOrthoWall(11, 28, 1, 0);
 
     glPushMatrix();
-      glTranslatef(10, 3.1 + wall_height + floor1_height, 28);
+        glTranslatef(10, 3.1 + wall_height + floor1_height, 28);
         glColor3f(0.7f, 0.7f, 0.7f);
         glScalef(7, 0.8, 0.1);
         glutSolidCube(1.0);
@@ -589,7 +590,7 @@ void draw(){
 // floor 1
     // Back
     glPushMatrix();
-    glTranslatef(10, 3.6 + floor1_height + floor2_height, 10.75);
+        glTranslatef(10, 3.6 + floor1_height + floor2_height, 10.75);
         glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 21.5);
         glutSolidCube(1.0);
@@ -597,7 +598,7 @@ void draw(){
 
     // Front
     glPushMatrix();
-    glTranslatef(10, 3.6 + floor1_height + floor2_height, 34);
+        glTranslatef(10, 3.6 + floor1_height + floor2_height, 34);
         glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 18.5);
         glutSolidCube(1.0);
@@ -605,7 +606,7 @@ void draw(){
 
     // Right
     glPushMatrix();
-    glTranslatef(3.8, 3.6 + floor1_height + floor2_height, 22.5);
+        glTranslatef(3.8, 3.6 + floor1_height + floor2_height, 22.5);
         glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(7.6, 0.2, 6);
         glutSolidCube(1.0);
@@ -613,74 +614,73 @@ void draw(){
 
     // Left
     glPushMatrix();
-    glTranslatef(15.8, 3.6 + floor1_height + floor2_height, 22.5);
+        glTranslatef(15.8, 3.6 + floor1_height + floor2_height, 22.5);
         glColor3f(0.8f, 0.823f, 0.824f);
-        glScalef(7.6, 0.2 , 6);
+        glScalef(7.6, 0.2, 6);
         glutSolidCube(1.0);
     glPopMatrix();
 
     // piso
     glPushMatrix();
-    glTranslatef(10, 0.1 + floor1_height/2, 21.5);
+        glTranslatef(10, 0.1 + floor1_height / 2, 21.5);
         glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2 + floor1_height, 44);
         glutSolidCube(1.0);
     glPopMatrix();
-    if(enable_textures){
+
     textureFloor();
-    }
 
     // lage
     glPushMatrix();
-    glTranslatef(10, 7.1 + floor1_height + floor2_height + floor2_thickness, 21.5);
+        glTranslatef(10, 7.1 + floor1_height + floor2_height + floor2_thickness, 21.5);
         glColor3f(0.8f, 0.823f, 0.824f);
         glScalef(20, 0.2, 43.5);
         glutSolidCube(1.0);
     glPopMatrix();
 
 // ESCADA
-	float zBase = 25.5, yBase = 0.45;
+    float zBase = 25.5, yBase = 0.45;
 
-	for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1){
-			glPushMatrix();
-			glTranslatef(9.85, yBase + floor1_height, zBase);
-			glColor3f(1.0f, 0.85f, 0.8f);
-			glScalef(2, 0.175, 0.2);
-			glutSolidCube(1.0);
-			glPopMatrix();
-	}
+    for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1) {
+        glPushMatrix();
+            glTranslatef(9.85, yBase + floor1_height, zBase);
+            glColor3f(1.0f, 0.85f, 0.8f);
+            glScalef(2, 0.175, 0.2);
+            glutSolidCube(1.0);
+        glPopMatrix();
+    }
 
     // floor escada
-	glPushMatrix();
-	glTranslatef(9.9, 2.2 + floor1_height, 20.5);
-			glColor3f(0.5f, 0.5f, 0.5f);
-			glScalef(4.5, 0.2, 2);
-			glutSolidCube(1.0);
-	glPopMatrix();
+    glPushMatrix();
+        glTranslatef(9.9, 2.2 + floor1_height, 20.5);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glScalef(4.5, 0.2, 2);
+        glutSolidCube(1.0);
+    glPopMatrix();
 
-	zBase = 21.5;
-	yBase = 2.45;
+    zBase = 21.5;
+    yBase = 2.45;
 
-	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
-		glPushMatrix();
-		glTranslatef(11.6, yBase + floor1_height, zBase);
-		glColor3f(1.0f, 0.85f, 0.8f);
-		glScalef(1, 0.15, 0.35);
-		glutSolidCube(1.0);
-		glPopMatrix();
-	}
+    for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
+        glPushMatrix();
+            glTranslatef(11.6, yBase + floor1_height, zBase);
+            glColor3f(1.0f, 0.85f, 0.8f);
+            glScalef(1, 0.15, 0.35);
+            glutSolidCube(1.0);
+        glPopMatrix();
+    }
 
-	zBase = 21.5;
-	yBase = 2.45;
+    zBase = 21.5;
+    yBase = 2.45;
 
-	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
-		glPushMatrix();
-		glTranslatef(8.1, yBase + floor1_height, zBase);
-		glColor3f(1.0f, 0.85f, 0.8f);
-		glScalef(1, 0.15, 0.35);
-		glutSolidCube(1.0);
-		glPopMatrix();
-	}
+    for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
+        glPushMatrix();
+            glTranslatef(8.1, yBase + floor1_height, zBase);
+            glColor3f(1.0f, 0.85f, 0.8f);
+            glScalef(1, 0.15, 0.35);
+            glutSolidCube(1.0);
+        glPopMatrix();
+    }
 
 // FACHADA
     drawColumn(6);
@@ -690,14 +690,14 @@ void draw(){
 
     // sides
     glPushMatrix();
-    glTranslatef(3, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
+        glTranslatef(3, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(6, 7 + floor2_thickness, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(17, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
+        glTranslatef(17, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(6, 7 + floor2_thickness, 0.1);
         glutSolidCube(1.0);
@@ -705,7 +705,7 @@ void draw(){
 
     // Top
     glPushMatrix();
-    glTranslatef(10, 8 + floor1_height + floor2_thickness + floor2_height + 0.1f, 43);
+        glTranslatef(10, 8 + floor1_height + floor2_thickness + floor2_height + 0.1f, 43);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(20, 2, 0.1);
         glutSolidCube(1.0);
@@ -713,18 +713,18 @@ void draw(){
 
     // middle
     glPushMatrix();
-    glTranslatef(9.85, 9.62 + floor1_height + floor2_thickness, 43);
+        glTranslatef(9.85, 9.62 + floor1_height + floor2_thickness, 43);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(1.25, 1.25, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(9.85, 10.1 + floor1_height + floor2_thickness, 43);
-        glRotated(45,0,0,1);
+        glTranslatef(9.85, 10.1 + floor1_height + floor2_thickness, 43);
+        glRotated(45, 0, 0, 1);
         glColor3f(0.43f, 0.50f, 0.56f);
         glScalef(1.25, 1.25, 0.1);
-    glutSolidCube(1.0);
+        glutSolidCube(1.0);
     glPopMatrix();
 
     // details
@@ -735,16 +735,16 @@ void draw(){
 
     // grade
     float px = 6.4;
-    for (int i = 0; i < 74; i++, px += 0.1 ){
-      glPushMatrix();
-      glTranslatef(px, 4 + floor1_height + floor2_thickness, 43);
-          glColor3f(0.5f, 0.6f, 0.6f);
-          glScalef(0.02, 0.8, 0.02);
-          glutSolidCube(1.0);
-      glPopMatrix();
+    for (int i = 0; i < 74; i++, px += 0.1) {
+        glPushMatrix();
+            glTranslatef(px, 4 + floor1_height + floor2_thickness, 43);
+            glColor3f(0.5f, 0.6f, 0.6f);
+            glScalef(0.02, 0.8, 0.02);
+            glutSolidCube(1.0);
+        glPopMatrix();
     }
     glPushMatrix();
-    glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 43);
+        glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 43);
         glColor3f(0.5f, 0.6f, 0.6f);
         glScalef(12, 0.02, 0.02);
         glutSolidCube(1.0);
@@ -821,7 +821,7 @@ void draw(){
 
 }
 
-void changeSize(int w, int h){
+void changeSize(int w, int h) {
 
     // Prevent a divide by zero, when window is too short
     // (you cant make a window of zero width).
@@ -844,7 +844,7 @@ void changeSize(int w, int h){
     glMatrixMode(GL_MODELVIEW);
 }
 
-void renderScene(void){
+void renderScene(void) {
 
     // Para ver os objetos em modo polígono (somente os traços)
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -856,17 +856,17 @@ void renderScene(void){
     glLoadIdentity();
     ilumination();
     // Set the camera
-    gluLookAt(x, cam , z,  // de onde
-              x+lx, cam, z+lz, // pra onde
+    gluLookAt(x, cam, z,  // de onde
+              x + lx, cam, z + lz, // pra onde
               0.0f, 1.0f, 0.0f); // como
 
     // Draw ground
     glColor3f(0.0, 0.65, 0.0);
-        glBegin(GL_QUADS);
+    glBegin(GL_QUADS);
         glVertex3f(-100.0f, 0.0f, -100.0f);
         glVertex3f(-100.0f, 0.0f, 100.0f);
-        glVertex3f( 100.0f, 0.0f, 100.0f);
-        glVertex3f( 100.0f, 0.0f, -100.0f);
+        glVertex3f(100.0f, 0.0f, 100.0f);
+        glVertex3f(100.0f, 0.0f, -100.0f);
     glEnd();
 
     draw();
@@ -877,24 +877,24 @@ void renderScene(void){
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
-    switch(key){
+    switch (key) {
         case 'o':
-            if(door_angle <= 118.0f) door_angle += 2.0f;
+            if (door_angle <= 118.0f) door_angle += 2.0f;
             glutPostRedisplay();
-        break;
+            break;
 
         case 'c':
-            if(door_angle >= 2.0f) door_angle -= 2.0f;
+            if (door_angle >= 2.0f) door_angle -= 2.0f;
             glutPostRedisplay();
-        break;
+            break;
 
         case 27:
             exit(0);
-        break;
+            break;
     }
 }
 
-void processSpecialKeys(int key, int xx, int yy){
+void processSpecialKeys(int key, int xx, int yy) {
 
     float fraction = 0.5f;
 
@@ -904,67 +904,66 @@ void processSpecialKeys(int key, int xx, int yy){
             angle -= 0.05f;
             lx = sin(angle);
             lz = -cos(angle);
-        break;
+            break;
         case GLUT_KEY_RIGHT :
             angle += 0.05f;
             lx = sin(angle);
             lz = -cos(angle);
-        break;
+            break;
         case GLUT_KEY_UP :
             x += lx * fraction;
             z += lz * fraction;
-        break;
+            break;
         case GLUT_KEY_DOWN :
             x -= lx * fraction;
             z -= lz * fraction;
-        break;
+            break;
         case GLUT_KEY_PAGE_UP :
             cam += 0.1;
-        break;
+            break;
         case GLUT_KEY_PAGE_DOWN :
             cam -= 0.1;
-        break;
+            break;
     }
 }
 
 void mouseButton(int button, int state, int x, int y) {
 
-	// only start motion if the left button is pressed
-	if (button == GLUT_LEFT_BUTTON) {
+    // only start motion if the left button is pressed
+    if (button == GLUT_LEFT_BUTTON) {
 
-		// when the button is released
-		if (state == GLUT_UP) {
-			angle += deltaAngle;
-			xOrigin = -1;
-		}
-		else  {// state = GLUT_DOWN
-			xOrigin = x;
-		}
-	}
+        // when the button is released
+        if (state == GLUT_UP) {
+            angle += deltaAngle;
+            xOrigin = -1;
+        } else {// state = GLUT_DOWN
+            xOrigin = x;
+        }
+    }
 }
 
 void mouseMove(int x, int y) {
 
-	// this will only be true when the left button is down
-	if (xOrigin >= 0) {
+    // this will only be true when the left button is down
+    if (xOrigin >= 0) {
 
-		// update deltaAngle
-		deltaAngle = (x - xOrigin) * 0.01f;
+        // update deltaAngle
+        deltaAngle = (x - xOrigin) * 0.01f;
 
-		// update camera's direction
-		lx = sin(angle + deltaAngle);
-		lz = -cos(angle + deltaAngle);
-	}
+        // update camera's direction
+        lx = sin(angle + deltaAngle);
+        lz = -cos(angle + deltaAngle);
+    }
 }
 
-int main(int argc, char **argv){
+int main(int argc, char **argv) {
 
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowPosition(50,50);
-    glutInitWindowSize(800,600);
-    glutCreateWindow("House 3D");
+    glutInitWindowPosition(50, 50);
+    glutInitWindowSize(800, 600);
+    glutCreateWindow("MUPA");
 
     init();
 
@@ -975,7 +974,7 @@ int main(int argc, char **argv){
     glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(processSpecialKeys);
     glutMouseFunc(mouseButton);
-	glutMotionFunc(mouseMove);
+    glutMotionFunc(mouseMove);
 
     // OpenGL init
 
