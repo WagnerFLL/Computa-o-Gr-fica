@@ -2,7 +2,7 @@
 #include <GL/freeglut.h>
 #include <stdlib.h>
 #include <math.h>
-#include "texture.cpp"
+// #include "texture.cpp"
 
 // actual vector representing the camera's direction
 float lx=0.0f,lz=-1.0f;
@@ -12,6 +12,7 @@ int xOrigin = -1;
 // XZ position of the camera
 float x=10.0f,z=50.0f;
 
+GLuint texture;
 
 // angle for rotating
 float angle = 0.0f;
@@ -30,12 +31,61 @@ float floor2_height = 0.2f;
 
 GLUquadricObj *quadratic;
 
+GLuint loadTexture( const char * filename )
+{
+
+  GLuint texture;
+
+  int width, height;
+
+  unsigned char * data;
+
+  FILE * file;
+
+  file = fopen( filename, "rb" );
+
+  if ( file == NULL ) return 0;
+  width = 1024;
+  height = 512;
+  data = (unsigned char *)malloc( width * height * 3 );
+  //int size = fseek(file,);
+  fread( data, width * height * 3, 1, file );
+  fclose( file );
+
+ for(int i = 0; i < width * height ; ++i)
+{
+   int index = i*3;
+   unsigned char B,R;
+   B = data[index];
+   R = data[index+2];
+
+   data[index] = R;
+   data[index+2] = B;
+
+}
+
+
+glGenTextures( 1, &texture );
+glBindTexture( GL_TEXTURE_2D, texture );
+glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE );
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST );
+
+
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR );
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,GL_REPEAT );
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_REPEAT );
+gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height,GL_RGB, GL_UNSIGNED_BYTE, data );
+free( data );
+
+return texture;
+}
+
 void ilumination (void) {}
 
 void init(void) {
     quadratic = gluNewQuadric();
     glClearColor(0.0, 0.7, 1.0, 1.0);
-    loadTextures();
+    // loadTextures();
     glEnable (GL_DEPTH_TEST);
 }
 
@@ -49,13 +99,17 @@ void drawColumn(float x) {
 }
 
 void textureWall(float x, float z, float width, int floor, int parallel) {
+
+  float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
+
+  texture = loadTexture( "resources/teto.bmp" );
   glEnable(GL_TEXTURE_2D);
   glPushMatrix();
-    glTranslatef(x, 3.5 + (3.5 * floor), z);
+    glTranslatef(x, y, z);
     glRotated(90, 1, 0, 0);
     glRotated(270, 0, 0, parallel);
     glColor3ub(255,255,255);
-    glBindTexture(GL_TEXTURE_2D, texture_id[6]);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glBegin(GL_QUADS);
       glTexCoord2f(0.0f, 1.0f);
       glVertex3f(0, 0.0001, 3.5);
@@ -87,7 +141,8 @@ void drawOrthoWall(float x, float z, float width, int floor) {
 
 void drawParallelWall(float x, float z, float width, int floor) {
   float relativeZ = z + width/2;
-  float relativeY = 1.75 + (floor * (3.5 + floor2_thickness)) + wall_height + floor1_height;
+  float relativeY = 1.75 + (floor * (3.5 + floor2_thickness))
+                    + wall_height + floor1_height;
 
   glPushMatrix();
   glTranslatef(x, relativeY, relativeZ);
@@ -234,12 +289,13 @@ void drawTable(float x, float z){
 }
 
 void drawStar(float z) {
+  texture = loadTexture( "resources/estrela.bmp" );
   glEnable(GL_TEXTURE_2D);
   glPushMatrix();
     glTranslatef(3.8, 1.11 + floor1_height + floor2_thickness, z);
     glRotated(90, 0, 1, 0);
     glColor3ub(255,255,255);
-    glBindTexture(GL_TEXTURE_2D, texture_id[4]);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glBegin(GL_QUADS);
       glTexCoord2f(0.0f, 1.0f);
       glVertex3f(-0.07, 0.0001, 0.07);
@@ -255,11 +311,12 @@ void drawStar(float z) {
 }
 
 void textureFloor() {
+  texture = loadTexture( "resources/piso_carrara1.bmp" );
   glEnable(GL_TEXTURE_2D);
   glPushMatrix();
-    glTranslatef(0, 0.2, -0.5);
+    glTranslatef(0, 1.2, -0.5);
     glColor3ub(255,255,255);
-    glBindTexture(GL_TEXTURE_2D, texture_id[5]);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glBegin(GL_QUADS);
       glTexCoord2f(0.0f, 1.0f);
       glVertex3f(-0, 0.0001, 44);
@@ -287,8 +344,10 @@ void drawDoorOrtho(float x, float z, float floor) {
     float doorWidth = 1.25;
     float doorHeight = 2.2;
     float relativeX = x + (doorWidth/2);
-    float relativeY = doorHeight/2 + (floor* (3.5 + floor2_thickness
-)) + wall_height + floor1_height;
+    float relativeY = doorHeight/2
+                      + (floor* (3.5 + floor2_thickness))
+                      + wall_height + floor1_height;
+
     glPushMatrix();
         glTranslatef(relativeX + ((doorWidth/2) * -1), relativeY, z);
         glRotatef(door_angle, 0,1,0);
@@ -303,8 +362,10 @@ void drawDoorParallel(float x, float z, float floor) {
     float doorWidth = 1.25;
     float doorHeight = 2.2;
     float relativeZ = z + (doorWidth/2);
-    float relativeY = doorHeight/2 + (floor* (3.5 + floor2_thickness
-)) + wall_height + floor1_height;
+    float relativeY = doorHeight/2
+                      + (floor* (3.5 + floor2_thickness))
+                      + wall_height + floor1_height;
+
     glPushMatrix();
         glTranslatef(x, relativeY, relativeZ + ((doorWidth/2) * -1));
         glRotatef(door_angle, 0,1,0);
@@ -332,8 +393,10 @@ void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorL
     drawOrthoWall(x2, z2, width2, floor); // parede a direita da porta
 
     float relativeX = x + width1 + doorWidth/2; // parede emcima da porta
-    float relativeY = 3.5 - ((3.5 - doorHeight)/2) + (floor * (3.5 + floor2_thickness
-)) + wall_height + floor1_height;
+    float relativeY = 3.5 - ((3.5 - doorHeight)/2)
+                      + (floor * (3.5 + floor2_thickness))
+                      + wall_height + floor1_height;
+
     glPushMatrix();
     glTranslatef(relativeX, relativeY, z);
         glColor3f(0.7f, 0.7f, 0.7f);
@@ -360,8 +423,10 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
     drawParallelWall(x2, z2, width2, floor); // parede a direita da porta
 
     float relativeZ = z + width1 + doorWidth/2; // parede emcima da porta
-    float relativeY = 3.5 - ((3.5 - doorHeight)/2) + (floor * (3.5 + floor2_thickness
-)) + wall_height + floor1_height;
+    float relativeY = 3.5 - ((3.5 - doorHeight)/2)
+                      + (floor * (3.5 + floor2_thickness))
+                      + wall_height + floor1_height;
+
     glPushMatrix();
     glTranslatef(x, relativeY, relativeZ);
         glRotatef (90, 0,1,0);
@@ -371,19 +436,18 @@ void drawParallelWallWithDoor(float x, float z, float width, int floor, float do
     glPopMatrix();
 
     drawDoorParallel(x, z + width1, floor);
-
-
 }
 
 void draw(){
 
     // quadro fundo
+    texture = loadTexture( "resources/sample.bmp" );
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-      glTranslatef(4, 2, 0.6);
+      glTranslatef(4, 2 + floor1_height, 0.6);
       glRotated(90, 1, 0, 0);
       glColor3ub(255,255,255);
-      glBindTexture(GL_TEXTURE_2D, texture_id[1]);
+      glBindTexture(GL_TEXTURE_2D, texture);
       glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 1.0f);
         glVertex3f(-2, 0.0001, 1);
@@ -398,12 +462,13 @@ void draw(){
     glDisable(GL_TEXTURE_2D);
 
     //  Mesa parte escura
+    texture = loadTexture( "resources/escuro_mesa.bmp" );
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-      glTranslatef(3.8, 1.08, 5.5);
+      glTranslatef(3.8, 1.08 + floor1_height, 5.5);
       glRotated(90, 0, 1, 0);
       glColor3ub(255,255,255);
-      glBindTexture(GL_TEXTURE_2D, texture_id[3]);
+      glBindTexture(GL_TEXTURE_2D, texture);
       glBegin(GL_QUADS);  // floor
         glTexCoord2f(0.0f, 1.0f);
         glVertex3f(-2.9, 0.0001, 1.4);
@@ -563,7 +628,7 @@ void draw(){
     glPopMatrix();
 
 // ESCADA
-    float zBase = 25.5, yBase = 0.25;
+    float zBase = 25.5, yBase = 0.45;
 
     for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1){
       glPushMatrix();
@@ -583,7 +648,7 @@ void draw(){
     glPopMatrix();
 
     zBase = 21.5;
-    yBase = 2.25;
+    yBase = 2.45;
 
     for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
       glPushMatrix();
@@ -595,7 +660,7 @@ void draw(){
     }
 
     zBase = 21.5;
-    yBase = 2.25;
+    yBase = 2.45;
 
     for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12){
       glPushMatrix();
@@ -800,7 +865,6 @@ void renderScene(void){
     glutSwapBuffers();
 }
 
-
 void processNormalKeys(unsigned char key, int x, int y) {
     switch(key){
         case 'o':
@@ -819,10 +883,9 @@ void processNormalKeys(unsigned char key, int x, int y) {
     }
 }
 
-
 void processSpecialKeys(int key, int xx, int yy){
 
-float fraction = 0.5f;
+    float fraction = 0.5f;
 
     switch (key) {
 
@@ -853,7 +916,6 @@ float fraction = 0.5f;
     }
 }
 
-
 void mouseButton(int button, int state, int x, int y) {
 
 	// only start motion if the left button is pressed
@@ -870,14 +932,13 @@ void mouseButton(int button, int state, int x, int y) {
 	}
 }
 
-
 void mouseMove(int x, int y) {
 
 	// this will only be true when the left button is down
 	if (xOrigin >= 0) {
 
 		// update deltaAngle
-		deltaAngle = (x - xOrigin) * 0.001f;
+		deltaAngle = (x - xOrigin) * 0.01f;
 
 		// update camera's direction
 		lx = sin(angle + deltaAngle);
