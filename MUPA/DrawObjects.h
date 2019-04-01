@@ -4,7 +4,9 @@
 
 #ifndef COMPUTER_GRAPHICS_DRAWOBJECTS_H
 #define COMPUTER_GRAPHICS_DRAWOBJECTS_H
+
 void drawChair(float x, float y, float z, int cabeceira, int rotate) {
+
 	glPushMatrix();
 
 	glTranslated(x, y + 0.7 + floor1_height, z);

@@ -59,28 +59,7 @@ void loadTextures() {
     texture_id[3] = loadTexture("resources/sample.bmp", 400, 225, 0);
     texture_id[4] = loadTexture("resources/escuro_mesa.bmp", 800, 500, 0);
     texture_id[5] = loadTexture("resources/escada_tapete.bmp", 700, 208, 0);
-    texture_id[6] = loadTexture("resources/piso_massaranduba.bmp", 201, 201, 0);
-}
-
-
-void textureWall(float x, float z, float width, int floor, int parallel) {
-
-    float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
-
-    glPushMatrix();
-    glTranslatef(x, y, z);
-    glRotated(90, 1, 0, 0);
-    if (parallel)
-        glRotated(270, 0, 0, 1);
-    glColor3ub(223, 213, 208);
-    glBegin(GL_QUADS);
-    glVertex3f(0, 0.0001, 3.5);
-    glVertex3f(width, 0.0001, 3.5);
-    glVertex3f(width, 0.0001, 0);
-    glVertex3f(0, 0.0001, 0);
-    glEnd();
-
-    glPopMatrix();
+    texture_id[6] = loadTexture("resources/porta.bmp", 1258, 526, 0);
 }
 
 void textureFloor() {
