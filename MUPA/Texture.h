@@ -59,6 +59,7 @@
 		texture_id[2] = loadTexture("resources/piso_carrara1.bmp", 574, 522, 1);
 		texture_id[3] = loadTexture("resources/sample.bmp", 400, 225, 0);
 		texture_id[4] = loadTexture("resources/escuro_mesa.bmp", 800, 500, 0);
+        texture_id[5] = loadTexture("resources/escada_tapete.bmp", 700, 208, 0);
 	}
 
 
@@ -115,17 +116,17 @@
 
 	void textureStair(float y, float z) {
         y += 0.09;
-        texture = texture_id[1];
+        texture = texture_id[5];
         glEnable(GL_TEXTURE_2D);
         glPushMatrix();
-        glTranslatef(8.85, y, z - 0.076);
+        glTranslatef(8.85, y, z - 0.095);
         glColor3ub(255, 255, 255);
         glBindTexture(GL_TEXTURE_2D, texture);
         glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-0, 0.0001, 0.175);
+        glVertex3f(-0, 0.0001, 0.20);
         glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(2, 0.0001, 0.175);
+        glVertex3f(2, 0.0001, 0.20);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(2, 0.0001, -0);
         glTexCoord2f(0.0f, 0.0f);
@@ -134,7 +135,7 @@
         glPopMatrix();
         glDisable(GL_TEXTURE_2D);
 
-        texture = texture_id[1];
+        texture = texture_id[5];
         glEnable(GL_TEXTURE_2D);
         glPushMatrix();
         glTranslatef(8.85, y, z+0.1);
@@ -143,9 +144,9 @@
         glBindTexture(GL_TEXTURE_2D, texture);
         glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-0, 0.0001, 0.175);
+        glVertex3f(-0, 0.0001, 0.19);
         glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(2, 0.0001, 0.175);
+        glVertex3f(2, 0.0001, 0.19);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(2, 0.0001, -0);
         glTexCoord2f(0.0f, 0.0f);
@@ -154,5 +155,47 @@
         glPopMatrix();
         glDisable(GL_TEXTURE_2D);
     }
+
+    void textureStairL(float position, float y, float z) {
+        y += 0.09;
+        texture = texture_id[5];
+        glEnable(GL_TEXTURE_2D);
+        glPushMatrix();
+        glTranslatef(position, y-0.01, z - 0.18);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-0, 0.0001, 0.34);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(1, 0.0001, 0.34);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(1, 0.0001, -0);
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-0, 0.0001, -0);
+        glEnd();
+        glPopMatrix();
+        glDisable(GL_TEXTURE_2D);
+
+        texture = texture_id[5];
+        glEnable(GL_TEXTURE_2D);
+        glPushMatrix();
+        glTranslatef(position, y-0.01, z-0.177);
+        glRotatef(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-0, 0.0001, 0.19);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(1, 0.0001, 0.19);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(1, 0.0001, -0);
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-0, 0.0001, -0);
+        glEnd();
+        glPopMatrix();
+        glDisable(GL_TEXTURE_2D);
+}
 
 #endif //COMPUTER_GRAPHICS_TEXTURE_H
