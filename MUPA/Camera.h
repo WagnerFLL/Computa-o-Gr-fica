@@ -8,9 +8,9 @@ glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
 glm::vec3 temp = cameraPos + cameraFront;
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
+bool light = true;
 
-void mouseMovement(int x, int y)
-{
+void mouseMovement(int x, int y) {
 	mouseX = x;
 	mouseY = y;
 }
@@ -47,14 +47,11 @@ void processCamera()
 	gluLookAt(cameraPos[0], cameraPos[1] , cameraPos[2],  // de onde
               temp[0], temp[1],temp[2], // pra onde
 			  cameraUp[0], cameraUp[1], cameraUp[2]); // como
-	//	gluLookAt(x, cam , z,  // de onde
-	//			  x+lx, cam, z+lz, // pra onde
-	//			  0.0f, 1.0f, 0.0f); // como
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
 	float cameraSpeed = 0.5f;
-	switch(key){
+	switch(key) {
 		case 'w':
 			cameraPos += cameraSpeed * cameraFront;
 			break;
@@ -80,17 +77,33 @@ void processNormalKeys(unsigned char key, int x, int y) {
 			break;
 
 		case 'o':
-			if(door_angle <= 118.0f) door_angle += 2.0f;
+			if (door_angle <= 118.0f) door_angle += 2.0f;
 			glutPostRedisplay();
 			break;
 
 		case 'c':
-			if(door_angle >= 2.0f) door_angle -= 2.0f;
+			if (door_angle >= 2.0f) door_angle -= 2.0f;
 			glutPostRedisplay();
 			break;
 
 		case 27:
 			exit(0);
+			break;
+
+		case 'l':
+		    if (light){
+                glDisable(GL_COLOR_MATERIAL);
+                glDisable(GL_LIGHTING);
+                glDisable(GL_LIGHT0);
+                light = false;
+		    } else {
+                glEnable(GL_COLOR_MATERIAL);
+                glEnable(GL_LIGHTING);
+                glEnable(GL_LIGHT0);
+                light = true;
+		    }
+
+
 			break;
 	}
 }

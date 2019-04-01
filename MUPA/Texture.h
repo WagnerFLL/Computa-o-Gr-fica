@@ -19,7 +19,7 @@ GLuint loadTexture(const char *filename, int width, int height, int mode) {
     if (file == NULL) return 0;
 
     data = (unsigned char *) malloc(width * height * 3);
-    //int size = fseek(file,);
+
     fread(data, width * height * 3, 1, file);
     fclose(file);
 
@@ -59,6 +59,7 @@ void loadTextures() {
     texture_id[3] = loadTexture("resources/sample.bmp", 400, 225, 0);
     texture_id[4] = loadTexture("resources/escuro_mesa.bmp", 800, 500, 0);
     texture_id[5] = loadTexture("resources/escada_tapete.bmp", 700, 208, 0);
+    texture_id[6] = loadTexture("resources/piso_massaranduba.bmp", 201, 201, 0);
 }
 
 
@@ -66,30 +67,20 @@ void textureWall(float x, float z, float width, int floor, int parallel) {
 
     float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
 
-
-    texture = texture_id[0];
-    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
     glTranslatef(x, y, z);
     glRotated(90, 1, 0, 0);
     if (parallel)
         glRotated(270, 0, 0, 1);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
+    glColor3ub(223, 213, 208);
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
     glVertex3f(0, 0.0001, 3.5);
-    glTexCoord2f(1.0f, 1.0f);
     glVertex3f(width, 0.0001, 3.5);
-    glTexCoord2f(1.0f, 0.0f);
     glVertex3f(width, 0.0001, 0);
-    glTexCoord2f(0.0f, 0.0f);
     glVertex3f(0, 0.0001, 0);
     glEnd();
 
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
 }
 
 void textureFloor() {
@@ -99,6 +90,37 @@ void textureFloor() {
         glPushMatrix();
         glTranslatef(0, 1.2, -0.5 + 0.5*j);
         for (int i = 0; i < 40; ++i) {
+            glPushMatrix();
+            glTranslatef(0.5*i, 0, 0);
+            glColor3ub(255, 255, 255);
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.5);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(0.5, 0.0001, 0.5);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(0.5, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+            glEnd();
+            glPopMatrix();
+        }
+        glPopMatrix();
+    }
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureFloor2() {
+    texture = texture_id[2];
+    glEnable(GL_TEXTURE_2D);
+    for (int j = 0; j < 87 ; ++j) {
+        glPushMatrix();
+        glTranslatef(0, 1.2 + 3.71, -0.5 + 0.5*j);
+        for (int i = 0; i < 40; ++i) {
+            if((-0.5 + 0.5*j) > 21 && (-0.5 + 0.5*j) < 24.6)
+                if((0.5*i) > 7.2  && (0.5*i) < 12)
+                    continue;
             glPushMatrix();
             glTranslatef(0.5*i, 0, 0);
             glColor3ub(255, 255, 255);
