@@ -2,7 +2,7 @@
 #define COMPUTER_GRAPHICS_CAMERA_H
 
 glm::mat4 view;
-glm::vec3 cameraPos   = glm::vec3(10.0f, 5.0f,  50.0f);
+glm::vec3 cameraPos   = glm::vec3(10.0f, 3.0f,  50.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
 glm::vec3 temp = cameraPos + cameraFront;
@@ -11,8 +11,8 @@ float lastFrame = 0.0f; // Time of last frame
 
 void mouseMovement(int x, int y)
 {
-	printf("x = %d\n", x);
-	printf("y = %d\n", y);
+	mouseX = x;
+	mouseY = y;
 }
 
 void mouseButton(int button, int state, int x, int y) {
@@ -31,9 +31,9 @@ void mouseButton(int button, int state, int x, int y) {
 	}
 }
 
-void mouseMove(int x, int y) {
+void mouseMotion(int x, int y) {
 	if (xOrigin >= 0) {
-		deltaAngle = (x - xOrigin) * 0.001f;
+		deltaAngle = (x - xOrigin) * 0.01f;
 		cameraFront[0] = sin(angle + deltaAngle);
 		cameraFront[2] = -cos(angle + deltaAngle);
 	}
@@ -53,7 +53,7 @@ void processCamera()
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
-	float cameraSpeed = 0.05f * deltaTime;
+	float cameraSpeed = 0.5f;
 	switch(key){
 		case 'w':
 			cameraPos += cameraSpeed * cameraFront;
@@ -72,12 +72,10 @@ void processNormalKeys(unsigned char key, int x, int y) {
 			break;
 
 		case 32:
-			printf("ola");
 			cameraPos += cameraSpeed * cameraUp;
 			break;
 
 		case 'f':
-			printf("ola");
 			cameraPos -= cameraSpeed * cameraUp;
 			break;
 

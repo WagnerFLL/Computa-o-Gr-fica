@@ -7,6 +7,13 @@
 
 
 void draw() {
+	glColor3f(0.0, 0.65, 0.0);
+	glBegin(GL_QUADS);
+	glVertex3f(-100.0f, 0.0f, -100.0f);
+	glVertex3f(-100.0f, 0.0f, 100.0f);
+	glVertex3f(100.0f, 0.0f, 100.0f);
+	glVertex3f(100.0f, 0.0f, -100.0f);
+	glEnd();
 
 	// quadro fundo
 	texture = texture_id[3];
@@ -202,15 +209,16 @@ void draw() {
 	for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1) {
 		glPushMatrix();
 		glTranslatef(9.85, yBase + floor1_height, zBase);
-		glColor3f(1.0f, 0.85f, 0.8f);
+		glColor3ub(120, 60, 0);
 		glScalef(2, 0.175, 0.2);
 		glutSolidCube(1.0);
 		glPopMatrix();
+        textureStair(yBase + floor1_height, zBase);
 	}
 
 	// floor escada
 	glPushMatrix();
-	glTranslatef(9.9, 2.2 + floor1_height, 20.5);
+	glTranslatef(9.9, 2.4 + floor1_height, 20.5);
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glScalef(4.5, 0.2, 2);
 	glutSolidCube(1.0);
@@ -222,10 +230,11 @@ void draw() {
 	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
 		glPushMatrix();
 		glTranslatef(11.6, yBase + floor1_height, zBase);
-		glColor3f(1.0f, 0.85f, 0.8f);
+        glColor3ub(120, 60, 0);
 		glScalef(1, 0.15, 0.35);
 		glutSolidCube(1.0);
 		glPopMatrix();
+        textureStairL(11.1, yBase + floor1_height, zBase);
 	}
 
 	zBase = 21.5;
@@ -234,10 +243,11 @@ void draw() {
 	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
 		glPushMatrix();
 		glTranslatef(8.1, yBase + floor1_height, zBase);
-		glColor3f(1.0f, 0.85f, 0.8f);
+        glColor3ub(120, 60, 0);
 		glScalef(1, 0.15, 0.35);
 		glutSolidCube(1.0);
 		glPopMatrix();
+        textureStairL(7.6, yBase + floor1_height, zBase);
 	}
 
 // FACHADA

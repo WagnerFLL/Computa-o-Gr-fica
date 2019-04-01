@@ -102,6 +102,49 @@ void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorL
 	glutSolidCube(1.0);
 	glPopMatrix();
 
+	texture = texture_id[0];
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glTranslatef(x+width1, 4.7 + (3.7*floor), z+0.05);
+	glRotated(90, 1, 0, 0);
+	glColor3ub(255, 255, 255);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 0.0001, doorWidth+0.1);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.7 - doorHeight, 0.0001, doorWidth+0.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.7 - doorHeight, 0.0001, 0);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 0.0001, 0);
+	glEnd();
+
+	glPopMatrix();
+
+	texture = texture_id[0];
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glTranslatef(x+width1, 4.7 + (3.7*floor), z-0.06);
+	glRotated(90, 1, 0, 0);
+	glColor3ub(255, 255, 255);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 0.0001, doorWidth+0.1);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.7 - doorHeight, 0.0001, doorWidth+0.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.7 - doorHeight, 0.0001, 0);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 0.0001, 0);
+	glEnd();
+
+	glPopMatrix();
+
+
 	drawDoorOrtho(x + width1, z, floor);
 }
 
