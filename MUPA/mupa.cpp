@@ -50,6 +50,8 @@ void init(void) {
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
 	glShadeModel(GL_SMOOTH);
@@ -76,18 +78,14 @@ void renderScene(void) {
 	currentFrame = glutGet(GLUT_ELAPSED_TIME);
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 	processCamera();
 	lightsSetup();
-
-
     draw();
     glFlush();
     glutSwapBuffers();
 }
-
 
 
 void processSpecialKeys(int key, int xx, int yy) {
