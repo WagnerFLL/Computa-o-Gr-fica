@@ -38,18 +38,14 @@ float floor2_height = 0.2f;
 
 GLUquadricObj *quadratic;
 GLuint texture_id[25];
-
-layout (location = 0) in vec3 aPos;
-
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+GLfloat lightSpotCutoff = 10, attenuation = 0.25;
 
 #include "Camera.h"
 #include "Texture.h"
 #include "DrawObjects.h"
 #include "DrawWall.h"
 #include "Draw.h"
+#include "Lightning.h"
 
 float currentFrame;
 
@@ -61,6 +57,12 @@ void init(void) {
     glClearColor(0.0, 0.7, 1.0, 1.0);
     loadTextures();
     glEnable(GL_DEPTH_TEST);
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//	glEnable(GL_COLOR_MATERIAL);
+//	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+//	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+//	glShadeModel(GL_SMOOTH);
 }
 
 void changeSize(int w, int h){
@@ -152,6 +154,7 @@ int main(int argc, char **argv) {
     glutInitWindowPosition(50, 50);
     glutInitWindowSize(800, 600);
     glutCreateWindow("MUPA");
+    //lightsSetup();
     init();
 
     // register callbacks
