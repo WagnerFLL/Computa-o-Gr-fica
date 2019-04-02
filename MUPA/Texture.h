@@ -31,7 +31,6 @@ GLuint loadTexture(const char *filename, int width, int height, int mode) {
 
         data[index] = R;
         data[index + 2] = B;
-
     }
 
     glGenTextures(1, &texture);
@@ -134,6 +133,35 @@ void textureFacade(float x, float y) {
     glDisable(GL_TEXTURE_2D);
 }
 
+void textureWall(float x, float z, float width, int floor, int parallel) {
+
+    float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
+
+
+    texture = texture_id[0];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    glRotated(90, 1, 0, 0);
+    if (parallel)
+        glRotated(270, 0, 0, 1);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0, 0.0001, 3.5);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(width, 0.0001, 3.5);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(width, 0.0001, 0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0, 0.0001, 0);
+    glEnd();
+
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
 
 void textureStatue(float x) {
     texture = texture_id[8];

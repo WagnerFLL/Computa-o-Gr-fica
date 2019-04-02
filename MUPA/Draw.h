@@ -208,12 +208,14 @@ void draw() {
 	float zBase = 25.5, yBase = 0.45;
 
 	for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1) {
+        disableLight();
 		glPushMatrix();
 		glTranslatef(9.85, yBase + floor1_height, zBase);
 		glColor3ub(120, 60, 0);
 		glScalef(2, 0.175, 0.2);
 		glutSolidCube(1.0);
 		glPopMatrix();
+        enableLight();
         textureStair(yBase + floor1_height, zBase);
 	}
 
@@ -229,12 +231,14 @@ void draw() {
 	yBase = 2.45;
 
 	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
+        disableLight();
 		glPushMatrix();
 		glTranslatef(11.6, yBase + floor1_height, zBase);
         glColor3ub(120, 60, 0);
 		glScalef(1, 0.15, 0.35);
 		glutSolidCube(1.0);
 		glPopMatrix();
+        enableLight();
         textureStairL(11.1, yBase + floor1_height, zBase);
 	}
 
@@ -242,12 +246,14 @@ void draw() {
 	yBase = 2.45;
 
 	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
+        disableLight();
 		glPushMatrix();
 		glTranslatef(8.1, yBase + floor1_height, zBase);
         glColor3ub(120, 60, 0);
 		glScalef(1, 0.15, 0.35);
 		glutSolidCube(1.0);
 		glPopMatrix();
+        enableLight();
         textureStairL(7.6, yBase + floor1_height, zBase);
 	}
 

@@ -166,7 +166,6 @@ void drawStar(float z) {
 void detailColumn(float x, float y, int l) {
     glPushMatrix();
     glTranslatef(x, y, 43);
-//    glColor3ub(0, 255, 0);
     glScalef(0.75 - (l * 0.20), 0.2, 0.75 - (l * 0.20));
     glutSolidCube(1.0);
     glPopMatrix();
