@@ -62,7 +62,18 @@ void loadTextures() {
     texture_id[7] = loadTexture("resources/brasao.bmp", 651, 477, 0);
     texture_id[8] = loadTexture("resources/estatua.bmp", 508, 400, 0);
     texture_id[9] = loadTexture("resources/fachada_parede.bmp", 754, 385, 0);
-    texture_id[10] = loadTexture("resources/fachada_parede_superior.bmp", 754, 203, 0);
+    texture_id[10] = loadTexture("resources/quadro1.bmp", 754, 203, 0);
+	texture_id[11] = loadTexture("resources/quadro2.bmp", 331, 277, 0);
+	texture_id[12] = loadTexture("resources/quadro3.bmp", 574, 522, 1);
+	texture_id[13] = loadTexture("resources/quadro4.bmp", 400, 225, 0);
+	texture_id[14] = loadTexture("resources/quadro5.bmp", 800, 500, 0);
+	texture_id[15] = loadTexture("resources/quadro6.bmp", 700, 208, 0);
+	texture_id[16] = loadTexture("resources/quadro7.bmp", 1258, 526, 0);
+	texture_id[17] = loadTexture("resources/quadro8.bmp", 651, 477, 0);
+	texture_id[18] = loadTexture("resources/quadro9.bmp", 508, 400, 0);
+	texture_id[19] = loadTexture("resources/quadro10.bmp", 754, 385, 0);
+	texture_id[20] = loadTexture("resources/quadro11.bmp", 754, 203, 0);
+
 }
 
 void textureEscutcheon() {

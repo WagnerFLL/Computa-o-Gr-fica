@@ -15,6 +15,8 @@ void draw() {
 	glVertex3f(100.0f, 0.0f, -100.0f);
 	glEnd();
 
+	drawPaintStand(10, 2.3, 40, 0);
+
 	// quadro fundo
 	texture = texture_id[3];
 	glEnable(GL_TEXTURE_2D);
@@ -331,6 +333,7 @@ void draw() {
 		glutSolidCube(1.0);
 		glPopMatrix();
 	}
+
 	glPushMatrix();
 	glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 43);
 	glColor3f(0.5f, 0.6f, 0.6f);
@@ -360,6 +363,15 @@ void draw() {
 
 //Segundo andar
 
+	//parede apos subir escada
+	drawOrthoWall(10 - 1.5, 28, 3, 1);
+	glPushMatrix();
+	glTranslatef(10, 6.4 + wall_height + floor1_height + floor2_height + floor2_thickness, 28);
+	glColor3ub(223, 213, 208);
+	glScalef(7, 0.8, 0.1);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
 	//varanda com exposicao
 	drawOrthoWallWithDoor(6, 39, 2.6666, 1, 1);
 	drawOrthoWallWithDoor(8.6666, 39, 2.6666, 1, 1);
@@ -369,7 +381,7 @@ void draw() {
 	drawParallelWallWithDoor(13.8, 28, 15, 1, 1);
 
 	//exposição cima com elevador
-	drawOrthoWallWithDoor(13.5, 28, 6.5, 1, 1);
+	drawOrthoWallWithDoor(13, 28, 7, 1, 1);
 
 	//elevador com vazio
 	drawOrthoWall(13.8, 25.5, 6.2, 1);
@@ -384,7 +396,7 @@ void draw() {
 	drawParallelWallWithDoor(6, 28, 15, 1, 0.1);
 
 	//exposição baixo com corredor baixo
-	drawOrthoWallWithDoor(0, 28, 6.5, 1, 0.9);
+	drawOrthoWallWithDoor(0, 28, 7, 1, 0.9);
 
 	// corredor baixo com gabinete
 	drawOrthoWallWithDoor(0, 25.5, 6, 1, 0.9);

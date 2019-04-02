@@ -248,6 +248,43 @@ void drawLamp(int scaley, int scalex, GLfloat r, float x, float y, float z) {
 	glPopMatrix();
 }
 
+void drawPaintStand(float x, float y, float z, float rotation) {
+
+	glPushMatrix();
+	glTranslatef(x, y, z - 0.2);
+	glRotatef(10, 1, 0, 0);
+	glColor3ub(223, 213, 208);
+	glScalef(0.1, 2, 0.1);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(x, y, z + 0.3);
+	glRotatef(-15, 1, 0, 0);
+	glColor3ub(223, 213, 208);
+	glScalef(0.1, 2.2, 0.1);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(x - 0.3, y, z + 0.3);
+	glRotatef(-15, 1, 0, 0);
+	glRotatef(-10, 0, 0, 1);
+	glColor3ub(223, 213, 208);
+	glScalef(0.1, 2.25, 0.1);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(x + 0.3, y, z + 0.3);
+	glRotatef(-15, 1, 0, 0);
+	glRotatef(10, 0, 0, 1);
+	glColor3ub(223, 213, 208);
+	glScalef(0.1, 2.25, 0.1);
+	glutSolidCube(1.0);
+	glPopMatrix();
+}
+
 
 
 #endif //COMPUTER_GRAPHICS_DRAWOBJECTS_H

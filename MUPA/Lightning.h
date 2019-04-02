@@ -12,7 +12,7 @@ void lightsSetup()
 	GLfloat materialSpecular[] = {1, 1, 1, 1};
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, materialAmbientAndDiffuse); // Defines objects reflection to ambient and diffuse light
 	glMaterialfv(GL_FRONT, GL_SPECULAR, materialSpecular); // Defines objects reflection to specular light
-	glMaterialf(GL_FRONT, GL_SHININESS, 80); // Defines objects level of reflection (0 to 128)
+	glMaterialf(GL_FRONT, GL_SHININESS, 20); // Defines objects level of reflection (0 to 128)
 
 	GLfloat lightAmbient[] = {0.2, 0.2, 0.2, 1};
 	GLfloat lightDiffuse[] = {1.0, 1.0, 1.0, 1};
