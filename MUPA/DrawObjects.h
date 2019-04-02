@@ -163,6 +163,14 @@ void drawStar(float z) {
 	glDisable(GL_TEXTURE_2D);
 }
 
+void detailColumn(float x, float y, int l) {
+    glPushMatrix();
+    glTranslatef(x, y, 43);
+    glScalef(0.75 - (l * 0.20), 0.2, 0.75 - (l * 0.20));
+    glutSolidCube(1.0);
+    glPopMatrix();
+}
+
 void drawColumn(float x) {
 	glPushMatrix();
 	glTranslatef(x, 0 + floor1_height, 43);
@@ -170,6 +178,16 @@ void drawColumn(float x) {
 	glColor3f(0.78f, 0.823f, 0.824f);
 	gluCylinder(quadratic, 0.28, 0.28, 7 + floor2_thickness + floor2_height, 30, 30);
 	glPopMatrix();
+
+	detailColumn(x, 4.6, 0);
+	detailColumn(x, 4.4, 1);
+	detailColumn(x, 1.5, 1);
+	detailColumn(x, 1.3, 0);
+
+    detailColumn(x, 8.3, 0);
+    detailColumn(x, 8.1, 1);
+    detailColumn(x, 5.2, 1);
+    detailColumn(x, 5, 0);
 }
 
 void drawDetail(float x) {
