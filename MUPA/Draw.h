@@ -58,7 +58,7 @@ void draw() {
 	glDisable(GL_TEXTURE_2D);
 
 //Primeiro andar
-	// Back side floor
+	// Parede traseira
 	glPushMatrix();
 	glTranslatef(10, 4.5 + floor1_height, 0);
 	glColor3f(0.43f, 0.50f, 0.56f);
@@ -66,7 +66,7 @@ void draw() {
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	// Right side floor
+	// Parede lateral esquerda
 	glPushMatrix();
 	glTranslatef(0, 4.5 + floor1_height, 21.5);
 	glColor3f(0.43f, 0.50f, 0.56f);
@@ -74,7 +74,7 @@ void draw() {
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	// Right side floor
+	// Parede lateral direita
 	glPushMatrix();
 	glTranslatef(20, 4.5 + floor1_height, 21.5);
 	glColor3f(0.43f, 0.50f, 0.56f);
@@ -146,13 +146,14 @@ void draw() {
 
 	glPushMatrix();
 	glTranslatef(10, 3.1 + wall_height + floor1_height, 28);
-	glColor3f(0.7f, 0.7f, 0.7f);
+    glColor3ub(223, 213, 208);
 	glScalef(7, 0.8, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
 
 // floor 1
+    textureFloor2();
 	// Back
 	glPushMatrix();
 	glTranslatef(10, 3.6 + floor1_height + floor2_height, 10.75);
@@ -256,6 +257,8 @@ void draw() {
 	drawColumn(11.2);
 	drawColumn(14);
 
+	textureEscutcheon();
+
 	// sides
 	glPushMatrix();
 	glTranslatef(3, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
@@ -287,19 +290,16 @@ void draw() {
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(9.85, 10.1 + floor1_height + floor2_thickness, 43);
-	glRotated(45, 0, 0, 1);
-	glColor3f(0.43f, 0.50f, 0.56f);
-	glScalef(1.25, 1.25, 0.1);
-	glutSolidCube(1.0);
-	glPopMatrix();
-
 	// details
 	drawDetail(0);
 	drawDetail(5.75);
 	drawDetail(13.75);
 	drawDetail(19.5);
+
+	textureStatue(0);
+	textureStatue(5.75);
+	textureStatue(13.75);
+	textureStatue(19.5);
 
 	// grade
 	float px = 6.4;
