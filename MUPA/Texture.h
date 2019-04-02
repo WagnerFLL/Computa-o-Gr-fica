@@ -164,7 +164,7 @@ void textureFloor() {
     glEnable(GL_TEXTURE_2D);
     for (int j = 0; j < 88 ; ++j) {
         glPushMatrix();
-        glTranslatef(0, 1.2, -0.5 + 0.5*j);
+        glTranslatef(0, 1.202, -0.5 + 0.5*j);
         for (int i = 0; i < 40; ++i) {
             glPushMatrix();
             glTranslatef(0.5*i, 0, 0);
@@ -223,7 +223,7 @@ void textureStair(float y, float z) {
     texture = texture_id[5];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(8.85, y, z - 0.095);
+    glTranslatef(8.85, y+0.003, z - 0.095);
     glColor3ub(255, 255, 255);
     glBindTexture(GL_TEXTURE_2D, texture);
     glBegin(GL_QUADS);
@@ -242,7 +242,7 @@ void textureStair(float y, float z) {
     texture = texture_id[5];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(8.85, y, z + 0.1);
+    glTranslatef(8.85, y, z + 0.103);
     glRotatef(90, 1, 0, 0);
     glColor3ub(255, 255, 255);
     glBindTexture(GL_TEXTURE_2D, texture);
