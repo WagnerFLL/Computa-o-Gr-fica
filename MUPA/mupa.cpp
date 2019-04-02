@@ -41,7 +41,6 @@ GLuint texture_id[25];
 
 float currentFrame;
 
-
 void init(void) {
     quadratic = gluNewQuadric();
     glClearColor(0.0, 0.7, 1.0, 1.0);

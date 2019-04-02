@@ -62,6 +62,8 @@ void loadTextures() {
     texture_id[6] = loadTexture("resources/porta.bmp", 1258, 526, 0);
     texture_id[7] = loadTexture("resources/brasao.bmp", 651, 477, 0);
     texture_id[8] = loadTexture("resources/estatua.bmp", 508, 400, 0);
+    texture_id[9] = loadTexture("resources/fachada_parede.bmp", 754, 385, 0);
+    texture_id[10] = loadTexture("resources/fachada_parede_superior.bmp", 754, 203, 0);
 }
 
 void textureEscutcheon() {
@@ -87,6 +89,51 @@ void textureEscutcheon() {
 
     glDisable(GL_TEXTURE_2D);
 }
+
+void textureHigherFacade(float x){
+    texture = texture_id[10];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x, 10.46, 43.09);
+    glRotatef(90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 1.9);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(6, 0.0001, 1.9);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(6, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureFacade(float x, float y) {
+    texture = texture_id[9];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x, y, 43.08);
+    glRotatef(90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 3.7);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(6, 0.0001, 3.7);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(6, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
 
 void textureStatue(float x) {
     texture = texture_id[8];
