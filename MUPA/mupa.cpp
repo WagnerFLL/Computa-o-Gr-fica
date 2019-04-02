@@ -29,7 +29,7 @@ float wall_height = 0.2f;
 float floor2_height = 0.2f;
 
 GLUquadricObj *quadratic;
-GLuint texture_id[25];
+GLuint texture_id[40];
 
 
 #include "Camera.h"
@@ -46,6 +46,8 @@ void init(void) {
     glClearColor(0.0, 0.7, 1.0, 1.0);
     loadTextures();
     glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -122,7 +124,7 @@ int main(int argc, char **argv) {
 
     // init GLUT and create window
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA  | GLUT_ALPHA);
     glutInitWindowPosition(50, 50);
     glutInitWindowSize(800, 600);
     glutCreateWindow("MUPA");

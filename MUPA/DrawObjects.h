@@ -250,6 +250,29 @@ void drawLamp(int scaley, int scalex, GLfloat r, float x, float y, float z) {
 
 void drawPaintStand(float x, float y, float z, float rotation) {
 
+	//texture = texture_id[13];
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glTranslatef(x, y + 0.3, z + 0.35);
+	glScalef(0.5, 0.5, 0.5);
+	glRotated(90, 1, 0, 0);
+	glRotated(-90, 0, 1, 0);
+	glRotated(15, 0, 0, 1);
+	glColor3ub(255, 255, 255);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2, 0.0001, -1);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2, 0.0001, -1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2, 0.0001, 1);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-2, 0.0001, 1);
+	glEnd();
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
 	glPushMatrix();
 	glTranslatef(x, y, z - 0.2);
 	glRotatef(10, 1, 0, 0);
@@ -283,6 +306,111 @@ void drawPaintStand(float x, float y, float z, float rotation) {
 	glScalef(0.1, 2.25, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
+}
+
+void drawBookStand(float x, float y, float z, float rotation) {
+
+	int standColorR = 106, standColorG = 53, standColorB = 53;
+
+	//livro
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0,-0.17, 0.08);
+	glRotatef(15, 1, 0, 0);
+	glColor3ub(223, 213, 208);
+	glScalef(0.3, 0.1, 0.4);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	//apoio do livro
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0, -0.27, 0.3);
+	glRotatef(15, 1, 0, 0);
+	glColor3ub(standColorR - 30, standColorG - 10, standColorB - 10);
+	glScalef(0.7, 0.03, 0.03);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	//apoio emcima da base
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0, -0.25, 0);
+	glRotatef(15, 1, 0, 0);
+	glColor3ub(standColorR, standColorG, standColorB);
+	glScalef(0.7, 0.1, 0.7);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	//corpo
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0, -0.65 , 0);
+	glColor3ub(standColorR, standColorG, standColorB);
+	glScalef(0.3, 0.8, 0.3);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	//base
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0, -1, 0);
+	glColor3ub(standColorR, standColorG, standColorB);
+	glScalef(0.4, 0.1, 0.4);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+}
+
+void drawBookStand2(float x, float y, float z, float rotation) {
+
+	int standColorR = 70, standColorG = 70, standColorB = 70;
+
+	//vidro
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0, -0.05, 0);
+	glScalef(0.6, 0.4, 0.6);
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glutWireCube(1.0);
+	glPopMatrix();
+
+	//livro
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0,-0.22, 0);
+	glColor3ub(223, 213, 208);
+	glScalef(0.3, 0.07, 0.4);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	//corpo
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0, -0.65 , 0);
+	glColor3ub(standColorR, standColorG, standColorB);
+	glScalef(0.6, 0.8, 0.6);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
+	//base
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0, -1, 0);
+	glColor3ub(standColorR, standColorG, standColorB);
+	glScalef(0.7, 0.1, 0.7);
+	glutSolidCube(1.0);
+	glPopMatrix();
+
 }
 
 
