@@ -252,24 +252,47 @@ void draw() {
 	}
 
 // FACHADA
+
+    textureFacade(0, 4.75);
+    textureFacade(0, 4.75 + 3.7);
+    textureFacade(14, 4.75);
+    textureFacade(14, 4.75 + 3.7);
+
+    textureHigherFacade(0);
+    textureHigherFacade(6);
+    textureHigherFacade(10);
+    textureHigherFacade(14);
+
 	drawColumn(6);
 	drawColumn(8.6);
 	drawColumn(11.2);
 	drawColumn(14);
 
+    drawDetail(0);
+    drawDetail(5.75);
+    drawDetail(13.75);
+    drawDetail(19.5);
+
+    disableLight();
+    textureStatue(0);
+    textureStatue(5.75);
+    textureStatue(13.75);
+    textureStatue(19.5);
+
 	textureEscutcheon();
+    enableLight();
 
 	// sides
 	glPushMatrix();
 	glTranslatef(3, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
-	glColor3f(0.43f, 0.50f, 0.56f);
+    glColor3ub(239, 239, 239);
 	glScalef(6, 7 + floor2_thickness, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(17, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
-	glColor3f(0.43f, 0.50f, 0.56f);
+    glColor3ub(239, 239, 239);
 	glScalef(6, 7 + floor2_thickness, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
@@ -277,7 +300,7 @@ void draw() {
 	// Top
 	glPushMatrix();
 	glTranslatef(10, 8 + floor1_height + floor2_thickness + floor2_height + 0.1f, 43);
-	glColor3f(0.43f, 0.50f, 0.56f);
+    glColor3ub(239, 239, 239);
 	glScalef(20, 2, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
@@ -285,21 +308,12 @@ void draw() {
 	// middle
 	glPushMatrix();
 	glTranslatef(9.85, 9.62 + floor1_height + floor2_thickness, 43);
-	glColor3f(0.43f, 0.50f, 0.56f);
+    glColor3ub(239, 239, 239);
 	glScalef(1.25, 1.25, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	// details
-	drawDetail(0);
-	drawDetail(5.75);
-	drawDetail(13.75);
-	drawDetail(19.5);
 
-	textureStatue(0);
-	textureStatue(5.75);
-	textureStatue(13.75);
-	textureStatue(19.5);
 
 	// grade
 	float px = 6.4;

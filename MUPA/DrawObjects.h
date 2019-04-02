@@ -145,7 +145,7 @@ void drawStar(float z) {
 
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
-	glTranslatef(3.8, 1.11 + floor1_height + floor2_thickness, z);
+	glTranslatef(3.8, 1.11 + floor1_height, z);
 	glRotated(90, 0, 1, 0);
 	glColor3ub(255, 255, 255);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -175,10 +175,30 @@ void drawColumn(float x) {
 void drawDetail(float x) {
 	glPushMatrix();
 	glTranslatef(x + 0.25, 9.3 + floor1_height + floor2_thickness, 43);
-	glColor3f(0.43f, 0.50f, 0.56f);
+	glColor3ub(239, 239, 239);
 	glScalef(0.5, 0.6, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
+
+    texture = texture_id[9];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x - 0.01, 9.6 + floor1_height + floor2_thickness , 43.07);
+    glRotatef(90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 0.5);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(0.52, 0.0001, 0.5);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(0.52, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 void drawLamp(int scaley, int scalex, GLfloat r, float x, float y, float z) {

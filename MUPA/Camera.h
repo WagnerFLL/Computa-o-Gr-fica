@@ -15,6 +15,21 @@ void mouseMovement(int x, int y) {
 	mouseY = y;
 }
 
+void disableLight() {
+    glDisable(GL_COLOR_MATERIAL);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+
+}
+
+void enableLight() {
+    if (light) {
+        glEnable(GL_COLOR_MATERIAL);
+        glEnable(GL_LIGHTING);
+        glEnable(GL_LIGHT0);
+    }
+}
+
 void mouseButton(int button, int state, int x, int y) {
 
 	// only start motion if the left button is pressed
@@ -91,18 +106,10 @@ void processNormalKeys(unsigned char key, int x, int y) {
 			break;
 
 		case 'l':
-		    if (light){
-                glDisable(GL_COLOR_MATERIAL);
-                glDisable(GL_LIGHTING);
-                glDisable(GL_LIGHT0);
+		    if (light)
                 light = false;
-		    } else {
-                glEnable(GL_COLOR_MATERIAL);
-                glEnable(GL_LIGHTING);
-                glEnable(GL_LIGHT0);
+            else
                 light = true;
-		    }
-
 
 			break;
 	}
