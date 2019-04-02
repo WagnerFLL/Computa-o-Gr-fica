@@ -259,6 +259,75 @@ void draw() {
         textureStairL(7.6, yBase + floor1_height, zBase);
 	}
 
+	// grade
+    glColor3ub(120, 60, 0);
+    disableLight();
+
+    float px = 8.6;
+    float pz = 21.4;
+
+    for (int i = 0; i < 25; i++, px += 0.1) {
+        glPushMatrix();
+        glTranslatef(px, 4 + floor1_height + floor2_thickness, 24.8);
+        glScalef(0.02, 0.8, 0.02);
+        glutSolidCube(1.0);
+        glPopMatrix();
+    }
+
+    glPushMatrix();
+    glTranslatef(9.8, 4.4 + floor1_height + floor2_thickness, 24.8);
+    glScalef(2.5, 0.02, 0.06);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    px = 7.6;
+
+    for (int i = 0; i < 45; i++, px += 0.1) {
+        glPushMatrix();
+        glTranslatef(px, 4 + floor1_height + floor2_thickness, pz);
+        glScalef(0.02, 0.8, 0.02);
+        glutSolidCube(1.0);
+        glPopMatrix();
+    }
+
+    glPushMatrix();
+    glTranslatef(9.8, 4.4 + floor1_height + floor2_thickness, pz);
+    glScalef(4.6, 0.02, 0.06);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+
+    for (int i = 0; i < 35; i++, pz += 0.1) {
+        glPushMatrix();
+        glTranslatef(7.5, 4 + floor1_height + floor2_thickness, pz);
+        glScalef(0.02, 0.8, 0.02);
+        glutSolidCube(1.0);
+        glPopMatrix();
+    }
+
+    glPushMatrix();
+    glTranslatef(7.5, 4.4 + floor1_height + floor2_thickness, 23.1);
+    glScalef(0.06, 0.02, 3.4);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    pz = 21.4;
+    for (int i = 0; i < 35; i++, pz += 0.1) {
+        glPushMatrix();
+        glTranslatef(12.1, 4 + floor1_height + floor2_thickness, pz);
+        glScalef(0.02, 0.8, 0.02);
+        glutSolidCube(1.0);
+        glPopMatrix();
+    }
+
+    glPushMatrix();
+    glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 23.1);
+    glScalef(0.06, 0.02, 3.4);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    enableLight();
+
 // FACHADA
 
     textureFacade(0, 4.75);
@@ -321,10 +390,8 @@ void draw() {
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-
-
 	// grade
-	float px = 6.4;
+	px = 6.4;
 	for (int i = 0; i < 74; i++, px += 0.1) {
 		glPushMatrix();
 		glTranslatef(px, 4 + floor1_height + floor2_thickness, 43);
