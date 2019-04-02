@@ -60,6 +60,56 @@ void loadTextures() {
     texture_id[4] = loadTexture("resources/escuro_mesa.bmp", 800, 500, 0);
     texture_id[5] = loadTexture("resources/escada_tapete.bmp", 700, 208, 0);
     texture_id[6] = loadTexture("resources/porta.bmp", 1258, 526, 0);
+    texture_id[7] = loadTexture("resources/brasao.bmp", 651, 477, 0);
+    texture_id[8] = loadTexture("resources/estatua.bmp", 508, 400, 0);
+}
+
+void textureEscutcheon() {
+    texture = texture_id[7];
+    glEnable(GL_TEXTURE_2D);
+
+    glPushMatrix();
+    glTranslatef(9.4, 11.4, 43.08);
+    glRotatef(-90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 0.8);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(0.9, 0.0001, 0.8);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(0.9, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
+    glEnd();
+    glPopMatrix();
+
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureStatue(float x) {
+    texture = texture_id[8];
+    glEnable(GL_TEXTURE_2D);
+
+    glPushMatrix();
+    glTranslatef(x - 0.3, 10.8, 43.08);
+    glRotatef(-90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 0.8);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(1, 0.0001, 0.8);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(1, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
+    glEnd();
+    glPopMatrix();
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 void textureFloor() {

@@ -257,6 +257,8 @@ void draw() {
 	drawColumn(11.2);
 	drawColumn(14);
 
+	textureEscutcheon();
+
 	// sides
 	glPushMatrix();
 	glTranslatef(3, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
@@ -288,19 +290,16 @@ void draw() {
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(9.85, 10.1 + floor1_height + floor2_thickness, 43);
-	glRotated(45, 0, 0, 1);
-	glColor3f(0.43f, 0.50f, 0.56f);
-	glScalef(1.25, 1.25, 0.1);
-	glutSolidCube(1.0);
-	glPopMatrix();
-
 	// details
 	drawDetail(0);
 	drawDetail(5.75);
 	drawDetail(13.75);
 	drawDetail(19.5);
+
+	textureStatue(0);
+	textureStatue(5.75);
+	textureStatue(13.75);
+	textureStatue(19.5);
 
 	// grade
 	float px = 6.4;

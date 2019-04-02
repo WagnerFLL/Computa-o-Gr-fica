@@ -122,7 +122,8 @@ void drawOrthoWallWithDoor(float x, float z, float width, int floor, float doorL
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	drawDoorOrtho(x + width1, z, floor);
+	if (z < 38)
+	    drawDoorOrtho(x + width1, z, floor);
 }
 
 void drawParallelWallWithDoor(float x, float z, float width, int floor, float doorLocation) {
