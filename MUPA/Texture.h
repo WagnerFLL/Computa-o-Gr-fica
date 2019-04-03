@@ -366,7 +366,7 @@ void texturePaint(float x, float y, float z, float inclination, int id, float pr
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-	disableLight();
+
 }
 
 
