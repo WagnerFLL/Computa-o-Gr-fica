@@ -11,7 +11,7 @@ void drawOrthoWall(float x, float z, float width, int floor) {
 
 	glPushMatrix();
 	glTranslatef(relativeX, relativeY, z);
-    glColor3ub(223, 213, 208);
+    glColor3ub(223, 223, 223);
 	glScalef(width, 3.5, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();
@@ -28,7 +28,7 @@ void drawParallelWall(float x, float z, float width, int floor) {
 	glPushMatrix();
 	glTranslatef(x, relativeY, relativeZ);
 	glRotatef(90, 0, 1, 0);
-    glColor3ub(223, 213, 208);
+    glColor3ub(223, 223, 223);
 	glScalef(width, 3.5, 0.1);
 	glutSolidCube(1.0);
 	glPopMatrix();

@@ -59,7 +59,7 @@ void draw() {
 	texture = texture_id[3];
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
-	glTranslatef(4, 2 + floor1_height, 0.6);
+	glTranslatef(4, 2.2 + floor1_height, 0.082);
 	glRotated(90, 1, 0, 0);
 	glColor3ub(255, 255, 255);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -200,34 +200,34 @@ void draw() {
     textureFloor();
     textureFloor2();
 
-	// Back
+	// piso atrás escada
 	glPushMatrix();
 	glTranslatef(10, 3.6 + floor1_height + floor2_height, 10.75);
-	glColor3f(0.8f, 0.23f, 0.24f);
+    glColor3f(0.7f, 0.763f, 0.764f);
 	glScalef(20, 0.2, 21.5);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	// Front
+	// frente escada
 	glPushMatrix();
 	glTranslatef(10, 3.6 + floor1_height + floor2_height, 34);
-	glColor3f(0.8f, 0.23f, 0.24f);
+    glColor3f(0.7f, 0.763f, 0.764f);
 	glScalef(20, 0.2, 18.5);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	// Right
+	// direita escada
 	glPushMatrix();
 	glTranslatef(3.8, 3.6 + floor1_height + floor2_height, 22.5);
-	glColor3f(0.8f, 0.23f, 0.24f);
+    glColor3f(0.7f, 0.763f, 0.764f);
 	glScalef(7.6, 0.2, 6);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	// Left
+	// esquerda escada
 	glPushMatrix();
 	glTranslatef(15.8, 3.6 + floor1_height + floor2_height, 22.5);
-	glColor3f(0.8f, 0.23f, 0.24f);
+    glColor3f(0.7f, 0.763f, 0.764f);
 	glScalef(7.6, 0.2, 6);
 	glutSolidCube(1.0);
 	glPopMatrix();
@@ -235,15 +235,30 @@ void draw() {
 	// piso
 	glPushMatrix();
 	glTranslatef(10, 0.1 + floor1_height / 2, 21.5);
-	glColor3f(0.8f, 0.23f, 0.24f);
+    glColor3f(0.7f, 0.763f, 0.764f);
 	glScalef(20, 0.2 + floor1_height, 44);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	// lage
+	// degraus
+    glPushMatrix();
+    glTranslatef(10,floor1_height / 2 - 0.2, 43.5);
+    glColor3f(0.7f, 0.763f, 0.764f);
+    glScalef(20, floor1_height, 0.8);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(10,floor1_height / 2 - 0.6, 43.9);
+    glColor3f(0.7f, 0.763f, 0.764f);
+    glScalef(20, floor1_height, 0.6);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    // lage
 	glPushMatrix();
 	glTranslatef(10, 7.1 + floor1_height + floor2_height + floor2_thickness, 21.5);
-	glColor3f(0.8f, 0.23f, 0.24f);
+    glColor3f(0.7f, 0.763f, 0.764f);
 	glScalef(20, 0.2, 43.5);
 	glutSolidCube(1.0);
 	glPopMatrix();
@@ -451,6 +466,7 @@ void draw() {
 	glPopMatrix();
 
 // CADEIRA
+    disableLight();
 	drawChair(3.5, 0, 2, 1, 0);
 	drawChair(1.5, 0, 3.5, 0, 1);
 	drawChair(1.5, 0, 4.5, 0, 1);
@@ -469,7 +485,7 @@ void draw() {
 	drawStar(3.75);
 	drawStar(7.5);
 	drawStar(5.5);
-
+    enableLight();
 //Segundo andar
 
 	//parede apos subir escada

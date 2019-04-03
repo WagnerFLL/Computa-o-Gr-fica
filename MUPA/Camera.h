@@ -55,11 +55,9 @@ void mouseMotion(int x, int y) {
 }
 
 
-void processCamera()
-{
+void processCamera() {
 	temp = cameraPos + cameraFront;
 	glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-	printf("x = %d, y = %d, z = %d", cameraPos[0], cameraPos[1] , cameraPos[2]);
 	gluLookAt(cameraPos[0], cameraPos[1] , cameraPos[2],  // de onde
               temp[0], temp[1],temp[2], // pra onde
 			  cameraUp[0], cameraUp[1], cameraUp[2]); // como
@@ -85,11 +83,13 @@ void processNormalKeys(unsigned char key, int x, int y) {
 			break;
 
 		case 32:
-			cameraPos += cameraSpeed * cameraUp;
+			if(cameraPos[1] < 8)
+				cameraPos += cameraSpeed * cameraUp;
 			break;
 
 		case 'f':
-			cameraPos -= cameraSpeed * cameraUp;
+			if(cameraPos[1] > 0.5)
+				cameraPos -= cameraSpeed * cameraUp;
 			break;
 
 		case 'o':
