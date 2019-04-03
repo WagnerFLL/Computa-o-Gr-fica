@@ -20,7 +20,7 @@ void draw() {
 	drawPaintStand(1, 2.3, 36, 60, 20, 793/593, -90);
 	texturePaint(0.01, 1.1, 38.5, 0, 11, 795/687, 2, 90, 180);
 	texturePaint(3.1, 3.2, 42.8, 0, 12, 845/619, 2, 180, -90);
-	
+
     for (int i = 0; i < 10; ++i)
         textureInnerWall(4.3*i,0,0);
 
