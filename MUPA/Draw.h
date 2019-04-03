@@ -15,10 +15,28 @@ void draw() {
 	glVertex3f(100.0f, 0.0f, -100.0f);
 	glEnd();
 
+	// primeiro andar
 	drawPaintStand(1, 2.3, 42, 120, 19, 793/593, -90);
 	drawPaintStand(1, 2.3, 36, 60, 20, 793/593, -90);
 	texturePaint(0.01, 1.1, 38.5, 0, 11, 795/687, 2, 90, 180);
 	texturePaint(3.1, 3.2, 42.8, 0, 12, 845/619, 2, 180, -90);
+
+	//segundo andar exposiçao esquerda
+	texturePaint(2.9, 3.2 + 3.6, 42.8, 0, 12, 845/619, 2, 180, -90);
+	drawPaintStand(0.7, 2.3 + 3.6, 42, 120, 19, 793/593, -90);
+	texturePaint(0.01, 1.1 + 3.6 , 38.5, 0, 11, 795/687, 2, 90, 180);
+	drawPaintStand(0.7, 2.3 + 3.6, 36, 90, 20, 629/537, -90);
+	texturePaint(0.01, 1.1 + 3.6 , 32, 0, 13, 795/687, 2, 90, 180);
+	drawPaintStand(0.7, 2.3 + 3.6, 29, 60, 21, 866/693, -90);
+
+	drawBookStand2(2.9, 2.3 + 3.6, 38, 90);
+	drawBookStand2(2.9, 2.3 + 3.6, 33, 90);
+
+	texturePaint(5.99, 3.2 + 3.6 , 40.5, 0, 16, 664/521, 2, 270, -90);
+	texturePaint(5.99, 3.2 + 3.6 , 36.5, 0, 14, 1098/790, 2, 270, -90);
+	texturePaint(5.99, 3.2 + 3.6 , 33, 0, 15, 1016/689, 2, 270, -90);
+
+
 
 	// quadro fundo
 	texture = texture_id[3];
