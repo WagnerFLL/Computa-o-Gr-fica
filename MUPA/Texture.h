@@ -197,6 +197,79 @@ void textureStatue(float x) {
     glDisable(GL_TEXTURE_2D);
 }
 
+void textureInnerOrthoWall(float x, float floor, float side) {
+    if(side == 0) side = 0.07;
+    else side = 42.92;
+
+    texture = texture_id[0];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x, 3.7 * floor + 4 + 0.8, side);
+    glRotated(90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0, 0.0001, 0);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(4, 0.0001, 0);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(4, 0.0001, 3.8);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0, 0.0001, 3.8);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureInnerWall(float z, float floor, float side) {
+    if(side == 0) side = 0.07;
+    else side = 19.92;
+
+    texture = texture_id[0];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(side, 3.7 * floor + 4 + 0.8, z);
+    glRotated(90, 1, 0, 0);
+    glRotated(90, 0, 0, 1);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0, 0.0001, 0);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(4.3, 0.0001, 0);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(4.3, 0.0001, 3.8);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0, 0.0001, 3.8);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureFail(float floor, int p) {
+    texture = texture_id[0];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(6.5, (3.7 *(floor + 1)) + wall_height + floor1_height - 0.2, 28 + 0.062 * p);
+    glRotated(90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0, 0.0001, 0);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(7, 0.0001, 0);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(7, 0.0001, 0.8);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0, 0.0001, 0.8);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
 void textureFloor() {
     texture = texture_id[2];
     glEnable(GL_TEXTURE_2D);

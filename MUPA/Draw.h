@@ -20,6 +20,24 @@ void draw() {
 	texturePaint(0.01, 1.1, 38.5, 0, 11, 795/687, 2, 90, 180);
 	texturePaint(3.1, 3.2, 42.8, 0, 12, 845/619, 2, 180, -90);
 
+    for (int i = 0; i < 10; ++i)
+        textureInnerWall(4.3*i,0,0);
+
+    for (int i = 0; i < 10; ++i)
+        textureInnerWall(4.3*i,1,0);
+
+    for (int i = 0; i < 10; ++i)
+        textureInnerWall(4.3*i,0,1);
+
+    for (int i = 0; i < 10; ++i)
+        textureInnerWall(4.3*i,1,1);
+
+    for (int i = 0; i < 5; ++i)
+        textureInnerOrthoWall(4*i,0,0);
+
+    for (int i = 0; i < 5; ++i)
+        textureInnerOrthoWall(4*i,1,0);
+
 	// quadro fundo
 	texture = texture_id[3];
 	glEnable(GL_TEXTURE_2D);
@@ -156,9 +174,15 @@ void draw() {
 	glutSolidCube(1.0);
 	glPopMatrix();
 
+    textureFail(0, 1);
+    textureFail(0, -1);
+    textureFail(1, 1);
+    textureFail(1, -1);
 
-// floor 1
+// piso 1
+    textureFloor();
     textureFloor2();
+
 	// Back
 	glPushMatrix();
 	glTranslatef(10, 3.6 + floor1_height + floor2_height, 10.75);
@@ -198,8 +222,6 @@ void draw() {
 	glScalef(20, 0.2 + floor1_height, 44);
 	glutSolidCube(1.0);
 	glPopMatrix();
-
-	textureFloor();
 
 	// lage
 	glPushMatrix();
