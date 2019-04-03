@@ -19,7 +19,6 @@ void disableLight() {
     glDisable(GL_COLOR_MATERIAL);
     glDisable(GL_LIGHTING);
     glDisable(GL_LIGHT0);
-
 }
 
 void enableLight() {
@@ -32,15 +31,12 @@ void enableLight() {
 
 void mouseButton(int button, int state, int x, int y) {
 
-	// only start motion if the left button is pressed
 	if (button == GLUT_LEFT_BUTTON) {
 
-		// when the button is released
 		if (state == GLUT_UP) {
 			angle += deltaAngle;
 			xOrigin = -1;
-		}
-		else  {// state = GLUT_DOWN
+		} else  {
 			xOrigin = x;
 		}
 	}

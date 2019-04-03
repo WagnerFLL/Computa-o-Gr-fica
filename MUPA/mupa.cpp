@@ -8,28 +8,31 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-// actual vector representing the camera's direction
+GLuint texture_id[40];
+
+// direção da camera
 float lx = 0.0f, lz = -1.0f;
 float deltaAngle = 0.0f;
 int xOrigin = -1;
-// XZ position of the camera
+
+// XZ posição
 float x = 10.0f, z = 50.0f;
 int mouseX, mouseY;
 GLuint texture;
-// angle for rotating
+
+// ângulos
 float angle = 0.0f;
 float door_angle = 0.0f;
 float fovy = 70.0f;
 float cam = 3.5f;
 
-// heights
+// alturas
 float floor2_thickness = 0.2f;
 float floor1_height = 1.0f;
 float wall_height = 0.2f;
 float floor2_height = 0.2f;
 
 GLUquadricObj *quadratic;
-GLuint texture_id[40];
 
 
 #include "Camera.h"
@@ -62,19 +65,13 @@ void init(void) {
 }
 
 void changeSize(int w, int h){
-    // Prevent a divide by zero, when window is too short
-    // (you cant make a window of zero width).
     if (h == 0) h = 1;
     float ratio = w * 1.0 / h;
-    // Use the Projection Matrix
+
     glMatrixMode(GL_PROJECTION);
-    // Reset Matrix
     glLoadIdentity();
-    // Set the viewport to be the entire window
     glViewport(0, 0, w, h);
-    // Set the correct perspective.
     gluPerspective(fovy, ratio, 0.1f, 1000.0f);
-    // Get Back to the Modelview
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -125,16 +122,14 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 int main(int argc, char **argv) {
 
-    // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA  | GLUT_ALPHA);
     glutInitWindowPosition(50, 50);
     glutInitWindowSize(800, 600);
     glutCreateWindow("MUPA");
-//    lightsSetup();
+
     init();
 
-    // register callbacks
     glutDisplayFunc(renderScene);
     glutReshapeFunc(changeSize);
     glutIdleFunc(renderScene);
@@ -144,8 +139,6 @@ int main(int argc, char **argv) {
     glutMouseFunc(mouseButton);
     glutMotionFunc(mouseMotion);
 
-    // OpenGL init
-    // enter GLUT event processing cycle
     glutMainLoop();
 
     return 1;

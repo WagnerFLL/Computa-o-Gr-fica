@@ -10,9 +10,9 @@ void lightsSetup()
 	GLfloat lightSpotCutoff = 180, attenuation = 0.60, exponent = 30;
 	GLfloat materialAmbientAndDiffuse[] = {1, 1, 1, 1};
 	GLfloat materialSpecular[] = {1, 1, 1, 1};
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, materialAmbientAndDiffuse); // Defines objects reflection to ambient and diffuse light
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialSpecular); // Defines objects reflection to specular light
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 70); // Defines objects level of reflection (0 to 128)
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, materialAmbientAndDiffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialSpecular);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 70);
 
 	GLfloat lightAmbient[] = {0.2, 0.2, 0.2, 0.6};
 	GLfloat lightDiffuse[] = {1.0, 1.0, 1.0, 1};

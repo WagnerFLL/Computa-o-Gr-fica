@@ -1,18 +1,15 @@
-//
-// Created by lucas on 3/31/2019.
-//
-
 #ifndef COMPUTER_GRAPHICS_DRAW_H
 #define COMPUTER_GRAPHICS_DRAW_H
 
 
 void draw() {
+	// chão
 	glColor3f(0.0, 0.65, 0.0);
 	glBegin(GL_QUADS);
-	glVertex3f(-100.0f, 0.0f, -100.0f);
-	glVertex3f(-100.0f, 0.0f, 100.0f);
-	glVertex3f(100.0f, 0.0f, 100.0f);
-	glVertex3f(100.0f, 0.0f, -100.0f);
+		glVertex3f(-100.0f, 0.0f, -100.0f);
+		glVertex3f(-100.0f, 0.0f, 100.0f);
+		glVertex3f(100.0f, 0.0f, 100.0f);
+		glVertex3f(100.0f, 0.0f, -100.0f);
 	glEnd();
 
 	// primeiro andar
@@ -45,7 +42,7 @@ void draw() {
         textureInnerOrthoWall(4*i,1,0);
 
 
-	//segundo andar exposiçao esquerda
+	// segundo andar exposiçao esquerda
 	texturePaint(2.9, 3.2 + 3.6, 42.8, 0, 12, 845/619, 2, 180, -90);
 	drawPaintStand(0.7, 2.3 + 3.6, 42, 120, 19, 793/593, -90);
 	texturePaint(0.01, 1.1 + 3.6 , 38.5, 0, 11, 795/687, 2, 90, 180);
@@ -60,8 +57,8 @@ void draw() {
 	texturePaint(5.99, 3.2 + 3.6 , 36.5, 0, 14, 1098/790, 2, 270, -90);
 	texturePaint(5.99, 3.2 + 3.6 , 33, 0, 15, 1016/689, 2, 270, -90);
 
-	//segundo andar exposiçao direita
-		//parede com salão
+	// segundo andar exposiçao direita
+		// parede com salão
 		drawBookStand1(14.5, 2.3 + 3.6, 33, 90, 1);
 		drawBookStand1(14.5, 2.3 + 3.6, 31.5, 90, 2);
 		drawBookStand1(14.5, 2.3 + 3.6, 30, 90, 3);
@@ -77,21 +74,21 @@ void draw() {
 		drawPaintStand(18, 2.3 + 3.6, 42, 180, 19, 793/593, -90);
 		drawPaintStand(16, 2.3 + 3.6, 42, 180, 19, 793/593, -90);
 
-	//segundo andar salão
-		//cantos
+	// segundo andar salão
+		// cantos
 		drawPaintStand(6.5, 2.3 + 3.6, 28.5, 45, 28, 793/593, -90);
 		drawPaintStand(13.3, 2.3 + 3.6, 28.5, -45, 29, 793/593, -90);
 		drawPaintStand(13.3, 2.3 + 3.6, 38.3, 225, 18, 793/593, -90);
 		drawPaintStand(6.5, 2.3 + 3.6, 38.3, -225, 19, 793/593, -90);
-		//paredes
+		// paredes
 		texturePaint(6.45, 3.2 + 3.6 , 34, 0, 16, 664/521, 2, 270, -90);
 		texturePaint(14.0, 3.2 + 3.6 , 32.5, 0, 14, 1098/790, 2, 270, -90);
 		texturePaint(9.5, 3.2 + 3.6 , 28.5, 0, 15, 1016/689, 2, 180, -90);
-		//centro
+		// centro
 		drawBookStand2(10, 2.3 + 3.6, 33, 90, 3);
 		drawBookStand2(10, 2.3 + 3.6, 34.5, 90, 2);
 
-	//segundo andar escada
+	// segundo andar escada
 	texturePaint(6.4,1.2 + 3.6 , 21.5, 0, 22, 664/521, 1.5, 270, 180);
 	texturePaint(6.4, 1.2 + 3.6 , 24, 0, 23, 664/521, 1.5, 270, 180);
 
@@ -107,70 +104,70 @@ void draw() {
 	texture = texture_id[36];
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
-	glTranslatef(4, 2.2 + floor1_height, 0.082);
-	glRotated(90, 1, 0, 0);
-	glColor3ub(255, 255, 255);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(-2, 0.0001, -1);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(2, 0.0001, -1);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(2, 0.0001, 1);
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(-2, 0.0001, 1);
-	glEnd();
+		glTranslatef(4, 2.2 + floor1_height, 0.082);
+		glRotated(90, 1, 0, 0);
+		glColor3ub(255, 255, 255);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glBegin(GL_QUADS);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(-2, 0.0001, -1);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(2, 0.0001, -1);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(2, 0.0001, 1);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(-2, 0.0001, 1);
+		glEnd();
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-	//  Mesa parte escura
+	// Mesa parte escura
 	texture = texture_id[4];
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
-	glTranslatef(3.8, 1.08 + floor1_height, 5.5);
-	glRotated(90, 0, 1, 0);
-	glColor3ub(255, 255, 255);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glBegin(GL_QUADS);  // floor
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(-2.9, 0.0001, 1.4);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(2.9, 0.0001, 1.4);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(2.9, 0.0001, -1.4);
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(-2.9, 0.0001, -1.4);
-	glEnd();
+		glTranslatef(3.8, 1.08 + floor1_height, 5.5);
+		glRotated(90, 0, 1, 0);
+		glColor3ub(255, 255, 255);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glBegin(GL_QUADS);  // floor
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(-2.9, 0.0001, 1.4);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(2.9, 0.0001, 1.4);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(2.9, 0.0001, -1.4);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(-2.9, 0.0001, -1.4);
+		glEnd();
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-//Primeiro andar
+// Primeiro andar
 	// Parede traseira
 	glPushMatrix();
-	glTranslatef(10, 4.5 + floor1_height, 0);
-	glColor3f(0.43f, 0.50f, 0.56f);
-	glScalef(20, 9, 0.1);
-	glutSolidCube(1.0);
+		glTranslatef(10, 4.5 + floor1_height, 0);
+		glColor3f(0.43f, 0.50f, 0.56f);
+		glScalef(20, 9, 0.1);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// Parede lateral esquerda
 	glPushMatrix();
-	glTranslatef(0, 4.5 + floor1_height, 21.5);
-	glColor3f(0.43f, 0.50f, 0.56f);
-	glScalef(0.1, 9, 43);
-	glutSolidCube(1.0);
+		glTranslatef(0, 4.5 + floor1_height, 21.5);
+		glColor3f(0.43f, 0.50f, 0.56f);
+		glScalef(0.1, 9, 43);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// Parede lateral direita
 	glPushMatrix();
-	glTranslatef(20, 4.5 + floor1_height, 21.5);
-	glColor3f(0.43f, 0.50f, 0.56f);
-	glScalef(0.1, 9, 43);
-	glutSolidCube(1.0);
+		glTranslatef(20, 4.5 + floor1_height, 21.5);
+		glColor3f(0.43f, 0.50f, 0.56f);
+		glScalef(0.1, 9, 43);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
-	//varanda com exposicao
+	// varanda com exposicao
 	drawOrthoWallWithDoor(6, 39, 2.6666, 0, 1);
 	drawOrthoWallWithDoor(8.6666, 39, 2.6666, 0, 1);
 	drawOrthoWallWithDoor(11.3333, 39, 2.6666, 0, 1);
@@ -233,10 +230,10 @@ void draw() {
 	drawOrthoWall(11, 28, 1, 0);
 
 	glPushMatrix();
-	glTranslatef(10, 3.1 + wall_height + floor1_height, 28);
-    glColor3ub(223, 213, 208);
-	glScalef(7, 0.8, 0.1);
-	glutSolidCube(1.0);
+		glTranslatef(10, 3.1 + wall_height + floor1_height, 28);
+		glColor3ub(223, 213, 208);
+		glScalef(7, 0.8, 0.1);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
     textureFail(0, 1);
@@ -250,65 +247,65 @@ void draw() {
 
 	// piso atrás escada
 	glPushMatrix();
-	glTranslatef(10, 3.6 + floor1_height + floor2_height, 10.75);
-    glColor3f(0.7f, 0.763f, 0.764f);
-	glScalef(20, 0.2, 21.5);
-	glutSolidCube(1.0);
+		glTranslatef(10, 3.6 + floor1_height + floor2_height, 10.75);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(20, 0.2, 21.5);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// frente escada
 	glPushMatrix();
-	glTranslatef(10, 3.6 + floor1_height + floor2_height, 34);
-    glColor3f(0.7f, 0.763f, 0.764f);
-	glScalef(20, 0.2, 18.5);
-	glutSolidCube(1.0);
+		glTranslatef(10, 3.6 + floor1_height + floor2_height, 34);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(20, 0.2, 18.5);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// direita escada
 	glPushMatrix();
-	glTranslatef(3.8, 3.6 + floor1_height + floor2_height, 22.5);
-    glColor3f(0.7f, 0.763f, 0.764f);
-	glScalef(7.6, 0.2, 6);
-	glutSolidCube(1.0);
+		glTranslatef(3.8, 3.6 + floor1_height + floor2_height, 22.5);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(7.6, 0.2, 6);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// esquerda escada
 	glPushMatrix();
-	glTranslatef(15.8, 3.6 + floor1_height + floor2_height, 22.5);
-    glColor3f(0.7f, 0.763f, 0.764f);
-	glScalef(7.6, 0.2, 6);
-	glutSolidCube(1.0);
+		glTranslatef(15.8, 3.6 + floor1_height + floor2_height, 22.5);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(7.6, 0.2, 6);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// piso
 	glPushMatrix();
-	glTranslatef(10, 0.1 + floor1_height / 2, 21.5);
-    glColor3f(0.7f, 0.763f, 0.764f);
-	glScalef(20, 0.2 + floor1_height, 44);
-	glutSolidCube(1.0);
+		glTranslatef(10, 0.1 + floor1_height / 2, 21.5);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(20, 0.2 + floor1_height, 44);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// degraus
     glPushMatrix();
-    glTranslatef(10,floor1_height / 2 - 0.2, 43.5);
-    glColor3f(0.7f, 0.763f, 0.764f);
-    glScalef(20, floor1_height, 0.8);
-    glutSolidCube(1.0);
+		glTranslatef(10,floor1_height / 2 - 0.2, 43.5);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(20, floor1_height, 0.8);
+		glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(10,floor1_height / 2 - 0.6, 43.9);
-    glColor3f(0.7f, 0.763f, 0.764f);
-    glScalef(20, floor1_height, 0.6);
-    glutSolidCube(1.0);
+		glTranslatef(10,floor1_height / 2 - 0.6, 43.9);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(20, floor1_height, 0.6);
+		glutSolidCube(1.0);
     glPopMatrix();
 
     // lage
 	glPushMatrix();
-	glTranslatef(10, 7.1 + floor1_height + floor2_height + floor2_thickness, 21.5);
-    glColor3f(0.7f, 0.763f, 0.764f);
-	glScalef(20, 0.2, 43.5);
-	glutSolidCube(1.0);
+		glTranslatef(10, 7.1 + floor1_height + floor2_height + floor2_thickness, 21.5);
+		glColor3f(0.7f, 0.763f, 0.764f);
+		glScalef(20, 0.2, 43.5);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 // ESCADA
@@ -317,10 +314,10 @@ void draw() {
 	for (int i = 0; i < 21; i++, zBase -= 0.2, yBase += 0.1) {
         disableLight();
 		glPushMatrix();
-		glTranslatef(9.85, yBase + floor1_height, zBase);
-		glColor3ub(120, 60, 0);
-		glScalef(2, 0.175, 0.2);
-		glutSolidCube(1.0);
+			glTranslatef(9.85, yBase + floor1_height, zBase);
+			glColor3ub(120, 60, 0);
+			glScalef(2, 0.175, 0.2);
+			glutSolidCube(1.0);
 		glPopMatrix();
         enableLight();
         textureStair(yBase + floor1_height, zBase);
@@ -328,10 +325,10 @@ void draw() {
 
 	// floor escada
 	glPushMatrix();
-	glTranslatef(9.9, 2.4 + floor1_height, 20.5);
-	glColor3f(0.5f, 0.5f, 0.5f);
-	glScalef(4.5, 0.2, 2);
-	glutSolidCube(1.0);
+		glTranslatef(9.9, 2.4 + floor1_height, 20.5);
+		glColor3f(0.5f, 0.5f, 0.5f);
+		glScalef(4.5, 0.2, 2);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	zBase = 21.5;
@@ -340,10 +337,10 @@ void draw() {
 	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
         disableLight();
 		glPushMatrix();
-		glTranslatef(11.6, yBase + floor1_height, zBase);
-        glColor3ub(120, 60, 0);
-		glScalef(1, 0.15, 0.35);
-		glutSolidCube(1.0);
+			glTranslatef(11.6, yBase + floor1_height, zBase);
+			glColor3ub(120, 60, 0);
+			glScalef(1, 0.15, 0.35);
+			glutSolidCube(1.0);
 		glPopMatrix();
         enableLight();
         textureStairL(11.1, yBase + floor1_height, zBase);
@@ -355,10 +352,10 @@ void draw() {
 	for (int i = 0; i < 12; i++, zBase += 0.334, yBase += 0.12) {
         disableLight();
 		glPushMatrix();
-		glTranslatef(8.1, yBase + floor1_height, zBase);
-        glColor3ub(120, 60, 0);
-		glScalef(1, 0.15, 0.35);
-		glutSolidCube(1.0);
+			glTranslatef(8.1, yBase + floor1_height, zBase);
+			glColor3ub(120, 60, 0);
+			glScalef(1, 0.15, 0.35);
+			glutSolidCube(1.0);
 		glPopMatrix();
         enableLight();
         textureStairL(7.6, yBase + floor1_height, zBase);
@@ -373,62 +370,62 @@ void draw() {
 
     for (int i = 0; i < 25; i++, px += 0.1) {
         glPushMatrix();
-        glTranslatef(px, 4 + floor1_height + floor2_thickness, 24.8);
-        glScalef(0.02, 0.8, 0.02);
-        glutSolidCube(1.0);
+			glTranslatef(px, 4 + floor1_height + floor2_thickness, 24.8);
+			glScalef(0.02, 0.8, 0.02);
+			glutSolidCube(1.0);
         glPopMatrix();
     }
 
     glPushMatrix();
-    glTranslatef(9.8, 4.4 + floor1_height + floor2_thickness, 24.8);
-    glScalef(2.5, 0.02, 0.06);
-    glutSolidCube(1.0);
+		glTranslatef(9.8, 4.4 + floor1_height + floor2_thickness, 24.8);
+		glScalef(2.5, 0.02, 0.06);
+		glutSolidCube(1.0);
     glPopMatrix();
 
     px = 7.6;
 
     for (int i = 0; i < 45; i++, px += 0.1) {
         glPushMatrix();
-        glTranslatef(px, 4 + floor1_height + floor2_thickness, pz);
-        glScalef(0.02, 0.8, 0.02);
-        glutSolidCube(1.0);
+			glTranslatef(px, 4 + floor1_height + floor2_thickness, pz);
+			glScalef(0.02, 0.8, 0.02);
+			glutSolidCube(1.0);
         glPopMatrix();
     }
 
     glPushMatrix();
-    glTranslatef(9.8, 4.4 + floor1_height + floor2_thickness, pz);
-    glScalef(4.6, 0.02, 0.06);
-    glutSolidCube(1.0);
+		glTranslatef(9.8, 4.4 + floor1_height + floor2_thickness, pz);
+		glScalef(4.6, 0.02, 0.06);
+		glutSolidCube(1.0);
     glPopMatrix();
 
 
     for (int i = 0; i < 35; i++, pz += 0.1) {
         glPushMatrix();
-        glTranslatef(7.5, 4 + floor1_height + floor2_thickness, pz);
-        glScalef(0.02, 0.8, 0.02);
-        glutSolidCube(1.0);
+			glTranslatef(7.5, 4 + floor1_height + floor2_thickness, pz);
+			glScalef(0.02, 0.8, 0.02);
+			glutSolidCube(1.0);
         glPopMatrix();
     }
 
     glPushMatrix();
-    glTranslatef(7.5, 4.4 + floor1_height + floor2_thickness, 23.1);
-    glScalef(0.06, 0.02, 3.4);
-    glutSolidCube(1.0);
+		glTranslatef(7.5, 4.4 + floor1_height + floor2_thickness, 23.1);
+		glScalef(0.06, 0.02, 3.4);
+		glutSolidCube(1.0);
     glPopMatrix();
 
     pz = 21.4;
     for (int i = 0; i < 35; i++, pz += 0.1) {
         glPushMatrix();
-        glTranslatef(12.1, 4 + floor1_height + floor2_thickness, pz);
-        glScalef(0.02, 0.8, 0.02);
-        glutSolidCube(1.0);
+			glTranslatef(12.1, 4 + floor1_height + floor2_thickness, pz);
+			glScalef(0.02, 0.8, 0.02);
+			glutSolidCube(1.0);
         glPopMatrix();
     }
 
     glPushMatrix();
-    glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 23.1);
-    glScalef(0.06, 0.02, 3.4);
-    glutSolidCube(1.0);
+		glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 23.1);
+		glScalef(0.06, 0.02, 3.4);
+		glutSolidCube(1.0);
     glPopMatrix();
 
     enableLight();
@@ -464,53 +461,53 @@ void draw() {
 	textureEscutcheon();
     enableLight();
 
-	// sides
+	// laterais
 	glPushMatrix();
-	glTranslatef(3, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
-    glColor3ub(239, 239, 239);
-	glScalef(6, 7 + floor2_thickness, 0.1);
-	glutSolidCube(1.0);
+		glTranslatef(3, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
+		glColor3ub(239, 239, 239);
+		glScalef(6, 7 + floor2_thickness, 0.1);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(17, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
-    glColor3ub(239, 239, 239);
-	glScalef(6, 7 + floor2_thickness, 0.1);
-	glutSolidCube(1.0);
+		glTranslatef(17, 3.5 + floor1_height + floor2_thickness + floor2_height, 43);
+		glColor3ub(239, 239, 239);
+		glScalef(6, 7 + floor2_thickness, 0.1);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
-	// Top
+	// topo
 	glPushMatrix();
-	glTranslatef(10, 8 + floor1_height + floor2_thickness + floor2_height + 0.1f, 43);
-    glColor3ub(239, 239, 239);
-	glScalef(20, 2, 0.1);
-	glutSolidCube(1.0);
+		glTranslatef(10, 8 + floor1_height + floor2_thickness + floor2_height + 0.1f, 43);
+		glColor3ub(239, 239, 239);
+		glScalef(20, 2, 0.1);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
-	// middle
+	// meio
 	glPushMatrix();
-	glTranslatef(9.85, 9.62 + floor1_height + floor2_thickness, 43);
-    glColor3ub(239, 239, 239);
-	glScalef(1.25, 1.25, 0.1);
-	glutSolidCube(1.0);
+		glTranslatef(9.85, 9.62 + floor1_height + floor2_thickness, 43);
+		glColor3ub(239, 239, 239);
+		glScalef(1.25, 1.25, 0.1);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	// grade
 	px = 6.4;
 	for (int i = 0; i < 74; i++, px += 0.1) {
 		glPushMatrix();
-		glTranslatef(px, 4 + floor1_height + floor2_thickness, 43);
-		glColor3f(0.5f, 0.6f, 0.6f);
-		glScalef(0.02, 0.8, 0.02);
-		glutSolidCube(1.0);
+			glTranslatef(px, 4 + floor1_height + floor2_thickness, 43);
+			glColor3f(0.5f, 0.6f, 0.6f);
+			glScalef(0.02, 0.8, 0.02);
+			glutSolidCube(1.0);
 		glPopMatrix();
 	}
 
 	glPushMatrix();
-	glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 43);
-	glColor3f(0.5f, 0.6f, 0.6f);
-	glScalef(12, 0.02, 0.02);
-	glutSolidCube(1.0);
+		glTranslatef(12.1, 4.4 + floor1_height + floor2_thickness, 43);
+		glColor3f(0.5f, 0.6f, 0.6f);
+		glScalef(12, 0.02, 0.02);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 // CADEIRA
@@ -534,15 +531,15 @@ void draw() {
 	drawStar(7.5);
 	drawStar(5.5);
     enableLight();
-//Segundo andar
 
-	//parede apos subir escada
+// Segundo andar
+	// parede apos subir escada
 	drawOrthoWall(10 - 1.5, 28, 3, 1);
 	glPushMatrix();
-	glTranslatef(10, 6.4 + wall_height + floor1_height + floor2_height + floor2_thickness, 28);
-	glColor3ub(223, 213, 208);
-	glScalef(7, 0.8, 0.1);
-	glutSolidCube(1.0);
+		glTranslatef(10, 6.4 + wall_height + floor1_height + floor2_height + floor2_thickness, 28);
+		glColor3ub(223, 213, 208);
+		glScalef(7, 0.8, 0.1);
+		glutSolidCube(1.0);
 	glPopMatrix();
 
 	//varanda com exposicao
@@ -553,22 +550,22 @@ void draw() {
 	// exposição cima com salão
 	drawParallelWallWithDoor(13.8, 28, 15, 1, 1);
 
-	//exposição cima com elevador
+	// exposição cima com elevador
 	drawOrthoWallWithDoor(13, 28, 7, 1, 1);
 
-	//elevador com vazio
+	// elevador com vazio
 	drawOrthoWall(13.8, 25.5, 6.2, 1);
 
 	// atras da escada
 	drawOrthoWall(6, 19.5, 2, 1);
 
-	//vazio com circulacao
+	// vazio com circulacao
 	drawParallelWall(13.8, 19.5, 6, 1);
 
 	// exposição baixo com salão
 	drawParallelWallWithDoor(6, 28, 15, 1, 0.1);
 
-	//exposição baixo com corredor baixo
+	// exposição baixo com corredor baixo
 	drawOrthoWallWithDoor(0, 28, 7, 1, 0.9);
 
 	// corredor baixo com gabinete

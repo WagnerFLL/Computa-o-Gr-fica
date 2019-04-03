@@ -9,18 +9,17 @@
 GLuint loadTexture(const char *filename, int width, int height, int mode) {
 
     GLuint texture;
-
     unsigned char *data;
 
     FILE *file;
-
     file = fopen(filename, "rb");
 
-    if (file == NULL) return 0;
+    if (file == NULL)
+        return 0;
 
     data = (unsigned char *) malloc(width * height * 3);
-
     fread(data, width * height * 3, 1, file);
+
     fclose(file);
 
     for (int i = 0; i < width * height; ++i) {
@@ -48,7 +47,7 @@ GLuint loadTexture(const char *filename, int width, int height, int mode) {
 }
 
 void FreeTexture(GLuint texture) {
-    glDeleteTextures(1, &texture); //  Delete our texture, simple enough.
+    glDeleteTextures(1, &texture);
 }
 
 void loadTextures() {
@@ -97,20 +96,20 @@ void textureEscutcheon() {
     glEnable(GL_TEXTURE_2D);
 
     glPushMatrix();
-    glTranslatef(9.4, 11.4, 43.08);
-    glRotatef(-90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.8);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(0.9, 0.0001, 0.8);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(0.9, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(9.4, 11.4, 43.08);
+        glRotatef(-90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.8);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(0.9, 0.0001, 0.8);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(0.9, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
 
     glDisable(GL_TEXTURE_2D);
@@ -120,20 +119,20 @@ void textureHigherFacade(float x){
     texture = texture_id[10];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(x, 10.46, 43.09);
-    glRotatef(90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 1.9);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(6, 0.0001, 1.9);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(6, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(x, 10.46, 43.09);
+        glRotatef(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 1.9);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(6, 0.0001, 1.9);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(6, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -142,20 +141,20 @@ void textureFacade(float x, float y) {
     texture = texture_id[9];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(x, y, 43.08);
-    glRotatef(90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 3.7);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(6, 0.0001, 3.7);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(6, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(x, y, 43.08);
+        glRotatef(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 3.7);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(6, 0.0001, 3.7);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(6, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -166,24 +165,22 @@ void textureWall(float x, float z, float width, int floor, int parallel) {
     texture = texture_id[0];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(x, y, z);
-    glRotated(90, 1, 0, 0);
-    if (parallel)
-        glRotated(270, 0, 0, 1);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0, 0.0001, 3.5);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(width, 0.0001, 3.5);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(width, 0.0001, 0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0, 0.0001, 0);
-    glEnd();
-
+        glTranslatef(x, y, z);
+        glRotated(90, 1, 0, 0);
+        if (parallel)
+            glRotated(270, 0, 0, 1);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(0, 0.0001, 3.5);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(width, 0.0001, 3.5);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(width, 0.0001, 0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(0, 0.0001, 0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -193,20 +190,20 @@ void textureStatue(float x) {
     glEnable(GL_TEXTURE_2D);
 
     glPushMatrix();
-    glTranslatef(x - 0.3, 10.8, 43.08);
-    glRotatef(-90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.8);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(1, 0.0001, 0.8);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(1, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(x - 0.3, 10.8, 43.08);
+        glRotatef(-90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.8);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(1, 0.0001, 0.8);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(1, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
 
     glDisable(GL_TEXTURE_2D);
@@ -219,20 +216,20 @@ void textureInnerOrthoWallFront(float x, float floor) {
     texture = texture_id[0];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(x, 3.7 * floor + 4 + 0.8, side);
-    glRotated(90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0, 0.0001, 0);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(6, 0.0001, 0);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(6, 0.0001, 3.8);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0, 0.0001, 3.8);
-    glEnd();
+        glTranslatef(x, 3.7 * floor + 4 + 0.8, side);
+        glRotated(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(0, 0.0001, 0);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(6, 0.0001, 0);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(6, 0.0001, 3.8);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(0, 0.0001, 3.8);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -244,20 +241,20 @@ void textureInnerOrthoWall(float x, float floor, float side) {
     texture = texture_id[0];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(x, 3.7 * floor + 4 + 0.8, side);
-    glRotated(90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0, 0.0001, 0);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(4, 0.0001, 0);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(4, 0.0001, 3.8);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0, 0.0001, 3.8);
-    glEnd();
+        glTranslatef(x, 3.7 * floor + 4 + 0.8, side);
+        glRotated(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(0, 0.0001, 0);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(4, 0.0001, 0);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(4, 0.0001, 3.8);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(0, 0.0001, 3.8);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -269,21 +266,21 @@ void textureInnerWall(float z, float floor, float side) {
     texture = texture_id[0];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(side, 3.7 * floor + 4 + 0.8, z);
-    glRotated(90, 1, 0, 0);
-    glRotated(90, 0, 0, 1);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0, 0.0001, 0);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(4.3, 0.0001, 0);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(4.3, 0.0001, 3.8);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0, 0.0001, 3.8);
-    glEnd();
+        glTranslatef(side, 3.7 * floor + 4 + 0.8, z);
+        glRotated(90, 1, 0, 0);
+        glRotated(90, 0, 0, 1);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(0, 0.0001, 0);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(4.3, 0.0001, 0);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(4.3, 0.0001, 3.8);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(0, 0.0001, 3.8);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -292,20 +289,20 @@ void textureFail(float floor, int p) {
     texture = texture_id[0];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(6.5, (3.7 *(floor + 1)) + wall_height + floor1_height - 0.2, 28 + 0.062 * p);
-    glRotated(90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0, 0.0001, 0);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(7, 0.0001, 0);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(7, 0.0001, 0.8);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0, 0.0001, 0.8);
-    glEnd();
+        glTranslatef(6.5, (3.7 *(floor + 1)) + wall_height + floor1_height - 0.2, 28 + 0.062 * p);
+        glRotated(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(0, 0.0001, 0);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(7, 0.0001, 0);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(7, 0.0001, 0.8);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(0, 0.0001, 0.8);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -318,19 +315,19 @@ void textureFloor() {
         glTranslatef(0, 1.202, -0.5 + 0.5*j);
         for (int i = 0; i < 40; ++i) {
             glPushMatrix();
-            glTranslatef(0.5*i, 0, 0);
-            glColor3ub(255, 255, 255);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            glBegin(GL_QUADS);
-            glTexCoord2f(0.0f, 1.0f);
-            glVertex3f(-0, 0.0001, 0.5);
-            glTexCoord2f(1.0f, 1.0f);
-            glVertex3f(0.5, 0.0001, 0.5);
-            glTexCoord2f(1.0f, 0.0f);
-            glVertex3f(0.5, 0.0001, -0);
-            glTexCoord2f(0.0f, 0.0f);
-            glVertex3f(-0, 0.0001, -0);
-            glEnd();
+                glTranslatef(0.5*i, 0, 0);
+                glColor3ub(255, 255, 255);
+                glBindTexture(GL_TEXTURE_2D, texture);
+                glBegin(GL_QUADS);
+                    glTexCoord2f(0.0f, 1.0f);
+                    glVertex3f(-0, 0.0001, 0.5);
+                    glTexCoord2f(1.0f, 1.0f);
+                    glVertex3f(0.5, 0.0001, 0.5);
+                    glTexCoord2f(1.0f, 0.0f);
+                    glVertex3f(0.5, 0.0001, -0);
+                    glTexCoord2f(0.0f, 0.0f);
+                    glVertex3f(-0, 0.0001, -0);
+                glEnd();
             glPopMatrix();
         }
         glPopMatrix();
@@ -349,19 +346,19 @@ void textureFloor2() {
                 if((0.5*i) > 7.2  && (0.5*i) < 12)
                     continue;
             glPushMatrix();
-            glTranslatef(0.5*i, 0, 0);
-            glColor3ub(255, 255, 255);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            glBegin(GL_QUADS);
-            glTexCoord2f(0.0f, 1.0f);
-            glVertex3f(-0, 0.0001, 0.5);
-            glTexCoord2f(1.0f, 1.0f);
-            glVertex3f(0.5, 0.0001, 0.5);
-            glTexCoord2f(1.0f, 0.0f);
-            glVertex3f(0.5, 0.0001, -0);
-            glTexCoord2f(0.0f, 0.0f);
-            glVertex3f(-0, 0.0001, -0);
-            glEnd();
+                glTranslatef(0.5*i, 0, 0);
+                glColor3ub(255, 255, 255);
+                glBindTexture(GL_TEXTURE_2D, texture);
+                glBegin(GL_QUADS);
+                    glTexCoord2f(0.0f, 1.0f);
+                    glVertex3f(-0, 0.0001, 0.5);
+                    glTexCoord2f(1.0f, 1.0f);
+                    glVertex3f(0.5, 0.0001, 0.5);
+                    glTexCoord2f(1.0f, 0.0f);
+                    glVertex3f(0.5, 0.0001, -0);
+                    glTexCoord2f(0.0f, 0.0f);
+                    glVertex3f(-0, 0.0001, -0);
+                glEnd();
             glPopMatrix();
         }
         glPopMatrix();
@@ -374,39 +371,39 @@ void textureStair(float y, float z) {
     texture = texture_id[5];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(8.85, y+0.003, z - 0.095);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.20);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(2, 0.0001, 0.20);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(2, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(8.85, y+0.003, z - 0.095);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.20);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(2, 0.0001, 0.20);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(2, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 
     texture = texture_id[5];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(8.85, y, z + 0.103);
-    glRotatef(90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.19);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(2, 0.0001, 0.19);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(2, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(8.85, y, z + 0.103);
+        glRotatef(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.19);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(2, 0.0001, 0.19);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(2, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -416,39 +413,39 @@ void textureStairL(float position, float y, float z) {
     texture = texture_id[5];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(position, y - 0.01, z - 0.18);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.34);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(1, 0.0001, 0.34);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(1, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(position, y - 0.01, z - 0.18);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.34);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(1, 0.0001, 0.34);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(1, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 
     texture = texture_id[5];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(position, y - 0.01, z - 0.177);
-    glRotatef(90, 1, 0, 0);
-    glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.19);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(1, 0.0001, 0.19);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(1, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(position, y - 0.01, z - 0.177);
+        glRotatef(90, 1, 0, 0);
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.19);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(1, 0.0001, 0.19);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(1, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -457,21 +454,21 @@ void textureBook2(float x, float y, float z, float rotation, int id) {
     texture = texture_id[id + 32];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(x, y, z);
-    glRotatef(rotation, 0, 1, 0);
-    glColor3ub(255, 255, 255);
-    glTranslatef(-0.15, -0.17, -0.2);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.4);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(0.3, 0.0001, 0.4);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(0.3, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(x, y, z);
+        glRotatef(rotation, 0, 1, 0);
+        glColor3ub(255, 255, 255);
+        glTranslatef(-0.15, -0.17, -0.2);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.4);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(0.3, 0.0001, 0.4);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(0.3, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -480,22 +477,22 @@ void textureBook1(float x, float y, float z, float rotation, int id) {
     texture = texture_id[id + 29];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glTranslatef(x, y, z);
-    glRotatef(rotation, 0, 1, 0);
-    glColor3ub(255, 255, 255);
-    glTranslatef(-0.14,-0.07, -0.1);
-    glRotatef(15, 1, 0, 0);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-0, 0.0001, 0.4);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(0.3, 0.0001, 0.4);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(0.3, 0.0001, -0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-0, 0.0001, -0);
-    glEnd();
+        glTranslatef(x, y, z);
+        glRotatef(rotation, 0, 1, 0);
+        glColor3ub(255, 255, 255);
+        glTranslatef(-0.14,-0.07, -0.1);
+        glRotatef(15, 1, 0, 0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, 0.4);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(0.3, 0.0001, 0.4);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(0.3, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
@@ -504,30 +501,27 @@ void texturePaint(float x, float y, float z, float inclination, int id, float pr
 	texture = texture_id[id];
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
-	glTranslatef(x, y, z);
-	glRotatef(rotation, 0, 1, 0);
-	glTranslatef(0.5, 0.8, 0.30);
-	glRotated(90, 1, 0, 0);
-	glRotated(flip, 0, 1, 0);
-	glRotated(inclination, 0, 0, 1);
+        glTranslatef(x, y, z);
+        glRotatef(rotation, 0, 1, 0);
+        glTranslatef(0.5, 0.8, 0.30);
+        glRotated(90, 1, 0, 0);
+        glRotated(flip, 0, 1, 0);
+        glRotated(inclination, 0, 0, 1);
 
-	glColor3ub(255, 255, 255);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(-0, 0.0001, size * proportion);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(size, 0.0001, size * proportion);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(size, 0.0001, -0);
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(-0, 0.0001, -0);
-	glEnd();
+        glColor3ub(255, 255, 255);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0, 0.0001, size * proportion);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(size, 0.0001, size * proportion);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(size, 0.0001, -0);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0, 0.0001, -0);
+        glEnd();
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
-
-
 }
-
 
 #endif //COMPUTER_GRAPHICS_TEXTURE_H
