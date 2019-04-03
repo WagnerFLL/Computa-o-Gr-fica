@@ -82,6 +82,12 @@ void loadTextures() {
 	texture_id[27] = loadTexture("resources/quadro17.bmp", 580, 429, 0);
 	texture_id[28] = loadTexture("resources/quadro18.bmp", 1200, 984, 0);
 	texture_id[29] = loadTexture("resources/quadro19.bmp", 660, 555, 0);
+	texture_id[30] = loadTexture("resources/capa_livro1.bmp", 339, 262, 0);
+	texture_id[31] = loadTexture("resources/capa_livro2.bmp", 598, 444, 0);
+	texture_id[32] = loadTexture("resources/capa_livro3.bmp", 472, 324, 0);
+	texture_id[33] = loadTexture("resources/capa_livro4.bmp", 432, 296, 0);
+	texture_id[34] = loadTexture("resources/capa_livro5.bmp", 435, 299, 0);
+	texture_id[35] = loadTexture("resources/capa_livro6.bmp", 621, 424, 0);
 
 }
 
@@ -414,6 +420,53 @@ void textureStairL(float position, float y, float z) {
     glVertex3f(1, 0.0001, 0.19);
     glTexCoord2f(1.0f, 0.0f);
     glVertex3f(1, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureBook2(float x, float y, float z, float rotation, int id) {
+    texture = texture_id[id + 32];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    glRotatef(rotation, 0, 1, 0);
+    glColor3ub(255, 255, 255);
+    glTranslatef(-0.15, -0.17, -0.2);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 0.4);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(0.3, 0.0001, 0.4);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(0.3, 0.0001, -0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-0, 0.0001, -0);
+    glEnd();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureBook1(float x, float y, float z, float rotation, int id) {
+    texture = texture_id[id + 29];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    glRotatef(rotation, 0, 1, 0);
+    glColor3ub(255, 255, 255);
+    glTranslatef(-0.14,-0.07, -0.1);
+    glRotatef(15, 1, 0, 0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-0, 0.0001, 0.4);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(0.3, 0.0001, 0.4);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(0.3, 0.0001, -0);
     glTexCoord2f(0.0f, 0.0f);
     glVertex3f(-0, 0.0001, -0);
     glEnd();

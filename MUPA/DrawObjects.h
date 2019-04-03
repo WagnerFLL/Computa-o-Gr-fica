@@ -319,7 +319,7 @@ void drawPaintStand(float x, float y, float z, float rotation, int id, float pro
 	enableLight();
 }
 
-void drawBookStand1(float x, float y, float z, float rotation) {
+void drawBookStand1(float x, float y, float z, float rotation, int id) {
 
 	int standColorR = 106, standColorG = 53, standColorB = 53;
 
@@ -334,6 +334,8 @@ void drawBookStand1(float x, float y, float z, float rotation) {
 	glScalef(0.3, 0.1, 0.4);
 	glutSolidCube(1.0);
 	glPopMatrix();
+
+    textureBook1(x, y, z, rotation, id);
 
 	//apoio do livro
 	glPushMatrix();
@@ -379,7 +381,7 @@ void drawBookStand1(float x, float y, float z, float rotation) {
 	enableLight();
 }
 
-void drawBookStand2(float x, float y, float z, float rotation) {
+void drawBookStand2(float x, float y, float z, float rotation, int id) {
 
 	int standColorR = 70, standColorG = 70, standColorB = 70;
 	disableLight();
@@ -402,6 +404,8 @@ void drawBookStand2(float x, float y, float z, float rotation) {
 	glScalef(0.3, 0.07, 0.4);
 	glutSolidCube(1.0);
 	glPopMatrix();
+
+    textureBook2(x, y, z, rotation, id);
 
 	//corpo
 	glPushMatrix();
