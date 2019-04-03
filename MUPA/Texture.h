@@ -88,6 +88,7 @@ void loadTextures() {
 	texture_id[33] = loadTexture("resources/capa_livro4.bmp", 432, 296, 0);
 	texture_id[34] = loadTexture("resources/capa_livro5.bmp", 435, 299, 0);
 	texture_id[35] = loadTexture("resources/capa_livro6.bmp", 621, 424, 0);
+	texture_id[36] = loadTexture("resources/quadro_donzela.bmp", 668, 400, 0);
 
 }
 
@@ -208,6 +209,31 @@ void textureStatue(float x) {
     glEnd();
     glPopMatrix();
 
+    glDisable(GL_TEXTURE_2D);
+}
+
+void textureInnerOrthoWallFront(float x, float floor) {
+
+    float side = 42.92;
+
+    texture = texture_id[0];
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(x, 3.7 * floor + 4 + 0.8, side);
+    glRotated(90, 1, 0, 0);
+    glColor3ub(255, 255, 255);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0, 0.0001, 0);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(6, 0.0001, 0);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(6, 0.0001, 3.8);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0, 0.0001, 3.8);
+    glEnd();
+    glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
 

@@ -21,6 +21,11 @@ void draw() {
 	texturePaint(0.01, 1.1, 38.5, 0, 11, 795/687, 2, 90, 180);
 	texturePaint(3.1, 3.2, 42.8, 0, 12, 845/619, 2, 180, -90);
 
+    textureInnerOrthoWallFront(0, 0);
+    textureInnerOrthoWallFront(0, 1);
+    textureInnerOrthoWallFront(14, 0);
+    textureInnerOrthoWallFront(14, 1);
+
     for (int i = 0; i < 10; ++i)
         textureInnerWall(4.3*i,0,0);
 
@@ -99,7 +104,7 @@ void draw() {
 	drawBookStand1(10, 2.3 + 3.6, 27.5, 180, 1);
 
 	// quadro fundo
-	texture = texture_id[3];
+	texture = texture_id[36];
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
 	glTranslatef(4, 2.2 + floor1_height, 0.082);
