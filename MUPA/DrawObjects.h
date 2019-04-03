@@ -252,7 +252,6 @@ void drawPaintStand(float x, float y, float z, float rotation, int id, float pro
 
 	float size = 1;
 	int standColorR = 106, standColorG = 53, standColorB = 53;
-
 	texturePaint(x, y, z, 15, id, proportion, size, rotation, flip);
 	disableLight();
 	glPushMatrix();
@@ -311,7 +310,7 @@ void drawPaintStand(float x, float y, float z, float rotation, int id, float pro
 	glTranslatef(x, y, z);
 	glRotatef(rotation, 0, 1, 0);
 	glRotatef(-15, 1, 0, 0);
-	glTranslatef(0, -0.3, 0.5);
+	glTranslatef(0, -0.3, 0.37);
 	glColor3ub(standColorR, standColorG, standColorB);
 	glScalef(1, 0.1, 0.1);
 	glutSolidCube(1.0);

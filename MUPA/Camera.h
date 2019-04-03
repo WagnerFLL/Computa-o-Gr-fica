@@ -64,7 +64,7 @@ void processCamera() {
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
-	float cameraSpeed = 0.5f;
+	float cameraSpeed = 0.08f;
 	switch(key) {
 		case 'w':
 			cameraPos += cameraSpeed * cameraFront;
