@@ -55,6 +55,49 @@ void draw() {
 	texturePaint(5.99, 3.2 + 3.6 , 36.5, 0, 14, 1098/790, 2, 270, -90);
 	texturePaint(5.99, 3.2 + 3.6 , 33, 0, 15, 1016/689, 2, 270, -90);
 
+	//segundo andar exposiçao direita
+		//parede com salão
+		drawBookStand1(14.5, 2.3 + 3.6, 33, 90);
+		drawBookStand1(14.5, 2.3 + 3.6, 31.5, 90);
+		drawBookStand1(14.5, 2.3 + 3.6, 30, 90);
+
+		drawBookStand2(14.5, 2.3 + 3.6, 38, 90);
+		drawBookStand2(14.5, 2.3 + 3.6, 40, 90);
+
+		//parede com parte de fora
+		drawBookStand2(18.5, 2.3 + 3.6, 29, 0);
+		texturePaint(19.99, 3.2 + 3.6 , 40, 0, 16, 664/521, 2, 270, -90);
+		texturePaint(19.99, 3.2 + 3.6 , 36.5, 0, 14, 1098/790, 2, 270, -90);
+		texturePaint(19.99, 3.2 + 3.6 , 33, 0, 15, 1016/689, 2, 270, -90);
+		drawPaintStand(18, 2.3 + 3.6, 42, 180, 19, 793/593, -90);
+		drawPaintStand(16, 2.3 + 3.6, 42, 180, 19, 793/593, -90);
+
+	//segundo andar salão
+		//cantos
+		drawPaintStand(6.5, 2.3 + 3.6, 28.5, 45, 19, 793/593, -90);
+		drawPaintStand(13.3, 2.3 + 3.6, 28.5, -45, 19, 793/593, -90);
+		drawPaintStand(13.3, 2.3 + 3.6, 38.3, 225, 19, 793/593, -90);
+		drawPaintStand(6.5, 2.3 + 3.6, 38.3, -225, 19, 793/593, -90);
+		//paredes
+		texturePaint(6.45, 3.2 + 3.6 , 34, 0, 16, 664/521, 2, 270, -90);
+		texturePaint(14.0, 3.2 + 3.6 , 32.5, 0, 14, 1098/790, 2, 270, -90);
+		texturePaint(9.5, 3.2 + 3.6 , 28.5, 0, 15, 1016/689, 2, 180, -90);
+		//centro
+		drawBookStand2(10, 2.3 + 3.6, 33, 90);
+		drawBookStand2(10, 2.3 + 3.6, 34.5, 90);
+
+	//segundo andar escada
+	texturePaint(6.4, 2.9 + 3.6 , 21.5, 0, 16, 664/521, 1.5, 270, -90);
+	texturePaint(6.4, 2.9 + 3.6 , 24, 0, 16, 664/521, 1.5, 270, -90);
+
+	texturePaint(7.8, 3.2 + 3.6 , 20, 0, 14, 1098/790, 2, 180, -90);
+	texturePaint(10.8, 3.2 + 3.6 ,20, 0, 15, 1016/689, 2, 180, -90);
+
+	texturePaint(14, 2.9 + 3.6 , 21.5, 0, 16, 664/521, 1.5, 270, -90);
+	texturePaint(14, 2.9 + 3.6 , 24, 0, 16, 664/521, 1.5, 270, -90);
+
+	drawBookStand1(10, 2.3 + 3.6, 27.5, 180);
+
 	// quadro fundo
 	texture = texture_id[3];
 	glEnable(GL_TEXTURE_2D);

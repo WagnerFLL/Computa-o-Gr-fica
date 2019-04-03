@@ -59,7 +59,6 @@ void processCamera()
 {
 	temp = cameraPos + cameraFront;
 	glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-	printf("x = %d, y = %d, z = %d", cameraPos[0], cameraPos[1] , cameraPos[2]);
 	gluLookAt(cameraPos[0], cameraPos[1] , cameraPos[2],  // de onde
               temp[0], temp[1],temp[2], // pra onde
 			  cameraUp[0], cameraUp[1], cameraUp[2]); // como
@@ -90,6 +89,7 @@ void processNormalKeys(unsigned char key, int x, int y) {
 
 		case 'f':
 			cameraPos -= cameraSpeed * cameraUp;
+			printf("x = %f, y = %f, z = %f\n", cameraPos[0], cameraPos[1] , cameraPos[2]);
 			break;
 
 		case 'o':

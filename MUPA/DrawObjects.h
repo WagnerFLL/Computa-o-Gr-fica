@@ -320,7 +320,7 @@ void drawPaintStand(float x, float y, float z, float rotation, int id, float pro
 	enableLight();
 }
 
-void drawBookStand(float x, float y, float z, float rotation) {
+void drawBookStand1(float x, float y, float z, float rotation) {
 
 	int standColorR = 106, standColorG = 53, standColorB = 53;
 
