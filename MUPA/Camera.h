@@ -90,6 +90,7 @@ void processNormalKeys(unsigned char key, int x, int y) {
 		case 'f':
 			if(cameraPos[1] > 0.5)
 				cameraPos -= cameraSpeed * cameraUp;
+			printf("x = %f, y = %f, z = %f\n", cameraPos[0], cameraPos[1] , cameraPos[2]);
 			break;
 
 		case 'o':

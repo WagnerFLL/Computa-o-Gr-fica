@@ -325,6 +325,7 @@ void drawBookStand1(float x, float y, float z, float rotation) {
 	int standColorR = 106, standColorG = 53, standColorB = 53;
 
 	//livro
+	disableLight();
 	glPushMatrix();
 	glTranslatef(x, y, z);
 	glRotatef(rotation, 0, 1, 0);
@@ -376,13 +377,13 @@ void drawBookStand1(float x, float y, float z, float rotation) {
 	glScalef(0.4, 0.1, 0.4);
 	glutSolidCube(1.0);
 	glPopMatrix();
-
+	enableLight();
 }
 
 void drawBookStand2(float x, float y, float z, float rotation) {
 
 	int standColorR = 70, standColorG = 70, standColorB = 70;
-
+	disableLight();
 	//vidro
 	glPushMatrix();
 	glTranslatef(x, y, z);
@@ -422,7 +423,7 @@ void drawBookStand2(float x, float y, float z, float rotation) {
 	glScalef(0.7, 0.1, 0.7);
 	glutSolidCube(1.0);
 	glPopMatrix();
-
+	enableLight();
 }
 
 

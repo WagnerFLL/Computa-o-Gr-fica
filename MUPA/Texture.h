@@ -64,16 +64,24 @@ void loadTextures() {
     texture_id[9] = loadTexture("resources/fachada_parede.bmp", 754, 385, 0);
 	texture_id[10] = loadTexture("resources/fachada_parede_superior.bmp", 754, 203, 0);
     texture_id[11] = loadTexture("resources/quadro1.bmp", 795, 687, 0);
-	texture_id[12] = loadTexture("resources/quadro2.bmp", 845, 619, 0);
+	texture_id[12] = loadTexture("resources/quadro2.bmp", 820, 600, 0);
 	texture_id[13] = loadTexture("resources/quadro3.bmp", 1067, 676, 0);
-	texture_id[14] = loadTexture("resources/quadro4.bmp", 1098, 790, 0);
+	texture_id[14] = loadTexture("resources/quadro4.bmp", 1088, 783, 0);
 	texture_id[15] = loadTexture("resources/quadro5.bmp", 1016, 689, 0);
-	texture_id[16] = loadTexture("resources/quadro6.bmp", 665, 521, 0);
+	texture_id[16] = loadTexture("resources/quadro6.bmp", 659, 516, 0);
 	texture_id[17] = loadTexture("resources/quadro7.bmp", 1133, 919, 0);
 	texture_id[18] = loadTexture("resources/quadro8.bmp", 807, 637, 0);
 	texture_id[19] = loadTexture("resources/quadro9.bmp", 703, 593, 0);
-	texture_id[20] = loadTexture("resources/quadro10.bmp", 629, 537, 0);
-	texture_id[21] = loadTexture("resources/quadro11.bmp", 866, 693, 0);
+	texture_id[20] = loadTexture("resources/quadro10.bmp", 620, 530, 0);
+	texture_id[21] = loadTexture("resources/quadro11.bmp", 860, 688, 0);
+	texture_id[22] = loadTexture("resources/quadro12.bmp", 256, 206, 0);
+	texture_id[23] = loadTexture("resources/quadro13.bmp", 516, 428, 0);
+	texture_id[24] = loadTexture("resources/quadro14.bmp", 580, 429, 0);
+	texture_id[25] = loadTexture("resources/quadro15.bmp", 944, 748, 0);
+	texture_id[26] = loadTexture("resources/quadro16.bmp", 1112, 956, 0);
+	texture_id[27] = loadTexture("resources/quadro17.bmp", 580, 429, 0);
+	texture_id[28] = loadTexture("resources/quadro18.bmp", 1200, 984, 0);
+	texture_id[29] = loadTexture("resources/quadro19.bmp", 660, 555, 0);
 
 }
 
