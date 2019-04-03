@@ -15,7 +15,10 @@ void draw() {
 	glVertex3f(100.0f, 0.0f, -100.0f);
 	glEnd();
 
-	//drawBookStand2(10, 2.3, 40, 0);
+	drawPaintStand(1, 2.3, 42, 120, 19, 793/593, -90);
+	drawPaintStand(1, 2.3, 36, 60, 20, 793/593, -90);
+	texturePaint(0.01, 1.1, 38.5, 0, 11, 795/687, 2, 90, 180);
+	texturePaint(3.1, 3.2, 42.8, 0, 12, 845/619, 2, 180, -90);
 
 	// quadro fundo
 	texture = texture_id[3];

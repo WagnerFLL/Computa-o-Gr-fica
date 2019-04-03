@@ -148,8 +148,6 @@ void textureFacade(float x, float y) {
 void textureWall(float x, float z, float width, int floor, int parallel) {
 
     float y = (0.2 + floor1_height) + 3.5 + ((3.5 + floor2_height) * (floor));
-
-
     texture = texture_id[0];
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
@@ -340,6 +338,35 @@ void textureStairL(float position, float y, float z) {
     glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
+}
+
+void texturePaint(float x, float y, float z, float inclination, int id, float proportion, float size, float rotation, float flip) {
+	texture = texture_id[id];
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(0.5, 0.8, 0.30);
+	glRotated(90, 1, 0, 0);
+	glRotated(flip, 0, 1, 0);
+	glRotated(inclination, 0, 0, 1);
+
+	glColor3ub(255, 255, 255);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0, 0.0001, size * proportion);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(size, 0.0001, size * proportion);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(size, 0.0001, -0);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0, 0.0001, -0);
+	glEnd();
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
+	disableLight();
 }
 
 
