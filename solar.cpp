@@ -7,12 +7,13 @@ void init(void) {
   glClearColor(0.0, 0.0, 0.0, 0.0);
   glEnable(GL_DEPTH_TEST);
   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-  GLfloat mat_shininess[] = { 50.0 };
-  GLfloat light_position[] = { -1.0, -1.0, 0.0, 1 };
+  GLfloat mat_shininess[] = { 10.0 };
+  GLfloat light_position[] = { 10.0, 0.0, 1.0, 1};
   glClearColor (0.0, 0.0, 0.0, 0.0);
   glShadeModel (GL_SMOOTH);
 
   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+  glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_specular);
   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
   glEnable(GL_LIGHTING);
@@ -69,6 +70,22 @@ void display(void) {
       glutSolidSphere(0.2, 10, 8); /* desenha o segundo planeta */
   glPopMatrix();
 
+  glPushMatrix();
+      glColor3ub(100,207,180);
+      glRotatef((GLfloat) year, 0.0, (GLfloat) -1.0, 0.0);
+      glTranslatef((GLfloat) -5.0, 0.0, 0.0);        /* translada a partir do novo sistema de coordenadas resultante da Rotacao */
+      glRotatef((GLfloat) day, 0.0, (GLfloat) -1.0, 0.0);
+      glutSolidSphere(0.2, 10, 8); /* desenha o segundo planeta */
+  glPopMatrix();
+
+  glPushMatrix();
+      glColor3ub(135,127,80);
+      glRotatef((GLfloat) year, 0.0, (GLfloat) -1.0, 0.0);
+      glTranslatef((GLfloat) 2.0, 0.0, 0.0);        /* translada a partir do novo sistema de coordenadas resultante da Rotacao */
+      glRotatef((GLfloat) day, 0.0, (GLfloat) -1.0, 0.0);
+      glutSolidSphere(0.2, 10, 8); /* desenha o segundo planeta */
+  glPopMatrix();
+
   //executa os comandos
   glutSwapBuffers();
 }
@@ -80,7 +97,7 @@ void reshape(int w, int h) {
   glLoadIdentity();
 
   gluPerspective(60.0, (GLfloat) w / (GLfloat) h, 1.0, 20.0);
-  gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // posicao da camera
+  gluLookAt(0.0, 5.0, 7.4, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // posicao da camera
 }
 
 void keyboard(unsigned char key, int x, int y) {
