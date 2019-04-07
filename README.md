@@ -1,4 +1,4 @@
-# Computer graphics
+# Computer graphics | UFAL
 Computer graphics with OpenGL 2.0
 
 How to compile:
