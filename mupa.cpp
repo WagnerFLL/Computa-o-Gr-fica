@@ -10,7 +10,7 @@
 
 GLuint texture_id[40];
 
-// direção da camera
+// Direção da camera
 float lx = 0.0f, lz = -1.0f;
 float deltaAngle = 0.0f;
 int xOrigin = -1;
@@ -20,13 +20,13 @@ float x = 10.0f, z = 50.0f;
 int mouseX, mouseY;
 GLuint texture;
 
-// ângulos
+// Ângulos
 float angle = 0.0f;
 float door_angle = 0.0f;
 float fovy = 70.0f;
 float cam = 3.5f;
 
-// alturas
+// Alturas
 float floor2_thickness = 0.2f;
 float floor1_height = 1.0f;
 float wall_height = 0.2f;
@@ -64,7 +64,7 @@ void init(void) {
 	glShadeModel(GL_SMOOTH);
 }
 
-void changeSize(int w, int h){
+void changeSize(int w, int h) {
     if (h == 0) h = 1;
     float ratio = w * 1.0 / h;
 
@@ -87,7 +87,6 @@ void renderScene(void) {
     glFlush();
     glutSwapBuffers();
 }
-
 
 void processSpecialKeys(int key, int xx, int yy) {
     float fraction = 0.5f;
@@ -138,7 +137,6 @@ int main(int argc, char **argv) {
 	glutPassiveMotionFunc(mouseMovement);
     glutMouseFunc(mouseButton);
     glutMotionFunc(mouseMotion);
-
     glutMainLoop();
 
     return 1;
